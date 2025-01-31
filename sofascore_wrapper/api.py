@@ -1,28 +1,20 @@
-import asyncio
-from sofascore_wrapper.api import SofascoreAPI
-from sofascore_wrapper.team import Team
-from sofascore_wrapper.league import League
-from sofascore_wrapper.manager import Manager
+import aiohttp
 
-async def main():
-    api = SofascoreAPI()
+BASE_URL = "https://www.sofascore.com/api/v1"
 
-    # Fetch team data
-    team = Team(api, 42)
-    team_data = await team.fetch()
-    print("Team Data:", team_data)
+class SofascoreAPI:
+    def __init__(self):
+        self.session = None
 
-    # Fetch league data
-    league = League(api, 17)
-    league_data = await league.fetch()
-    print("League Data:", league_data)
+    async def _get(self, endpoint):
+        if self.session is None:
+            self.session = aiohttp.ClientSession()
+        async with self.session.get(f"{BASE_URL}{endpoint}") as response:
+            if response.status == 200:
+                return await response.json()
+            else:
+                raise Exception(f"Failed to fetch {endpoint}: {response.status}")
 
-    # Fetch manager data
-    manager = Manager(api, 1234)
-    manager_data = await manager.fetch()
-    print("Manager Data:", manager_data)
-
-    await api.close()
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    async def close(self):
+        if self.session:
+            await self.session.close()

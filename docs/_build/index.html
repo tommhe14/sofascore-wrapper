@@ -9,6 +9,8 @@
   <title>Welcome to sofascore-wrapper’s documentation! &mdash; sofascore_wrapper 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/alabaster.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/basic.css" />
 
   
       <script src="_static/documentation_options.js?v=8d563738"></script>
@@ -83,13 +85,13 @@ It allows you to fetch and interact with data from Sofascore, including informat
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html#api-modules">API Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#api">API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#player">Player</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#team">Team</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-sofascore_wrapper.api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-sofascore_wrapper.player">Player</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-sofascore_wrapper.team">Team</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#match">Match</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#search">Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#league">League</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#manager">Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-sofascore_wrapper.search">Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-sofascore_wrapper.league">League</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-sofascore_wrapper.manager">Manager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#flag">Flag</a></li>
 </ul>
 </li>
@@ -100,10 +102,34 @@ It allows you to fetch and interact with data from Sofascore, including informat
 <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
 <p>To install the package, use pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sofascore-wrapper
+</pre></div>
+</div>
 </section>
 <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
 <p>Here’s a simple example of how to use the wrapper to search for a player:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">sofascore_wrapper.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">from</span> <span class="nn">sofascore_wrapper.search</span> <span class="kn">import</span> <span class="n">Search</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+   <span class="n">api</span> <span class="o">=</span> <span class="n">SofascoreAPI</span><span class="p">()</span>  <span class="c1"># Initialize the API client</span>
+
+   <span class="c1"># Create an instance of the Search class</span>
+   <span class="n">search</span> <span class="o">=</span> <span class="n">Search</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">search_string</span><span class="o">=</span><span class="s2">&quot;saka&quot;</span><span class="p">)</span>
+
+   <span class="c1"># Perform the search and print the result</span>
+   <span class="n">player</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search</span><span class="o">.</span><span class="n">search_all</span><span class="p">()</span>
+   <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+
+   <span class="c1"># Close the API client</span>
+   <span class="k">await</span> <span class="n">api</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
 <p>In this example, we initialize the <cite>SofascoreAPI</cite>, create a <cite>Search</cite> instance with the search string <cite>“saka”</cite>, and call <cite>search_all()</cite> to fetch the player data. The result is printed to the console.</p>
 </section>
 <section id="api-reference">

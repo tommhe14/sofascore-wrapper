@@ -631,8 +631,8 @@ class Team:
                         },
                         "userCount": 2341486,
                         "nameCode": "ARS",
-                        "disabled": false,
-                        "national": false,
+                        "disabled": False,
+                        "national": False,
                         "type": 0,
                         "id": 42,
                         "entityType": "team",
@@ -667,8 +667,8 @@ class Team:
                         },
                         "userCount": 248252,
                         "nameCode": "CRU",
-                        "disabled": false,
-                        "national": false,
+                        "disabled": False,
+                        "national": False,
                         "type": 0,
                         "id": 1954,
                         "entityType": "team",
@@ -701,6 +701,7 @@ class Team:
         data = await self.api._get(f"/team/{self.team_id}/transfers")
         data["transfersOut"].reverse()  
         return data["transfersOut"]
+
 
     async def next_fixtures(self) -> List:
         """
