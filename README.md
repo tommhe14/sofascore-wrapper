@@ -37,11 +37,14 @@ Join our Discord community for support and discussions:
 ## 📜 License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## From the developer;
+## From Me!
 
 - If you encounter any issues feel free to open an issue.
 - If you have any enhancement requests, feel free to open an issue with the front end proof of what you're looking to get.
 - Always open to pull requests!
+
+## Examples
+Check out some more use cases from the examples folder!
 
 ---
 Enjoy using **Sofascore Wrapper**! 🎉
