@@ -1,10 +1,10 @@
 # Sofascore Wrapper
 
-Welcome to **Sofascore Wrapper**, a Python API wrapper for the Sofascore undocumented API. This library allows you to fetch and interact with Sofascore data, including information about matches, players, teams, and more.
+A Python API wrapper for the Sofascore undocumented API. This library allows you to fetch and interact with Sofascore data, including information about matches, players, teams, and more.
 
 ## 📖 Documentation
 For detailed usage and API reference, visit the official documentation:
-👉 [Sofascore Wrapper Docs](https://tommhe14.github.io/sofascore-wrapper/search.html)
+👉 [Sofascore Wrapper Docs](https://tommhe14.github.io/sofascore-wrapper)
 
 ## 📥 Installation
 You can install the package using pip:
