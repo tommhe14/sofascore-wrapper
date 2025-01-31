@@ -21,6 +21,7 @@ class Team:
             Dict: A dictionary containing team details such as name, slug, short name, gender, sport, category, tournament, and more.
 
         Example Response:
+            .. code-block:: json
             {
                 "team": {
                     "name": "Arsenal",
@@ -270,6 +271,7 @@ class Team:
             str: The URL of the team's image.
 
         Example Response:
+            .. code-block:: json
             "https://img.sofascore.com/api/v1/team/42/image"
         """
         return f"https://img.sofascore.com/api/v1/team/{self.team_id}/image"
@@ -282,6 +284,7 @@ class Team:
             Dict: A dictionary containing performance data such as events, tournament details, and team statistics.
 
         Example Response:
+            .. code-block:: json
             {
                 "events": [
                     {
@@ -481,6 +484,7 @@ class Team:
             List: A list of dictionaries containing details about each transfer, including player information, transfer details, and fees.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "player": {
@@ -595,6 +599,7 @@ class Team:
             List: A list of dictionaries containing details about each transfer, including player information, transfer details, and fees.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "player": {
@@ -711,6 +716,7 @@ class Team:
             List: A list of dictionaries containing details about the upcoming fixtures, including tournament, season, round, teams, scores, and more.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "tournament": {
@@ -920,6 +926,7 @@ class Team:
             List: A list of dictionaries containing details about the past fixtures, including tournament, season, round, teams, scores, and more.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "tournament": {
@@ -1129,6 +1136,7 @@ class Team:
             Dict: A dictionary containing the unique tournament seasons.
 
         Example Response:
+            .. code-block:: json
             {
                 "uniqueTournamentSeasons": [
                     {
@@ -1183,6 +1191,7 @@ class Team:
             Dict: A dictionary containing the players in the team's squad, including their details, positions, and statistics.
 
         Example Response:
+            .. code-block:: json
             {
                 "players": [
                     {
@@ -1392,6 +1401,7 @@ class Team:
             Dict: A dictionary containing the top players of the team, including their statistics and performance metrics.
 
         Example Response:
+            .. code-block:: json
             {
                 "topPlayers": {
                     "rating": [
@@ -1442,6 +1452,7 @@ class Team:
             Dict: A dictionary containing the team's statistics in the league, including goals scored, goals conceded, assists, shots, and more.
 
         Example Response:
+            .. code-block:: json
             {
                 "statistics": {
                     "goalsScored": 16,
@@ -1571,6 +1582,7 @@ class Team:
             Dict: A dictionary containing the latest highlights, including titles, subtitles, URLs, and thumbnails.
 
         Example Response:
+            .. code-block:: json
             {
                 "media": [
                     {
@@ -1622,6 +1634,7 @@ class Team:
             Dict: A dictionary containing the performance graph data, including events, week, position, and timeframe.
 
         Example Response:
+            .. code-block:: json
             {
                 "graphData": [
                     {

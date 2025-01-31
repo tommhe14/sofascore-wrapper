@@ -26,6 +26,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "id": 17,
                 "name": "Premier League",
@@ -62,6 +63,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "name": "Premier League 24/25",
@@ -89,6 +91,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "info": {
                     "goals": 691,
@@ -161,6 +164,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "statistic": 10,
@@ -319,6 +323,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             "https://img.sofascore.com/api/v1/unique-tournament/17/image/dark"
         """
         return f"{BASE_URL}/unique-tournament/{self.league_id}/image/{image_type}"
@@ -337,6 +342,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "topPlayers": {
                     "rating": [
@@ -403,6 +409,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "topTeams": {
                     "avgRating": [
@@ -447,6 +454,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "media": [
                     {
@@ -480,6 +488,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "standings": [
                     {
@@ -594,6 +603,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "standings": [
                     {
@@ -708,6 +718,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "standings": [
                     {
@@ -822,6 +833,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "player": {
                     "name": "Rodri",
@@ -881,6 +893,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "featuredEvents": [
                     {
@@ -1050,6 +1063,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "rounds": [
                     {
@@ -1079,6 +1093,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "formation": "3-4-3",
                 "players": [
@@ -1266,6 +1281,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "currentRound": {
                     "round": 24
@@ -1294,6 +1310,7 @@ class League:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             24
         """
         data = await self.api._get(f"/unique-tournament/{self.league_id}/season/{season}/rounds")

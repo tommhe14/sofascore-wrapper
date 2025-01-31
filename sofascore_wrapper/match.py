@@ -1,6 +1,6 @@
 from .api import SofascoreAPI
 import datetime
-from typing import Str, Dict, List, Literal, Any, Optional
+from typing import Optional, Dict
 
 class Match:
     def __init__(self, api: SofascoreAPI, match_id: int = None):
@@ -17,6 +17,7 @@ class Match:
                 - "total": The total number of football games scheduled for today.
 
         Example Response:
+            .. code-block:: json
             {
                 "live": 21,
                 "total": 270
@@ -36,6 +37,7 @@ class Match:
                 Each game is represented as a dictionary with details such as tournament, teams, scores, and match status.
 
         Example Response:
+            .. code-block:: json
             {
                 "events": [
                     {
@@ -229,6 +231,7 @@ class Match:
             Dict[str, Any]: A dictionary containing the fixtures for the specified date, including match details, teams, and timings.
 
         Example Response:
+            .. code-block:: json
             {
                 "events": [
                     {
@@ -436,7 +439,8 @@ class Match:
                         - winning (bool): Indicates if the choice is winning.
                         - change (int): The change in odds.
 
-        Example:
+        Example Response:
+            .. code-block:: json
             {
                 "markets": [
                     {
@@ -510,7 +514,8 @@ class Match:
                     - fullTime (Dict[str, Any]): The full-time market data, with the same structure as `default`.
                 - hasMoreOdds (bool): Indicates if there are more odds available.
 
-        Example:
+        Example Response:
+            .. code-block:: json
             {
                 "featured": {
                     "default": {
@@ -635,7 +640,8 @@ class Match:
                     - awayWins (int): The number of wins for the away team's manager.
                     - draws (int): The number of draws between the managers.
 
-        Example:
+        Example Response:
+            .. code-block:: json
             {
                 "teamDuel": {
                     "homeWins": 0,
@@ -656,62 +662,78 @@ class Match:
     
     async def incidents(self):
         """
-        Returns the game's important incidents including game status changes.
-        {
-  "incidents": [
-    {
-      "text": "FT",
-      "homeScore": 1,
-      "awayScore": 2,
-      "isLive": false,
-      "time": 90,
-      "addedTime": 999,
-      "timeSeconds": 5400,
-      "reversedPeriodTime": 1,
-      "reversedPeriodTimeSeconds": 0,
-      "incidentType": "period"
-    },
-    {
-      "time": 90,
-      "player": {
-        "name": "Raheem Sterling",
-        "slug": "raheem-sterling",
-        "shortName": "R. Sterling",
-        "position": "M",
-        "jerseyNumber": "30",
-        "height": 170,
-        "userCount": 49508,
-        "id": 138534,
-        "marketValueCurrency": "EUR",
-        "dateOfBirthTimestamp": 786844800,
-        "proposedMarketValueRaw": {
-          "value": 21000000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "رحيم ستيرلينغ",
-            "hi": "रहीम स्टर्लिंग",
-            "bn": "রাহিম স্টার্লিং"
-          },
-          "shortNameTranslation": {
-            "ar": "ر. سترلينغ",
-            "hi": "आर. स्टर्लिंग",
-            "bn": "আর. স্টার্লিং"
-          }
-        }
-      },
-      "description": "Goalkeeper save",
-      "id": 118513874,
-      "addedTime": 3,
-      "incidentType": "inGamePenalty",
-      "isHome": false,
-      "incidentClass": "missed",
-      "reason": "goalkeeperSave",
-      "reversedPeriodTime": 1
-    },
+        Retrieves important incidents during the match, including game status changes.
+
+        This function returns a list of incidents that occurred in the match, such as 
+        goals, substitutions, or other significant game events. Each incident contains 
+        details such as the time, player involved (if applicable), description, and 
+        game status (e.g., score updates, penalties).
+
+        :returns: A dictionary containing a list of incidents with details about each 
+                incident, including time, player, description, and the type of incident.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "incidents": [
+                        {
+                            "text": "FT",
+                            "homeScore": 1,
+                            "awayScore": 2,
+                            "isLive": false,
+                            "time": 90,
+                            "addedTime": 999,
+                            "timeSeconds": 5400,
+                            "reversedPeriodTime": 1,
+                            "reversedPeriodTimeSeconds": 0,
+                            "incidentType": "period"
+                        },
+                        {
+                            "time": 90,
+                            "player": {
+                                "name": "Raheem Sterling",
+                                "slug": "raheem-sterling",
+                                "shortName": "R. Sterling",
+                                "position": "M",
+                                "jerseyNumber": "30",
+                                "height": 170,
+                                "userCount": 49508,
+                                "id": 138534,
+                                "marketValueCurrency": "EUR",
+                                "dateOfBirthTimestamp": 786844800,
+                                "proposedMarketValueRaw": {
+                                    "value": 21000000,
+                                    "currency": "EUR"
+                                },
+                                "fieldTranslations": {
+                                    "nameTranslation": {
+                                        "ar": "رحيم ستيرلينغ",
+                                        "hi": "रहीम स्टर्लिंग",
+                                        "bn": "রাহিম স্টার্লিং"
+                                    },
+                                    "shortNameTranslation": {
+                                        "ar": "ر. سترلينغ",
+                                        "hi": "आर. स्टर्लिंग",
+                                        "bn": "আর. স্টার্লিং"
+                                    }
+                                }
+                            },
+                            "description": "Goalkeeper save",
+                            "id": 118513874,
+                            "addedTime": 3,
+                            "incidentType": "inGamePenalty",
+                            "isHome": false,
+                            "incidentClass": "missed",
+                            "reason": "goalkeeperSave",
+                            "reversedPeriodTime": 1
+                        }
+                    ]
+                }
         """
         return await self.api._get(f"/event/{self.match_id}/incidents")
+
     
     async def incidents(self) -> Dict[str, Any]:
         """
@@ -751,7 +773,8 @@ class Match:
                     - incidentClass (str, optional): The class of the incident (e.g., "missed").
                     - reason (str, optional): The reason for the incident (e.g., "goalkeeperSave").
 
-        Example:
+        Example Response:
+            .. code-block:: json
             {
                 "incidents": [
                     {
@@ -890,6 +913,7 @@ class Match:
         number, market value, and translations for the player's name in various languages.
 
         Example Response:
+            .. code-block:: json
             {
                 "value": "7.8",
                 "label": "rating",
@@ -940,6 +964,7 @@ class Match:
         events, such as who will score first or whether both teams will score.
 
         Example Response:
+            .. code-block:: json
             {
                 "vote": {
                     "vote1": 8779,
@@ -976,6 +1001,7 @@ class Match:
         along with their average ratings, position, and points value.
 
         Example Response:
+            .. code-block:: json
             {
                 "homeTeam": {
                     "avgRating": "6.81",
@@ -1019,6 +1045,7 @@ class Match:
         different country codes. The user can use `get_channel()` to fetch the channel names.
 
         Example Response:
+            .. code-block:: json
             {
                 "countryChannels": {
                     "TG": [2781, 3025, 644],  # Country code "TG" with channel IDs
@@ -1042,6 +1069,7 @@ class Match:
         for a specific match. It returns the name of the channel if available.
 
         Example Response:
+            .. code-block:: json
             "TV2 Play"  # The channel name corresponding to the channel ID.
 
         Args:
@@ -1063,54 +1091,54 @@ class Match:
         given match. It returns the managers' names, IDs, and translations in 
         different languages.
 
-        Example Response:
-            {
-            "homeManager": {
-                "name": "Michel",
-                "slug": "michel",
-                "shortName": "Michel",
-                "id": 788163,
-                "fieldTranslations": {
-                "nameTranslation": {
-                    "ar": "ميشيل",
-                    "hi": "मिशेल",
-                    "bn": "মিশেল"
-                },
-                "shortNameTranslation": {
-                    "ar": "ميشيل",
-                    "hi": "मिशेल",
-                    "bn": "মিশেল"
-                }
-                }
-            },
-            "awayManager": {
-                "name": "Mikel Arteta",
-                "slug": "mikel-arteta",
-                "shortName": "M. Arteta",
-                "id": 794075,
-                "fieldTranslations": {
-                "nameTranslation": {
-                    "ar": "ميكيل أرتيتا",
-                    "hi": "मिकेल आर्टेटा",
-                    "bn": "মিকেল আর্তেতা"
-                },
-                "shortNameTranslation": {
-                    "ar": "م. أرتيتا",
-                    "hi": "एम. आर्टेटा",
-                    "bn": "এম. আরতেতা"
-                }
-                }
-            }
-            }
-
-        Args:
-            None
-
-        Returns:
-            dict: A dictionary containing the home and away team managers' details, 
+        :returns: A dictionary containing the home and away team managers' details, 
                 including names, IDs, and translations in multiple languages.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "homeManager": {
+                        "name": "Michel",
+                        "slug": "michel",
+                        "shortName": "Michel",
+                        "id": 788163,
+                        "fieldTranslations": {
+                            "nameTranslation": {
+                                "ar": "ميشيل",
+                                "hi": "मिशेल",
+                                "bn": "মিশেল"
+                            },
+                            "shortNameTranslation": {
+                                "ar": "ميشيل",
+                                "hi": "मिशेल",
+                                "bn": "মিশেল"
+                            }
+                        }
+                    },
+                    "awayManager": {
+                        "name": "Mikel Arteta",
+                        "slug": "mikel-arteta",
+                        "shortName": "M. Arteta",
+                        "id": 794075,
+                        "fieldTranslations": {
+                            "nameTranslation": {
+                                "ar": "ميكيل أرتيتا",
+                                "hi": "मिकेल आर्टेटा",
+                                "bn": "মিকেল আর্তেতা"
+                            },
+                            "shortNameTranslation": {
+                                "ar": "م. أرتيتا",
+                                "hi": "एम. आर्टेटा",
+                                "bn": "এম. আরতেতা"
+                            }
+                        }
+                    }
+                }
         """
         return await self.api._get(f"/event/{self.match_id}/managers")
+
     
     async def lineups_home(self) -> Dict:
         """
@@ -1120,62 +1148,61 @@ class Match:
         details of the players such as name, position, jersey number, market value, 
         and translations in different languages.
 
-        Example Response:
-            {
-            "confirmed": true,
-            "players": [
-                {
-                "player": {
-                    "name": "Pau López",
-                    "slug": "pau-lopez",
-                    "shortName": "P. López",
-                    "position": "G",
-                    "jerseyNumber": "25",
-                    "height": 189,
-                    "userCount": 1060,
-                    "id": 548848,
-                    "country": {
-                    "alpha2": "ES",
-                    "alpha3": "ESP",
-                    "name": "Spain",
-                    "slug": "spain"
-                    },
-                    "marketValueCurrency": "EUR",
-                    "dateOfBirthTimestamp": 787276800,
-                    "proposedMarketValueRaw": {
-                    "value": 3700000,
-                    "currency": "EUR"
-                    },
-                    "fieldTranslations": {
-                    "nameTranslation": {
-                        "ar": "باو لوبيز",
-                        "hi": "पाऊ लोपेज़",
-                        "bn": "পাউ লোপেজ"
-                    },
-                    "shortNameTranslation": {
-                        "ar": "ب. لوبيز",
-                        "hi": "पी. लोपेज़",
-                        "bn": "পি. লোপেজ"
-                    }
-                    }
-                }
-                }
-            ]
-            }
-
-        Args:
-            None
-
-        Returns:
-            dict: A dictionary containing the home team's confirmed lineup and 
+        :returns: A dictionary containing the home team's confirmed lineup and 
                 details of each player, including player name, position, 
                 jersey number, country, market value, and translations.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+                {
+                    "confirmed": true,
+                    "players": [
+                        {
+                            "player": {
+                                "name": "Pau López",
+                                "slug": "pau-lopez",
+                                "shortName": "P. López",
+                                "position": "G",
+                                "jerseyNumber": "25",
+                                "height": 189,
+                                "userCount": 1060,
+                                "id": 548848,
+                                "country": {
+                                    "alpha2": "ES",
+                                    "alpha3": "ESP",
+                                    "name": "Spain",
+                                    "slug": "spain"
+                                },
+                                "marketValueCurrency": "EUR",
+                                "dateOfBirthTimestamp": 787276800,
+                                "proposedMarketValueRaw": {
+                                    "value": 3700000,
+                                    "currency": "EUR"
+                                },
+                                "fieldTranslations": {
+                                    "nameTranslation": {
+                                        "ar": "باو لوبيز",
+                                        "hi": "पाऊ लोपेज़",
+                                        "bn": "পাউ লোপেজ"
+                                    },
+                                    "shortNameTranslation": {
+                                        "ar": "ب. لوبيز",
+                                        "hi": "पी. लोपेज़",
+                                        "bn": "পি. লোপেজ"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
         """
         data = await self.api._get(f"/event/{self.match_id}/lineups")
         return {
             "confirmed": data["confirmed"],
             "players": data["home"]["players"]
         }
+
 
     async def lineups_away(self) -> Dict:
         """
@@ -1185,62 +1212,62 @@ class Match:
         details of the players such as name, position, jersey number, market value, 
         and translations in different languages.
 
-        Example Response:
-            {
-            "confirmed": true,
-            "players": [
-                {
-                "player": {
-                    "name": "Pau López",
-                    "slug": "pau-lopez",
-                    "shortName": "P. López",
-                    "position": "G",
-                    "jerseyNumber": "25",
-                    "height": 189,
-                    "userCount": 1060,
-                    "id": 548848,
-                    "country": {
-                    "alpha2": "ES",
-                    "alpha3": "ESP",
-                    "name": "Spain",
-                    "slug": "spain"
-                    },
-                    "marketValueCurrency": "EUR",
-                    "dateOfBirthTimestamp": 787276800,
-                    "proposedMarketValueRaw": {
-                    "value": 3700000,
-                    "currency": "EUR"
-                    },
-                    "fieldTranslations": {
-                    "nameTranslation": {
-                        "ar": "باو لوبيز",
-                        "hi": "पाऊ लोपेज़",
-                        "bn": "পাউ লোপেজ"
-                    },
-                    "shortNameTranslation": {
-                        "ar": "ب. لوبيز",
-                        "hi": "पी. लोपेज़",
-                        "bn": "পি. লোপেজ"
-                    }
-                    }
-                }
-                }
-            ]
-            }
-
-        Args:
-            None
-
-        Returns:
-            dict: A dictionary containing the away team's confirmed lineup and 
+        :returns: A dictionary containing the away team's confirmed lineup and 
                 details of each player, including player name, position, 
                 jersey number, country, market value, and translations.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "confirmed": true,
+                    "players": [
+                        {
+                            "player": {
+                                "name": "Pau López",
+                                "slug": "pau-lopez",
+                                "shortName": "P. López",
+                                "position": "G",
+                                "jerseyNumber": "25",
+                                "height": 189,
+                                "userCount": 1060,
+                                "id": 548848,
+                                "country": {
+                                    "alpha2": "ES",
+                                    "alpha3": "ESP",
+                                    "name": "Spain",
+                                    "slug": "spain"
+                                },
+                                "marketValueCurrency": "EUR",
+                                "dateOfBirthTimestamp": 787276800,
+                                "proposedMarketValueRaw": {
+                                    "value": 3700000,
+                                    "currency": "EUR"
+                                },
+                                "fieldTranslations": {
+                                    "nameTranslation": {
+                                        "ar": "باو لوبيز",
+                                        "hi": "पाऊ लोपेज़",
+                                        "bn": "পাউ লোপেজ"
+                                    },
+                                    "shortNameTranslation": {
+                                        "ar": "ب. لوبيز",
+                                        "hi": "पी. लोपेज़",
+                                        "bn": "পি. লোপেজ"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
         """
         data = await self.api._get(f"/event/{self.match_id}/lineups")
         return {
             "confirmed": data["confirmed"],
             "players": data["away"]["players"]
         }
+
 
 
     async def shotmap(self) -> Dict:
@@ -1252,91 +1279,90 @@ class Match:
         the shot type, situation, coordinates, expected goal (xG), and other 
         relevant information such as body part used and goal mouth location.
 
+        :returns: A dictionary containing a list of shot events, including player information, 
+                shot type, coordinates, xG value, and additional shot data.
+        :rtype: dict
+
         Example Response:
-            {
-            "shotmap": [
+            .. code-block:: json
+
                 {
-                "player": {
-                    "name": "Mikel Merino",
-                    "slug": "mikel-merino",
-                    "shortName": "M. Merino",
-                    "position": "M",
-                    "jerseyNumber": "23",
-                    "userCount": 7943,
-                    "id": 592010,
-                    "fieldTranslations": {
-                    "nameTranslation": {
-                        "ar": "ميكيل ميرينو",
-                        "hi": "मिकेल मेरिनो",
-                        "bn": "মাইকেল মেরিনো"
-                    },
-                    "shortNameTranslation": {
-                        "ar": "م. ميرينو",
-                        "hi": "एम. मेरिनो",
-                        "bn": "এম. মেরিনো"
-                    }
-                    }
-                },
-                "isHome": false,
-                "shotType": "block",
-                "situation": "assisted",
-                "playerCoordinates": {
-                    "x": 15.8,
-                    "y": 33.6,
-                    "z": 0
-                },
-                "bodyPart": "left-foot",
-                "goalMouthLocation": "low-centre",
-                "goalMouthCoordinates": {
-                    "x": 0,
-                    "y": 50.3,
-                    "z": 19
-                },
-                "blockCoordinates": {
-                    "x": 11.8,
-                    "y": 37.7,
-                    "z": 0
-                },
-                "xg": 0.073860235512257,
-                "xgot": 0,
-                "id": 4347934,
-                "time": 90,
-                "addedTime": 4,
-                "timeSeconds": 5637,
-                "draw": {
-                    "start": {
-                    "x": 33.6,
-                    "y": 15.8
-                    },
-                    "block": {
-                    "x": 37.7,
-                    "y": 11.8
-                    },
-                    "end": {
-                    "x": 49.7,
-                    "y": 0
-                    },
-                    "goal": {
-                    "x": 49.7,
-                    "y": 81
-                    }
-                },
-                "reversedPeriodTime": 1,
-                "reversedPeriodTimeSeconds": 663,
-                "incidentType": "shot"
+                    "shotmap": [
+                        {
+                            "player": {
+                                "name": "Mikel Merino",
+                                "slug": "mikel-merino",
+                                "shortName": "M. Merino",
+                                "position": "M",
+                                "jerseyNumber": "23",
+                                "userCount": 7943,
+                                "id": 592010,
+                                "fieldTranslations": {
+                                    "nameTranslation": {
+                                        "ar": "ميكيل ميرينو",
+                                        "hi": "मिकेल मेरिनो",
+                                        "bn": "মাইকেল মেরিনো"
+                                    },
+                                    "shortNameTranslation": {
+                                        "ar": "م. ميرينو",
+                                        "hi": "एम. मेरिनो",
+                                        "bn": "এম. মেরিনো"
+                                    }
+                                }
+                            },
+                            "isHome": false,
+                            "shotType": "block",
+                            "situation": "assisted",
+                            "playerCoordinates": {
+                                "x": 15.8,
+                                "y": 33.6,
+                                "z": 0
+                            },
+                            "bodyPart": "left-foot",
+                            "goalMouthLocation": "low-centre",
+                            "goalMouthCoordinates": {
+                                "x": 0,
+                                "y": 50.3,
+                                "z": 19
+                            },
+                            "blockCoordinates": {
+                                "x": 11.8,
+                                "y": 37.7,
+                                "z": 0
+                            },
+                            "xg": 0.073860235512257,
+                            "xgot": 0,
+                            "id": 4347934,
+                            "time": 90,
+                            "addedTime": 4,
+                            "timeSeconds": 5637,
+                            "draw": {
+                                "start": {
+                                    "x": 33.6,
+                                    "y": 15.8
+                                },
+                                "block": {
+                                    "x": 37.7,
+                                    "y": 11.8
+                                },
+                                "end": {
+                                    "x": 49.7,
+                                    "y": 0
+                                },
+                                "goal": {
+                                    "x": 49.7,
+                                    "y": 81
+                                }
+                            },
+                            "reversedPeriodTime": 1,
+                            "reversedPeriodTimeSeconds": 663,
+                            "incidentType": "shot"
+                        }
+                    ]
                 }
-            ]
-            }
-
-        Args:
-            None
-
-        Returns:
-            dict: A dictionary containing a list of shot events that include details
-                such as player information, shot type, coordinates, xG value, and
-                additional shot data.
         """
         return await self.api._get(f"/event/{self.match_id}/shotmap")
+
 
     
     async def heatmap(self, team_id: int) -> Dict:
@@ -1347,55 +1373,75 @@ class Match:
         represented by points on the field. This data provides insights into the 
         movement and positioning of players on the field.
 
+        :param team_id: The ID of the team for which the heatmap is to be fetched.
+        :type team_id: int
+        :returns: A dictionary containing the heatmap data with player points, each represented by x and y coordinates.
+        :rtype: dict
+
         Example Response:
+            .. code-block:: json
             {
-            "playerPoints": [
-                {
-                "x": 55.3,
-                "y": 10.3
-                },
-                {
-                "x": 40.5,
-                "y": 30.2
-                },
-                ...
-            ]
+                "playerPoints": [
+                    {
+                        "x": 55.3,
+                        "y": 10.3
+                    },
+                    {
+                        "x": 40.5,
+                        "y": 30.2
+                    },
+                    ...
+                ]
             }
-
-        Args:
-            team_id (int): The ID of the team for which the heatmap is to be fetched.
-
-        Returns:
-            dict: A dictionary containing the heatmap data with player points, each represented by x and y coordinates.
         """
         return await self.api._get(f"/event/{self.match_id}/heatmap/{team_id}")
 
+
     async def stats(self):
         """
-        returns the stats for the game.
-        {
-  "statistics": [
-    {
-      "period": "ALL",
-      "groups": [
-        {
-          "groupName": "Match overview",
-          "statisticsItems": [
-            {
-              "name": "Ball possession",
-              "home": "39%",
-              "away": "61%",
-              "compareCode": 2,
-              "statisticsType": "positive",
-              "valueType": "event",
-              "homeValue": 39,
-              "awayValue": 61,
-              "renderType": 2,
-              "key": "ballPossession"
-            },
+        Retrieves the statistics for the game.
+
+        This function returns detailed statistics for the match, including various 
+        performance metrics for both teams (e.g., ball possession, shots, etc.), 
+        grouped by categories such as "Match overview".
+
+        :returns: A dictionary containing the match statistics, with grouped statistics 
+                for home and away teams.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "statistics": [
+                        {
+                            "period": "ALL",
+                            "groups": [
+                                {
+                                    "groupName": "Match overview",
+                                    "statisticsItems": [
+                                        {
+                                            "name": "Ball possession",
+                                            "home": "39%",
+                                            "away": "61%",
+                                            "compareCode": 2,
+                                            "statisticsType": "positive",
+                                            "valueType": "event",
+                                            "homeValue": 39,
+                                            "awayValue": 61,
+                                            "renderType": 2,
+                                            "key": "ballPossession"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
         """
         return await self.api._get(f"/event/{self.match_id}/statistics")
-    
+
+        
     async def stats(self) -> Dict:
         """
         Retrieves the statistics for the given game.
@@ -1404,6 +1450,7 @@ class Match:
         shots, and other performance indicators for both teams.
 
         Example Response:
+            .. code-block:: json
             {
             "statistics": [
                 {
@@ -1444,28 +1491,31 @@ class Match:
         """
         Retrieves a match highlight video for the given game.
 
-        Example Response:
-            {
-            "highlights": [
-                {
-                "title": "Girona FC 1-2 Arsenal",
-                "subtitle": "Full Highlights",
-                "url": "https://youtu.be/3C0wBjYhqLE",
-                "thumbnailUrl": "https://i.ytimg.com/vi/3C0wBjYhqLE/hqdefault.jpg",
-                "mediaType": 1,
-                "doFollow": false,
-                "keyHighlight": true,
-                "id": 6209847,
-                "createdAtTimestamp": 1738195753,
-                "sourceUrl": "https://youtu.be/3C0wBjYhqLE"
-                }
-            ]
-            }
-
-        Returns:
-            dict: A dictionary containing a list of highlights for the match. Each highlight contains the 
+        :returns: A dictionary containing a list of highlights for the match. Each highlight contains the 
                 video title, subtitle, URL, thumbnail, and additional metadata like whether it's a key highlight.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "highlights": [
+                        {
+                            "title": "Girona FC 1-2 Arsenal",
+                            "subtitle": "Full Highlights",
+                            "url": "https://youtu.be/3C0wBjYhqLE",
+                            "thumbnailUrl": "https://i.ytimg.com/vi/3C0wBjYhqLE/hqdefault.jpg",
+                            "mediaType": 1,
+                            "doFollow": false,
+                            "keyHighlight": true,
+                            "id": 6209847,
+                            "createdAtTimestamp": 1738195753,
+                            "sourceUrl": "https://youtu.be/3C0wBjYhqLE"
+                        }
+                    ]
+                }
         """
         return await self.api._get(f"/event/{self.match_id}/highlights")
+
 
     

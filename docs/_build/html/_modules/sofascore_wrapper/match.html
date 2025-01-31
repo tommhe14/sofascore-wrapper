@@ -1,0 +1,1685 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.match &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.match</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.match</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+
+<div class="viewcode-block" id="Match">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match">[docs]</a>
+<span class="k">class</span> <span class="nc">Match</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">,</span> <span class="n">match_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">match_id</span> <span class="o">=</span> <span class="n">match_id</span>
+
+<div class="viewcode-block" id="Match.total_games">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.total_games">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">total_games</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the total count of today&#39;s football games and how many are currently live.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+<span class="sd">                - &quot;live&quot;: The number of live football games.</span>
+<span class="sd">                - &quot;total&quot;: The total number of football games scheduled for today.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;live&quot;: 21,</span>
+<span class="sd">                &quot;total&quot;: 270</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/0/event-count&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;football&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
+
+    
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+
+<div class="viewcode-block" id="Match.live_games">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.live_games">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">live_games</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all currently live football games.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, List[Dict[str, Any]]]: A dictionary containing a list of live football games under the key &quot;events&quot;.</span>
+<span class="sd">                Each game is represented as a dictionary with details such as tournament, teams, scores, and match status.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;events&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;tournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;U20 CONMEBOL Championship, Group B&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;u20-conmebol-championship-group-b&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;South America&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;south-america&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1470,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;south-america&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;U20 CONMEBOL Championship&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;u20-conmebol-championship&quot;,</span>
+<span class="sd">                                &quot;primaryColorHex&quot;: &quot;#348925&quot;,</span>
+<span class="sd">                                &quot;secondaryColorHex&quot;: &quot;#afc402&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;South America&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;south-america&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 1470,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;south-america&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 11952,</span>
+<span class="sd">                                &quot;id&quot;: 632,</span>
+<span class="sd">                                &quot;hasPerformanceGraphFeature&quot;: false,</span>
+<span class="sd">                                &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                                &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;priority&quot;: 0,</span>
+<span class="sd">                            &quot;isGroup&quot;: true,</span>
+<span class="sd">                            &quot;groupName&quot;: &quot;Group B&quot;,</span>
+<span class="sd">                            &quot;isLive&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 10066</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;season&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;U20 CONMEBOL Ch.ship 2025&quot;,</span>
+<span class="sd">                            &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">                            &quot;editor&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 68914</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;roundInfo&quot;: {</span>
+<span class="sd">                            &quot;round&quot;: 4</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;customId&quot;: &quot;xdjsiAn&quot;,</span>
+<span class="sd">                        &quot;status&quot;: {</span>
+<span class="sd">                            &quot;code&quot;: 6,</span>
+<span class="sd">                            &quot;description&quot;: &quot;1st half&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;inprogress&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Ecuador U20&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;ecuador-u20&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Ecuador U20&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 4401,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;ECU&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: true,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 33758,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EC&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ECU&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;Ecuador&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;ecuador&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#000063&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#000063&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;الإكوادور تحت 20&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Эквадор U20&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Brazil U20&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;brazil-u20&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Brazil U20&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 39092,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;BRA&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: true,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 22672,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;BR&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;BRA&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;Brazil&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;brazil&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#009933&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#009933&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;البرازيل تحت 20&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Бразилия U20&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;time&quot;: {</span>
+<span class="sd">                            &quot;initial&quot;: 0,</span>
+<span class="sd">                            &quot;max&quot;: 2700,</span>
+<span class="sd">                            &quot;extra&quot;: 540,</span>
+<span class="sd">                            &quot;currentPeriodStartTimestamp&quot;: 1738279810</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;changes&quot;: {</span>
+<span class="sd">                            &quot;changes&quot;: [</span>
+<span class="sd">                                &quot;homeScore.period1&quot;,</span>
+<span class="sd">                                &quot;homeScore.normaltime&quot;,</span>
+<span class="sd">                                &quot;awayScore.period1&quot;,</span>
+<span class="sd">                                &quot;awayScore.normaltime&quot;</span>
+<span class="sd">                            ],</span>
+<span class="sd">                            &quot;changeTimestamp&quot;: 1738279909</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                        &quot;hasEventPlayerHeatMap&quot;: true,</span>
+<span class="sd">                        &quot;detailId&quot;: 1,</span>
+<span class="sd">                        &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 13123315,</span>
+<span class="sd">                        &quot;statusTime&quot;: {</span>
+<span class="sd">                            &quot;prefix&quot;: &quot;&quot;,</span>
+<span class="sd">                            &quot;initial&quot;: 0,</span>
+<span class="sd">                            &quot;max&quot;: 2700,</span>
+<span class="sd">                            &quot;timestamp&quot;: 1738279810,</span>
+<span class="sd">                            &quot;extra&quot;: 540</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;startTimestamp&quot;: 1738279800,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;ecuador-u20-brazil-u20&quot;,</span>
+<span class="sd">                        &quot;lastPeriod&quot;: &quot;period1&quot;,</span>
+<span class="sd">                        &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                        &quot;feedLocked&quot;: true,</span>
+<span class="sd">                        &quot;isEditor&quot;: false</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/football/events/live&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Match.games_by_date">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.games_by_date">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">games_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the fixtures for today or a specific date.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            date (str, optional): The date in the format &quot;YYYY-MM-DD&quot;. If not provided, today&#39;s date is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the fixtures for the specified date, including match details, teams, and timings.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;events&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;tournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                                &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 1,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                                &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                                &quot;id&quot;: 17,</span>
+<span class="sd">                                &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;priority&quot;: 617,</span>
+<span class="sd">                            &quot;isLive&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;customId&quot;: &quot;HsR&quot;,</span>
+<span class="sd">                        &quot;status&quot;: {</span>
+<span class="sd">                            &quot;code&quot;: 0,</span>
+<span class="sd">                            &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;winnerCode&quot;: 0,</span>
+<span class="sd">                        &quot;homeTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: false,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 42,</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Liverpool&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;liverpool&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Liverpool&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 2572976,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;LIV&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: false,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 44,</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ليفربول&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Ливерпуль&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;लिवरपूल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;লিভারপুল&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ليفربول&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;लिवरपूल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;লিভারপুল&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;period2&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;period2&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;time&quot;: {</span>
+<span class="sd">                            &quot;injuryTime1&quot;: 0,</span>
+<span class="sd">                            &quot;injuryTime2&quot;: 0,</span>
+<span class="sd">                            &quot;currentPeriodStartTimestamp&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;changes&quot;: {</span>
+<span class="sd">                            &quot;changes&quot;: [],</span>
+<span class="sd">                            &quot;changeTimestamp&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                        &quot;hasXg&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerHeatMap&quot;: false,</span>
+<span class="sd">                        &quot;detailId&quot;: 1,</span>
+<span class="sd">                        &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 12436472,</span>
+<span class="sd">                        &quot;startTimestamp&quot;: 1735330500,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal-liverpool&quot;,</span>
+<span class="sd">                        &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                        &quot;feedLocked&quot;: false,</span>
+<span class="sd">                        &quot;isEditor&quot;: false</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/sport/football/scheduled-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+        
+<div class="viewcode-block" id="Match.match_odds">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.match_odds">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">match_odds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the match odds for the specified match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the match odds data. The structure includes:</span>
+<span class="sd">                - markets (List[Dict[str, Any]]): A list of market objects, each containing:</span>
+<span class="sd">                    - sourceId (int): The source ID of the market.</span>
+<span class="sd">                    - structureType (int): The structure type of the market.</span>
+<span class="sd">                    - marketId (int): The ID of the market.</span>
+<span class="sd">                    - marketName (str): The name of the market.</span>
+<span class="sd">                    - isLive (bool): Indicates if the market is live.</span>
+<span class="sd">                    - fid (int): The fid of the market.</span>
+<span class="sd">                    - suspended (bool): Indicates if the market is suspended.</span>
+<span class="sd">                    - id (int): The ID of the market.</span>
+<span class="sd">                    - choices (List[Dict[str, Any]]): A list of choices/outcomes for the market, each containing:</span>
+<span class="sd">                        - initialFractionalValue (str): The initial fractional odds value.</span>
+<span class="sd">                        - fractionalValue (str): The current fractional odds value.</span>
+<span class="sd">                        - sourceId (int): The source ID of the choice.</span>
+<span class="sd">                        - name (str): The name of the choice.</span>
+<span class="sd">                        - winning (bool): Indicates if the choice is winning.</span>
+<span class="sd">                        - change (int): The change in odds.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;markets&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;sourceId&quot;: 168664758,</span>
+<span class="sd">                        &quot;structureType&quot;: 1,</span>
+<span class="sd">                        &quot;marketId&quot;: 1,</span>
+<span class="sd">                        &quot;marketName&quot;: &quot;Full time&quot;,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;fid&quot;: 168664758,</span>
+<span class="sd">                        &quot;suspended&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 1962878117,</span>
+<span class="sd">                        &quot;choices&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;17/4&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;9/2&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114984998,</span>
+<span class="sd">                                &quot;name&quot;: &quot;1&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: false,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;10/3&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;31/10&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985000,</span>
+<span class="sd">                                &quot;name&quot;: &quot;X&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: false,</span>
+<span class="sd">                                &quot;change&quot;: -1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;53/100&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;57/100&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985001,</span>
+<span class="sd">                                &quot;name&quot;: &quot;2&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: true,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/odds/1/all&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.featured_odds">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.featured_odds">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">featured_odds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the featured odds for the specified match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the featured odds data. The structure includes:</span>
+<span class="sd">                - featured (Dict[str, Dict[str, Any]]): A dictionary of featured markets, each containing:</span>
+<span class="sd">                    - default (Dict[str, Any]): The default market data, including:</span>
+<span class="sd">                        - sourceId (int): The source ID of the market.</span>
+<span class="sd">                        - structureType (int): The structure type of the market.</span>
+<span class="sd">                        - marketId (int): The ID of the market.</span>
+<span class="sd">                        - marketName (str): The name of the market.</span>
+<span class="sd">                        - isLive (bool): Indicates if the market is live.</span>
+<span class="sd">                        - fid (int): The fid of the market.</span>
+<span class="sd">                        - suspended (bool): Indicates if the market is suspended.</span>
+<span class="sd">                        - id (int): The ID of the market.</span>
+<span class="sd">                        - choices (List[Dict[str, Any]]): A list of choices/outcomes for the market, each containing:</span>
+<span class="sd">                            - initialFractionalValue (str): The initial fractional odds value.</span>
+<span class="sd">                            - fractionalValue (str): The current fractional odds value.</span>
+<span class="sd">                            - sourceId (int): The source ID of the choice.</span>
+<span class="sd">                            - name (str): The name of the choice.</span>
+<span class="sd">                            - winning (bool): Indicates if the choice is winning.</span>
+<span class="sd">                            - change (int): The change in odds.</span>
+<span class="sd">                    - asian (Dict[str, Any]): The Asian handicap market data, with the same structure as `default`.</span>
+<span class="sd">                    - fullTime (Dict[str, Any]): The full-time market data, with the same structure as `default`.</span>
+<span class="sd">                - hasMoreOdds (bool): Indicates if there are more odds available.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;featured&quot;: {</span>
+<span class="sd">                    &quot;default&quot;: {</span>
+<span class="sd">                        &quot;sourceId&quot;: 168664758,</span>
+<span class="sd">                        &quot;structureType&quot;: 1,</span>
+<span class="sd">                        &quot;marketId&quot;: 1,</span>
+<span class="sd">                        &quot;marketName&quot;: &quot;Full time&quot;,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;fid&quot;: 168664758,</span>
+<span class="sd">                        &quot;suspended&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 1962878117,</span>
+<span class="sd">                        &quot;choices&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;17/4&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;9/2&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114984998,</span>
+<span class="sd">                                &quot;name&quot;: &quot;1&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: false,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;10/3&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;31/10&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985000,</span>
+<span class="sd">                                &quot;name&quot;: &quot;X&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: false,</span>
+<span class="sd">                                &quot;change&quot;: -1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;53/100&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;57/100&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985001,</span>
+<span class="sd">                                &quot;name&quot;: &quot;2&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: true,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;asian&quot;: {</span>
+<span class="sd">                        &quot;sourceId&quot;: 168664758,</span>
+<span class="sd">                        &quot;structureType&quot;: 1,</span>
+<span class="sd">                        &quot;marketId&quot;: 17,</span>
+<span class="sd">                        &quot;marketName&quot;: &quot;Asian handicap&quot;,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;fid&quot;: 168664760,</span>
+<span class="sd">                        &quot;suspended&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 1962996370,</span>
+<span class="sd">                        &quot;choices&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;49/50&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;22/25&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985005,</span>
+<span class="sd">                                &quot;name&quot;: &quot;(1) Girona FC&quot;,</span>
+<span class="sd">                                &quot;change&quot;: -1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;23/25&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;51/50&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985008,</span>
+<span class="sd">                                &quot;name&quot;: &quot;(-1) Arsenal&quot;,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;fullTime&quot;: {</span>
+<span class="sd">                        &quot;sourceId&quot;: 168664758,</span>
+<span class="sd">                        &quot;structureType&quot;: 1,</span>
+<span class="sd">                        &quot;marketId&quot;: 1,</span>
+<span class="sd">                        &quot;marketName&quot;: &quot;Full time&quot;,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;fid&quot;: 168664758,</span>
+<span class="sd">                        &quot;suspended&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 1962878117,</span>
+<span class="sd">                        &quot;choices&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;17/4&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;9/2&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114984998,</span>
+<span class="sd">                                &quot;name&quot;: &quot;1&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: false,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;10/3&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;31/10&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985000,</span>
+<span class="sd">                                &quot;name&quot;: &quot;X&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: false,</span>
+<span class="sd">                                &quot;change&quot;: -1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;initialFractionalValue&quot;: &quot;53/100&quot;,</span>
+<span class="sd">                                &quot;fractionalValue&quot;: &quot;57/100&quot;,</span>
+<span class="sd">                                &quot;sourceId&quot;: 2114985001,</span>
+<span class="sd">                                &quot;name&quot;: &quot;2&quot;,</span>
+<span class="sd">                                &quot;winning&quot;: true,</span>
+<span class="sd">                                &quot;change&quot;: 1</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;hasMoreOdds&quot;: true</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/odds/1/featured&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.h2h">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.h2h">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">h2h</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the head-to-head (H2H) data for the teams involved in the specified match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the head-to-head data. The structure includes:</span>
+<span class="sd">                - teamDuel (Dict[str, int]): A dictionary representing the head-to-head results between the teams:</span>
+<span class="sd">                    - homeWins (int): The number of wins for the home team.</span>
+<span class="sd">                    - awayWins (int): The number of wins for the away team.</span>
+<span class="sd">                    - draws (int): The number of draws between the teams.</span>
+<span class="sd">                - managerDuel (Dict[str, int]): A dictionary representing the head-to-head results between the managers:</span>
+<span class="sd">                    - homeWins (int): The number of wins for the home team&#39;s manager.</span>
+<span class="sd">                    - awayWins (int): The number of wins for the away team&#39;s manager.</span>
+<span class="sd">                    - draws (int): The number of draws between the managers.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;teamDuel&quot;: {</span>
+<span class="sd">                    &quot;homeWins&quot;: 0,</span>
+<span class="sd">                    &quot;awayWins&quot;: 1,</span>
+<span class="sd">                    &quot;draws&quot;: 0</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;managerDuel&quot;: {</span>
+<span class="sd">                    &quot;homeWins&quot;: 0,</span>
+<span class="sd">                    &quot;awayWins&quot;: 1,</span>
+<span class="sd">                    &quot;draws&quot;: 0</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/h2h&quot;</span><span class="p">)</span></div>
+
+    
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">incidents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves important incidents during the match, including game status changes.</span>
+
+<span class="sd">        This function returns a list of incidents that occurred in the match, such as </span>
+<span class="sd">        goals, substitutions, or other significant game events. Each incident contains </span>
+<span class="sd">        details such as the time, player involved (if applicable), description, and </span>
+<span class="sd">        game status (e.g., score updates, penalties).</span>
+
+<span class="sd">        :returns: A dictionary containing a list of incidents with details about each </span>
+<span class="sd">                incident, including time, player, description, and the type of incident.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;incidents&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;text&quot;: &quot;FT&quot;,</span>
+<span class="sd">                            &quot;homeScore&quot;: 1,</span>
+<span class="sd">                            &quot;awayScore&quot;: 2,</span>
+<span class="sd">                            &quot;isLive&quot;: false,</span>
+<span class="sd">                            &quot;time&quot;: 90,</span>
+<span class="sd">                            &quot;addedTime&quot;: 999,</span>
+<span class="sd">                            &quot;timeSeconds&quot;: 5400,</span>
+<span class="sd">                            &quot;reversedPeriodTime&quot;: 1,</span>
+<span class="sd">                            &quot;reversedPeriodTimeSeconds&quot;: 0,</span>
+<span class="sd">                            &quot;incidentType&quot;: &quot;period&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;time&quot;: 90,</span>
+<span class="sd">                            &quot;player&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Raheem Sterling&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;raheem-sterling&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;R. Sterling&quot;,</span>
+<span class="sd">                                &quot;position&quot;: &quot;M&quot;,</span>
+<span class="sd">                                &quot;jerseyNumber&quot;: &quot;30&quot;,</span>
+<span class="sd">                                &quot;height&quot;: 170,</span>
+<span class="sd">                                &quot;userCount&quot;: 49508,</span>
+<span class="sd">                                &quot;id&quot;: 138534,</span>
+<span class="sd">                                &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                                &quot;dateOfBirthTimestamp&quot;: 786844800,</span>
+<span class="sd">                                &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                                    &quot;value&quot;: 21000000,</span>
+<span class="sd">                                    &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;رحيم ستيرلينغ&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;रहीम स्टर्लिंग&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;রাহিম স্টার্লিং&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ر. سترلينغ&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;आर. स्टर्लिंग&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;আর. স্টার্লিং&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;description&quot;: &quot;Goalkeeper save&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 118513874,</span>
+<span class="sd">                            &quot;addedTime&quot;: 3,</span>
+<span class="sd">                            &quot;incidentType&quot;: &quot;inGamePenalty&quot;,</span>
+<span class="sd">                            &quot;isHome&quot;: false,</span>
+<span class="sd">                            &quot;incidentClass&quot;: &quot;missed&quot;,</span>
+<span class="sd">                            &quot;reason&quot;: &quot;goalkeeperSave&quot;,</span>
+<span class="sd">                            &quot;reversedPeriodTime&quot;: 1</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/incidents&quot;</span><span class="p">)</span>
+
+    
+<div class="viewcode-block" id="Match.incidents">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.incidents">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">incidents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the important incidents for the specified match, including game status changes and key events.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the incidents data. The structure includes:</span>
+<span class="sd">                - incidents (List[Dict[str, Any]]): A list of incident objects, each containing:</span>
+<span class="sd">                    - text (str): A description or label for the incident (e.g., &quot;FT&quot; for full-time).</span>
+<span class="sd">                    - homeScore (int): The home team&#39;s score at the time of the incident.</span>
+<span class="sd">                    - awayScore (int): The away team&#39;s score at the time of the incident.</span>
+<span class="sd">                    - isLive (bool): Indicates if the match was live at the time of the incident.</span>
+<span class="sd">                    - time (int): The time in minutes when the incident occurred.</span>
+<span class="sd">                    - addedTime (int): The added or stoppage time when the incident occurred.</span>
+<span class="sd">                    - timeSeconds (int): The time in seconds when the incident occurred.</span>
+<span class="sd">                    - reversedPeriodTime (int): The reversed period time (e.g., 1 for first half, 2 for second half).</span>
+<span class="sd">                    - reversedPeriodTimeSeconds (int): The reversed period time in seconds.</span>
+<span class="sd">                    - incidentType (str): The type of incident (e.g., &quot;period&quot;, &quot;inGamePenalty&quot;).</span>
+<span class="sd">                    - player (Dict[str, Any], optional): Details about the player involved in the incident, including:</span>
+<span class="sd">                        - name (str): The player&#39;s full name.</span>
+<span class="sd">                        - slug (str): The player&#39;s slug or unique identifier.</span>
+<span class="sd">                        - shortName (str): The player&#39;s short name.</span>
+<span class="sd">                        - position (str): The player&#39;s position on the field.</span>
+<span class="sd">                        - jerseyNumber (str): The player&#39;s jersey number.</span>
+<span class="sd">                        - height (int): The player&#39;s height in centimeters.</span>
+<span class="sd">                        - userCount (int): The number of users following the player.</span>
+<span class="sd">                        - id (int): The player&#39;s unique ID.</span>
+<span class="sd">                        - marketValueCurrency (str): The currency of the player&#39;s market value.</span>
+<span class="sd">                        - dateOfBirthTimestamp (int): The player&#39;s date of birth as a timestamp.</span>
+<span class="sd">                        - proposedMarketValueRaw (Dict[str, Any]): The player&#39;s proposed market value, including:</span>
+<span class="sd">                            - value (int): The market value amount.</span>
+<span class="sd">                            - currency (str): The currency of the market value.</span>
+<span class="sd">                        - fieldTranslations (Dict[str, Any]): Translations of the player&#39;s name and short name in various languages.</span>
+<span class="sd">                    - description (str, optional): A description of the incident (e.g., &quot;Goalkeeper save&quot;).</span>
+<span class="sd">                    - id (int): The unique ID of the incident.</span>
+<span class="sd">                    - isHome (bool, optional): Indicates if the incident involved the home team.</span>
+<span class="sd">                    - incidentClass (str, optional): The class of the incident (e.g., &quot;missed&quot;).</span>
+<span class="sd">                    - reason (str, optional): The reason for the incident (e.g., &quot;goalkeeperSave&quot;).</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;incidents&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;text&quot;: &quot;FT&quot;,</span>
+<span class="sd">                        &quot;homeScore&quot;: 1,</span>
+<span class="sd">                        &quot;awayScore&quot;: 2,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;time&quot;: 90,</span>
+<span class="sd">                        &quot;addedTime&quot;: 999,</span>
+<span class="sd">                        &quot;timeSeconds&quot;: 5400,</span>
+<span class="sd">                        &quot;reversedPeriodTime&quot;: 1,</span>
+<span class="sd">                        &quot;reversedPeriodTimeSeconds&quot;: 0,</span>
+<span class="sd">                        &quot;incidentType&quot;: &quot;period&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;time&quot;: 90,</span>
+<span class="sd">                        &quot;player&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Raheem Sterling&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;raheem-sterling&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;R. Sterling&quot;,</span>
+<span class="sd">                            &quot;position&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;jerseyNumber&quot;: &quot;30&quot;,</span>
+<span class="sd">                            &quot;height&quot;: 170,</span>
+<span class="sd">                            &quot;userCount&quot;: 49508,</span>
+<span class="sd">                            &quot;id&quot;: 138534,</span>
+<span class="sd">                            &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                            &quot;dateOfBirthTimestamp&quot;: 786844800,</span>
+<span class="sd">                            &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                                &quot;value&quot;: 21000000,</span>
+<span class="sd">                                &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;رحيم ستيرلينغ&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;रहीम स्टर्लिंग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;রাহিম স্টার্লিং&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ر. سترلينغ&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर. स्टर्लिंग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর. স্টার্লিং&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;description&quot;: &quot;Goalkeeper save&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 118513874,</span>
+<span class="sd">                        &quot;addedTime&quot;: 3,</span>
+<span class="sd">                        &quot;incidentType&quot;: &quot;inGamePenalty&quot;,</span>
+<span class="sd">                        &quot;isHome&quot;: false,</span>
+<span class="sd">                        &quot;incidentClass&quot;: &quot;missed&quot;,</span>
+<span class="sd">                        &quot;reason&quot;: &quot;goalkeeperSave&quot;,</span>
+<span class="sd">                        &quot;reversedPeriodTime&quot;: 1</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/incidents&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.best_away_players">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.best_away_players">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">best_away_players</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the best-rated players of the away team for the specified match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries containing the best-rated players of the away team.</span>
+<span class="sd">                Each dictionary includes:</span>
+<span class="sd">                    - value (str): The rating value of the player.</span>
+<span class="sd">                    - label (str): The label for the value (e.g., &quot;rating&quot;).</span>
+<span class="sd">                    - player (Dict[str, Any]): Details about the player, including:</span>
+<span class="sd">                        - name (str): The player&#39;s full name.</span>
+<span class="sd">                        - slug (str): The player&#39;s slug or unique identifier.</span>
+<span class="sd">                        - shortName (str): The player&#39;s short name.</span>
+<span class="sd">                        - position (str): The player&#39;s position on the field.</span>
+<span class="sd">                        - jerseyNumber (str): The player&#39;s jersey number.</span>
+<span class="sd">                        - height (int): The player&#39;s height in centimeters.</span>
+<span class="sd">                        - userCount (int): The number of users following the player.</span>
+<span class="sd">                        - id (int): The player&#39;s unique ID.</span>
+<span class="sd">                        - marketValueCurrency (str): The currency of the player&#39;s market value.</span>
+<span class="sd">                        - dateOfBirthTimestamp (int): The player&#39;s date of birth as a timestamp.</span>
+<span class="sd">                        - proposedMarketValueRaw (Dict[str, Any]): The player&#39;s proposed market value, including:</span>
+<span class="sd">                            - value (int): The market value amount.</span>
+<span class="sd">                            - currency (str): The currency of the market value.</span>
+<span class="sd">                        - fieldTranslations (Dict[str, Any]): Translations of the player&#39;s name and short name in various languages.</span>
+<span class="sd">                Returns `None` if no data is available.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;value&quot;: &quot;7.8&quot;,</span>
+<span class="sd">                    &quot;label&quot;: &quot;rating&quot;,</span>
+<span class="sd">                    &quot;player&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Pau López&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;pau-lopez&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;P. López&quot;,</span>
+<span class="sd">                        &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                        &quot;jerseyNumber&quot;: &quot;25&quot;,</span>
+<span class="sd">                        &quot;height&quot;: 189,</span>
+<span class="sd">                        &quot;userCount&quot;: 1060,</span>
+<span class="sd">                        &quot;id&quot;: 548848,</span>
+<span class="sd">                        &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                        &quot;dateOfBirthTimestamp&quot;: 787276800,</span>
+<span class="sd">                        &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                            &quot;value&quot;: 3700000,</span>
+<span class="sd">                            &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;باو لوبيز&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;पाऊ लोपेज़&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;পাউ লোপেজ&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ب. لوبيز&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;पी. लोपेज़&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;পি. লোপেজ&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/best-players/summary&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bestAwayTeamPlayers&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.motm">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.motm">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">motm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the Man of the Match (MOTM) for the given game.</span>
+
+<span class="sd">        This function returns the player who was awarded Man of the Match based on the performance </span>
+<span class="sd">        in a given game. The result includes the player&#39;s details such as name, position, jersey </span>
+<span class="sd">        number, market value, and translations for the player&#39;s name in various languages.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;value&quot;: &quot;7.8&quot;,</span>
+<span class="sd">                &quot;label&quot;: &quot;rating&quot;,</span>
+<span class="sd">                &quot;player&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Pau López&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;pau-lopez&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;P. López&quot;,</span>
+<span class="sd">                    &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                    &quot;jerseyNumber&quot;: &quot;25&quot;,</span>
+<span class="sd">                    &quot;height&quot;: 189,</span>
+<span class="sd">                    &quot;userCount&quot;: 1060,</span>
+<span class="sd">                    &quot;id&quot;: 548848,</span>
+<span class="sd">                    &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                    &quot;dateOfBirthTimestamp&quot;: 787276800,</span>
+<span class="sd">                    &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                        &quot;value&quot;: 3700000,</span>
+<span class="sd">                        &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                            &quot;ar&quot;: &quot;باو لوبيز&quot;,</span>
+<span class="sd">                            &quot;hi&quot;: &quot;पाऊ लोपेज़&quot;,</span>
+<span class="sd">                            &quot;bn&quot;: &quot;পাউ লোপেজ&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                            &quot;ar&quot;: &quot;ب. لوبيز&quot;,</span>
+<span class="sd">                            &quot;hi&quot;: &quot;पी. लोपेज़&quot;,</span>
+<span class="sd">                            &quot;bn&quot;: &quot;পি. লোপেজ&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: The player information for the Man of the Match, including player details and ratings.</span>
+<span class="sd">            If no player of the match is found, it returns None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/best-players/summary&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;playerOfTheMatch&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Match.votes">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.votes">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">votes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the SofaScore votes for the given match.</span>
+
+<span class="sd">        This function returns various votes related to a match, including votes for the </span>
+<span class="sd">        most popular outcome (home win, away win, draw), as well as votes for specific </span>
+<span class="sd">        events, such as who will score first or whether both teams will score.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;vote&quot;: {</span>
+<span class="sd">                    &quot;vote1&quot;: 8779,</span>
+<span class="sd">                    &quot;vote2&quot;: 98254,</span>
+<span class="sd">                    &quot;voteX&quot;: 11223</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;bothTeamsToScoreVote&quot;: {</span>
+<span class="sd">                    &quot;voteYes&quot;: 16294,</span>
+<span class="sd">                    &quot;voteNo&quot;: 8891</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;firstTeamToScoreVote&quot;: {</span>
+<span class="sd">                    &quot;voteHome&quot;: 2429,</span>
+<span class="sd">                    &quot;voteNoGoal&quot;: 404,</span>
+<span class="sd">                    &quot;voteAway&quot;: 20338</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;whoShouldHaveWonVote&quot;: {</span>
+<span class="sd">                    &quot;vote1&quot;: 0,</span>
+<span class="sd">                    &quot;vote2&quot;: 0</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing the vote results, including vote counts for </span>
+<span class="sd">            different match outcomes and events.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Match.pre_match_form">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.pre_match_form">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">pre_match_form</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the pre-match form of the two teams for the given game.</span>
+
+<span class="sd">        This function returns the recent form of both the home and away teams, </span>
+<span class="sd">        along with their average ratings, position, and points value.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;homeTeam&quot;: {</span>
+<span class="sd">                    &quot;avgRating&quot;: &quot;6.81&quot;,</span>
+<span class="sd">                    &quot;position&quot;: 31,</span>
+<span class="sd">                    &quot;value&quot;: &quot;3&quot;,</span>
+<span class="sd">                    &quot;form&quot;: [</span>
+<span class="sd">                        &quot;W&quot;,  # Win</span>
+<span class="sd">                        &quot;L&quot;,  # Loss</span>
+<span class="sd">                        &quot;L&quot;,  # Loss</span>
+<span class="sd">                        &quot;L&quot;,  # Loss</span>
+<span class="sd">                        &quot;L&quot;   # Loss</span>
+<span class="sd">                    ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;awayTeam&quot;: {</span>
+<span class="sd">                    &quot;avgRating&quot;: &quot;7.08&quot;,</span>
+<span class="sd">                    &quot;position&quot;: 3,</span>
+<span class="sd">                    &quot;value&quot;: &quot;16&quot;,</span>
+<span class="sd">                    &quot;form&quot;: [</span>
+<span class="sd">                        &quot;W&quot;,  # Win</span>
+<span class="sd">                        &quot;L&quot;,  # Loss</span>
+<span class="sd">                        &quot;W&quot;,  # Win</span>
+<span class="sd">                        &quot;W&quot;,  # Win</span>
+<span class="sd">                        &quot;W&quot;   # Win</span>
+<span class="sd">                    ]</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;label&quot;: &quot;Pts&quot;  # Label for the points value (optional)</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing the pre-match form data for both teams, </span>
+<span class="sd">            including their recent results, average ratings, and positions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/pregame-form&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Match.match_channels">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.match_channels">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">match_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get all the available channels for the given match, grouped by country code.</span>
+
+<span class="sd">        This function returns a dictionary of available channels for a match based on </span>
+<span class="sd">        different country codes. The user can use `get_channel()` to fetch the channel names.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;countryChannels&quot;: {</span>
+<span class="sd">                    &quot;TG&quot;: [2781, 3025, 644],  # Country code &quot;TG&quot; with channel IDs</span>
+<span class="sd">                    &quot;EN&quot;: [1234, 5678],        # Country code &quot;EN&quot; with channel IDs</span>
+<span class="sd">                    &quot;US&quot;: [9876, 5432]         # Country code &quot;US&quot; with channel IDs</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing country codes as keys and a list of </span>
+<span class="sd">            channel IDs as values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tv/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/country-channels&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Match.get_channel">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.get_channel">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the channel name for the given channel ID.</span>
+
+<span class="sd">        This function retrieves the name of a TV channel based on the provided channel ID </span>
+<span class="sd">        for a specific match. It returns the name of the channel if available.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            &quot;TV2 Play&quot;  # The channel name corresponding to the channel ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel_id (int): The ID of the TV channel for which the name is required.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The name of the channel associated with the given channel ID, or None </span>
+<span class="sd">            if the channel name is not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tv/channel/</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tvChannelVotes&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tvChannel&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Match.managers">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.managers">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">managers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the managers for the given match.</span>
+
+<span class="sd">        This function retrieves the managers for the home and away teams in the </span>
+<span class="sd">        given match. It returns the managers&#39; names, IDs, and translations in </span>
+<span class="sd">        different languages.</span>
+
+<span class="sd">        :returns: A dictionary containing the home and away team managers&#39; details, </span>
+<span class="sd">                including names, IDs, and translations in multiple languages.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;homeManager&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Michel&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;michel&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Michel&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 788163,</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ميشيل&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;मिशेल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;মিশেল&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ميشيل&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;मिशेल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;মিশেল&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;awayManager&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Mikel Arteta&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;mikel-arteta&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;M. Arteta&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 794075,</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ميكيل أرتيتا&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;मिकेल आर्टेटा&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;মিকেল আর্তেতা&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;م. أرتيتا&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;एम. आर्टेटा&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;এম. আরতেতা&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/managers&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Match.lineups_home">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.lineups_home">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">lineups_home</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the lineup of the home team for the given match.</span>
+
+<span class="sd">        This function retrieves the confirmed lineup of the home team, including </span>
+<span class="sd">        details of the players such as name, position, jersey number, market value, </span>
+<span class="sd">        and translations in different languages.</span>
+
+<span class="sd">        :returns: A dictionary containing the home team&#39;s confirmed lineup and </span>
+<span class="sd">                details of each player, including player name, position, </span>
+<span class="sd">                jersey number, country, market value, and translations.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;confirmed&quot;: true,</span>
+<span class="sd">                    &quot;players&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;player&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Pau López&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;pau-lopez&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;P. López&quot;,</span>
+<span class="sd">                                &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                                &quot;jerseyNumber&quot;: &quot;25&quot;,</span>
+<span class="sd">                                &quot;height&quot;: 189,</span>
+<span class="sd">                                &quot;userCount&quot;: 1060,</span>
+<span class="sd">                                &quot;id&quot;: 548848,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;ES&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;ESP&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Spain&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;spain&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                                &quot;dateOfBirthTimestamp&quot;: 787276800,</span>
+<span class="sd">                                &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                                    &quot;value&quot;: 3700000,</span>
+<span class="sd">                                    &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;باو لوبيز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;पाऊ लोपेज़&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;পাউ লোপেজ&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ب. لوبيز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;पी. लोपेज़&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;পি. লোপেজ&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/lineups&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;confirmed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;confirmed&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;players&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span>
+        <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="Match.lineups_away">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.lineups_away">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">lineups_away</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the lineup of the away team for the given match.</span>
+
+<span class="sd">        This function retrieves the confirmed lineup of the away team, including </span>
+<span class="sd">        details of the players such as name, position, jersey number, market value, </span>
+<span class="sd">        and translations in different languages.</span>
+
+<span class="sd">        :returns: A dictionary containing the away team&#39;s confirmed lineup and </span>
+<span class="sd">                details of each player, including player name, position, </span>
+<span class="sd">                jersey number, country, market value, and translations.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;confirmed&quot;: true,</span>
+<span class="sd">                    &quot;players&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;player&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Pau López&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;pau-lopez&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;P. López&quot;,</span>
+<span class="sd">                                &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                                &quot;jerseyNumber&quot;: &quot;25&quot;,</span>
+<span class="sd">                                &quot;height&quot;: 189,</span>
+<span class="sd">                                &quot;userCount&quot;: 1060,</span>
+<span class="sd">                                &quot;id&quot;: 548848,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;ES&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;ESP&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Spain&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;spain&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                                &quot;dateOfBirthTimestamp&quot;: 787276800,</span>
+<span class="sd">                                &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                                    &quot;value&quot;: 3700000,</span>
+<span class="sd">                                    &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;باو لوبيز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;पाऊ लोपेज़&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;পাউ লোপেজ&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ب. لوبيز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;पी. लोपेज़&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;পি. লোপেজ&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/lineups&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;confirmed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;confirmed&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;players&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span>
+        <span class="p">}</span></div>
+
+
+
+
+<div class="viewcode-block" id="Match.shotmap">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.shotmap">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">shotmap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the shot map for the given match.</span>
+
+<span class="sd">        This function returns a list of shot events that occurred during the match, </span>
+<span class="sd">        including details about each shot, such as the player who took the shot, </span>
+<span class="sd">        the shot type, situation, coordinates, expected goal (xG), and other </span>
+<span class="sd">        relevant information such as body part used and goal mouth location.</span>
+
+<span class="sd">        :returns: A dictionary containing a list of shot events, including player information, </span>
+<span class="sd">                shot type, coordinates, xG value, and additional shot data.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;shotmap&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;player&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Mikel Merino&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;mikel-merino&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;M. Merino&quot;,</span>
+<span class="sd">                                &quot;position&quot;: &quot;M&quot;,</span>
+<span class="sd">                                &quot;jerseyNumber&quot;: &quot;23&quot;,</span>
+<span class="sd">                                &quot;userCount&quot;: 7943,</span>
+<span class="sd">                                &quot;id&quot;: 592010,</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ميكيل ميرينو&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;मिकेल मेरिनो&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;মাইকেল মেরিনো&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;م. ميرينو&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;एम. मेरिनो&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;এম. মেরিনো&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;isHome&quot;: false,</span>
+<span class="sd">                            &quot;shotType&quot;: &quot;block&quot;,</span>
+<span class="sd">                            &quot;situation&quot;: &quot;assisted&quot;,</span>
+<span class="sd">                            &quot;playerCoordinates&quot;: {</span>
+<span class="sd">                                &quot;x&quot;: 15.8,</span>
+<span class="sd">                                &quot;y&quot;: 33.6,</span>
+<span class="sd">                                &quot;z&quot;: 0</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;bodyPart&quot;: &quot;left-foot&quot;,</span>
+<span class="sd">                            &quot;goalMouthLocation&quot;: &quot;low-centre&quot;,</span>
+<span class="sd">                            &quot;goalMouthCoordinates&quot;: {</span>
+<span class="sd">                                &quot;x&quot;: 0,</span>
+<span class="sd">                                &quot;y&quot;: 50.3,</span>
+<span class="sd">                                &quot;z&quot;: 19</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;blockCoordinates&quot;: {</span>
+<span class="sd">                                &quot;x&quot;: 11.8,</span>
+<span class="sd">                                &quot;y&quot;: 37.7,</span>
+<span class="sd">                                &quot;z&quot;: 0</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;xg&quot;: 0.073860235512257,</span>
+<span class="sd">                            &quot;xgot&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 4347934,</span>
+<span class="sd">                            &quot;time&quot;: 90,</span>
+<span class="sd">                            &quot;addedTime&quot;: 4,</span>
+<span class="sd">                            &quot;timeSeconds&quot;: 5637,</span>
+<span class="sd">                            &quot;draw&quot;: {</span>
+<span class="sd">                                &quot;start&quot;: {</span>
+<span class="sd">                                    &quot;x&quot;: 33.6,</span>
+<span class="sd">                                    &quot;y&quot;: 15.8</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;block&quot;: {</span>
+<span class="sd">                                    &quot;x&quot;: 37.7,</span>
+<span class="sd">                                    &quot;y&quot;: 11.8</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;end&quot;: {</span>
+<span class="sd">                                    &quot;x&quot;: 49.7,</span>
+<span class="sd">                                    &quot;y&quot;: 0</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;goal&quot;: {</span>
+<span class="sd">                                    &quot;x&quot;: 49.7,</span>
+<span class="sd">                                    &quot;y&quot;: 81</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;reversedPeriodTime&quot;: 1,</span>
+<span class="sd">                            &quot;reversedPeriodTimeSeconds&quot;: 663,</span>
+<span class="sd">                            &quot;incidentType&quot;: &quot;shot&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/shotmap&quot;</span><span class="p">)</span></div>
+
+
+
+    
+<div class="viewcode-block" id="Match.heatmap">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.heatmap">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the heatmap data for the given team in the specified match.</span>
+
+<span class="sd">        The heatmap contains the coordinates of player activity during the match, </span>
+<span class="sd">        represented by points on the field. This data provides insights into the </span>
+<span class="sd">        movement and positioning of players on the field.</span>
+
+<span class="sd">        :param team_id: The ID of the team for which the heatmap is to be fetched.</span>
+<span class="sd">        :type team_id: int</span>
+<span class="sd">        :returns: A dictionary containing the heatmap data with player points, each represented by x and y coordinates.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;playerPoints&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;x&quot;: 55.3,</span>
+<span class="sd">                        &quot;y&quot;: 10.3</span>
+<span class="sd">                    },</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;x&quot;: 40.5,</span>
+<span class="sd">                        &quot;y&quot;: 30.2</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/heatmap/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the statistics for the game.</span>
+
+<span class="sd">        This function returns detailed statistics for the match, including various </span>
+<span class="sd">        performance metrics for both teams (e.g., ball possession, shots, etc.), </span>
+<span class="sd">        grouped by categories such as &quot;Match overview&quot;.</span>
+
+<span class="sd">        :returns: A dictionary containing the match statistics, with grouped statistics </span>
+<span class="sd">                for home and away teams.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;statistics&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;period&quot;: &quot;ALL&quot;,</span>
+<span class="sd">                            &quot;groups&quot;: [</span>
+<span class="sd">                                {</span>
+<span class="sd">                                    &quot;groupName&quot;: &quot;Match overview&quot;,</span>
+<span class="sd">                                    &quot;statisticsItems&quot;: [</span>
+<span class="sd">                                        {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Ball possession&quot;,</span>
+<span class="sd">                                            &quot;home&quot;: &quot;39%&quot;,</span>
+<span class="sd">                                            &quot;away&quot;: &quot;61%&quot;,</span>
+<span class="sd">                                            &quot;compareCode&quot;: 2,</span>
+<span class="sd">                                            &quot;statisticsType&quot;: &quot;positive&quot;,</span>
+<span class="sd">                                            &quot;valueType&quot;: &quot;event&quot;,</span>
+<span class="sd">                                            &quot;homeValue&quot;: 39,</span>
+<span class="sd">                                            &quot;awayValue&quot;: 61,</span>
+<span class="sd">                                            &quot;renderType&quot;: 2,</span>
+<span class="sd">                                            &quot;key&quot;: &quot;ballPossession&quot;</span>
+<span class="sd">                                        }</span>
+<span class="sd">                                    ]</span>
+<span class="sd">                                }</span>
+<span class="sd">                            ]</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/statistics&quot;</span><span class="p">)</span>
+
+        
+<div class="viewcode-block" id="Match.stats">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.stats">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the statistics for the given game.</span>
+
+<span class="sd">        The statistics provide a detailed overview of various match metrics, such as ball possession, </span>
+<span class="sd">        shots, and other performance indicators for both teams.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">            &quot;statistics&quot;: [</span>
+<span class="sd">                {</span>
+<span class="sd">                &quot;period&quot;: &quot;ALL&quot;,</span>
+<span class="sd">                &quot;groups&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                    &quot;groupName&quot;: &quot;Match overview&quot;,</span>
+<span class="sd">                    &quot;statisticsItems&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Ball possession&quot;,</span>
+<span class="sd">                        &quot;home&quot;: &quot;39%&quot;,</span>
+<span class="sd">                        &quot;away&quot;: &quot;61%&quot;,</span>
+<span class="sd">                        &quot;compareCode&quot;: 2,</span>
+<span class="sd">                        &quot;statisticsType&quot;: &quot;positive&quot;,</span>
+<span class="sd">                        &quot;valueType&quot;: &quot;event&quot;,</span>
+<span class="sd">                        &quot;homeValue&quot;: 39,</span>
+<span class="sd">                        &quot;awayValue&quot;: 61,</span>
+<span class="sd">                        &quot;renderType&quot;: 2,</span>
+<span class="sd">                        &quot;key&quot;: &quot;ballPossession&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        ...</span>
+<span class="sd">                    ]</span>
+<span class="sd">                    },</span>
+<span class="sd">                    ...</span>
+<span class="sd">                ]</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing the statistics for the match, including various categories like </span>
+<span class="sd">                &quot;Match overview&quot;, and performance indicators for both home and away teams.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/statistics&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Match.highlight">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.highlight">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">highlight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a match highlight video for the given game.</span>
+
+<span class="sd">        :returns: A dictionary containing a list of highlights for the match. Each highlight contains the </span>
+<span class="sd">                video title, subtitle, URL, thumbnail, and additional metadata like whether it&#39;s a key highlight.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;highlights&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;title&quot;: &quot;Girona FC 1-2 Arsenal&quot;,</span>
+<span class="sd">                            &quot;subtitle&quot;: &quot;Full Highlights&quot;,</span>
+<span class="sd">                            &quot;url&quot;: &quot;https://youtu.be/3C0wBjYhqLE&quot;,</span>
+<span class="sd">                            &quot;thumbnailUrl&quot;: &quot;https://i.ytimg.com/vi/3C0wBjYhqLE/hqdefault.jpg&quot;,</span>
+<span class="sd">                            &quot;mediaType&quot;: 1,</span>
+<span class="sd">                            &quot;doFollow&quot;: false,</span>
+<span class="sd">                            &quot;keyHighlight&quot;: true,</span>
+<span class="sd">                            &quot;id&quot;: 6209847,</span>
+<span class="sd">                            &quot;createdAtTimestamp&quot;: 1738195753,</span>
+<span class="sd">                            &quot;sourceUrl&quot;: &quot;https://youtu.be/3C0wBjYhqLE&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/highlights&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -26,6 +26,7 @@ class Search:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "results": [
                     {
@@ -91,6 +92,7 @@ class Search:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "type": "event",
@@ -291,6 +293,7 @@ class Search:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "type": "player",
@@ -382,6 +385,7 @@ class Search:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "type": "team",
@@ -445,6 +449,7 @@ class Search:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "type": "uniqueTournament",
