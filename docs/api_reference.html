@@ -1,0 +1,6770 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; sofascore_wrapper 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/alabaster.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/basic.css" />
+
+  
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to sofascore-wrapper’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            sofascore_wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="search.html">Search Page</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#api-modules">API Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI"><code class="docutils literal notranslate"><span class="pre">SofascoreAPI</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI.close"><code class="docutils literal notranslate"><span class="pre">SofascoreAPI.close()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.player">Player</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.attributes"><code class="docutils literal notranslate"><span class="pre">Player.attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.get_player"><code class="docutils literal notranslate"><span class="pre">Player.get_player()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.image"><code class="docutils literal notranslate"><span class="pre">Player.image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.last_matches"><code class="docutils literal notranslate"><span class="pre">Player.last_matches()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.league_stats"><code class="docutils literal notranslate"><span class="pre">Player.league_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.national_stats"><code class="docutils literal notranslate"><span class="pre">Player.national_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.transfer_history"><code class="docutils literal notranslate"><span class="pre">Player.transfer_history()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.player.PlayerSearch"><code class="docutils literal notranslate"><span class="pre">PlayerSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.PlayerSearch.search_player"><code class="docutils literal notranslate"><span class="pre">PlayerSearch.search_player()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.team">Team</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.team.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.get_team"><code class="docutils literal notranslate"><span class="pre">Team.get_team()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.image"><code class="docutils literal notranslate"><span class="pre">Team.image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.last_fixtures"><code class="docutils literal notranslate"><span class="pre">Team.last_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.latest_highlights"><code class="docutils literal notranslate"><span class="pre">Team.latest_highlights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.league_stats"><code class="docutils literal notranslate"><span class="pre">Team.league_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.next_fixtures"><code class="docutils literal notranslate"><span class="pre">Team.next_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.performance"><code class="docutils literal notranslate"><span class="pre">Team.performance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.performance_graph"><code class="docutils literal notranslate"><span class="pre">Team.performance_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.seasons"><code class="docutils literal notranslate"><span class="pre">Team.seasons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.squad"><code class="docutils literal notranslate"><span class="pre">Team.squad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.top_players"><code class="docutils literal notranslate"><span class="pre">Team.top_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.transfers_in"><code class="docutils literal notranslate"><span class="pre">Team.transfers_in()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.transfers_out"><code class="docutils literal notranslate"><span class="pre">Team.transfers_out()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#match">Match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.search">Search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.search.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_all"><code class="docutils literal notranslate"><span class="pre">Search.search_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_leagues"><code class="docutils literal notranslate"><span class="pre">Search.search_leagues()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_match"><code class="docutils literal notranslate"><span class="pre">Search.search_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_players"><code class="docutils literal notranslate"><span class="pre">Search.search_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_teams"><code class="docutils literal notranslate"><span class="pre">Search.search_teams()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.league">League</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.league.League"><code class="docutils literal notranslate"><span class="pre">League</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.current_round"><code class="docutils literal notranslate"><span class="pre">League.current_round()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.featured_game"><code class="docutils literal notranslate"><span class="pre">League.featured_game()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_image"><code class="docutils literal notranslate"><span class="pre">League.get_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_info"><code class="docutils literal notranslate"><span class="pre">League.get_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_latest_highlights"><code class="docutils literal notranslate"><span class="pre">League.get_latest_highlights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_league"><code class="docutils literal notranslate"><span class="pre">League.get_league()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_seasons"><code class="docutils literal notranslate"><span class="pre">League.get_seasons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.player_of_the_season"><code class="docutils literal notranslate"><span class="pre">League.player_of_the_season()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.rounds"><code class="docutils literal notranslate"><span class="pre">League.rounds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.standings"><code class="docutils literal notranslate"><span class="pre">League.standings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.standings_away"><code class="docutils literal notranslate"><span class="pre">League.standings_away()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.standings_home"><code class="docutils literal notranslate"><span class="pre">League.standings_home()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.top_players"><code class="docutils literal notranslate"><span class="pre">League.top_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.top_players_per_game"><code class="docutils literal notranslate"><span class="pre">League.top_players_per_game()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.top_teams"><code class="docutils literal notranslate"><span class="pre">League.top_teams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.totw"><code class="docutils literal notranslate"><span class="pre">League.totw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.totw_rounds"><code class="docutils literal notranslate"><span class="pre">League.totw_rounds()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.manager">Manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.manager.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.manager.Manager.get_manager"><code class="docutils literal notranslate"><span class="pre">Manager.get_manager()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flag">Flag</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">sofascore_wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_reference.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="search.html">Search Page</a></li>
+</ul>
+</div>
+</section>
+<section id="api-modules">
+<h1>API Modules<a class="headerlink" href="#api-modules" title="Link to this heading">¶</a></h1>
+<section id="module-sofascore_wrapper.api">
+<span id="api"></span><h2>API<a class="headerlink" href="#module-sofascore_wrapper.api" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.api.SofascoreAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.api.</span></span><span class="sig-name descname"><span class="pre">SofascoreAPI</span></span><a class="reference internal" href="_modules/sofascore_wrapper/api.html#SofascoreAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.api.SofascoreAPI" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.api.SofascoreAPI.close">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/api.html#SofascoreAPI.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.api.SofascoreAPI.close" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sofascore_wrapper.player">
+<span id="player"></span><h2>Player<a class="headerlink" href="#module-sofascore_wrapper.player" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.player.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api</strong> (<a class="reference internal" href="sofascore_wrapper.html#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p></li>
+<li><p><strong>player_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.attributes">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.attributes" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the player’s attributes and performance overview.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the player’s attributes and performance statistics.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“averageAttributeOverviews”: [</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“attacking”: 62,
+“technical”: 54,
+“tactical”: 44,
+“defending”: 32,
+“creativity”: 47,
+“position”: “F”,
+“yearShift”: 0,
+“id”: 19812</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>],
+“playerAttributeOverviews”: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>“attacking”: 85,
+“technical”: 77,
+“tactical”: 58,
+“defending”: 35,
+“creativity”: 80,
+“position”: “D”,
+“yearShift”: 0,
+“id”: 50004</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.get_player">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_player</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.get_player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.get_player" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch detailed information about the player.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing player details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Bukayo Saka”,
+“firstName”: “”,
+“lastName”: “”,
+“slug”: “bukayo-saka”,
+“shortName”: “B. Saka”,
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“primaryUniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“position”: “F”,
+“jerseyNumber”: “7”,
+“height”: 178,
+“preferredFoot”: “Left”,
+“retired”: false,
+“userCount”: 168684,
+“gender”: “M”,
+“id”: 934235,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“shirtNumber”: 7,
+“dateOfBirthTimestamp”: 999648000,
+“contractUntilTimestamp”: 1814313600,
+“proposedMarketValue”: 157000000,
+“proposedMarketValueRaw”: {</p>
+<blockquote>
+<div><p>“value”: 157000000,
+“currency”: “EUR”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “بوكايو ساكا”,
+“hi”: “बुकायो साका”,
+“bn”: “বুকায়ো সাকা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ب. ساكا”,
+“hi”: “बी. साका”,
+“bn”: “বি. সাকা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.image">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.image" title="Link to this definition">¶</a></dt>
+<dd><p>Example Response:</p>
+<p><a class="reference external" href="https://img.sofascore.com/api/v1/player/934235/image">https://img.sofascore.com/api/v1/player/934235/image</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.last_matches">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.last_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.last_matches" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the last matches the player participated in.</p>
+<p>The matches are returned in reverse chronological order, meaning the most recent match
+is the first item in the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A list of dictionaries containing match details, with the most recent match first.</dt><dd><p>Each dictionary includes information about the tournament, teams, scores, and timestamps.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Euro, Knockout stage”,
+“slug”: “uefa-euro-knockout-stage”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “Europe”,
+“slug”: “europe”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1465,
+“flag”: “europe”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “EURO”,
+“slug”: “european-championship”,
+“primaryColorHex”: “#293cdb”,
+“secondaryColorHex”: “#00ba5d”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “Europe”,
+“slug”: “europe”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1465,
+“flag”: “europe”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1011793,
+“id”: 1,
+“hasPerformanceGraphFeature”: false,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 683,
+“isGroup”: false,
+“isLive”: false,
+“id”: 2137</p>
+</dd>
+</dl>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “EURO 2024”,
+“year”: “2024”,
+“editor”: false,
+“id”: 56953</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 27,
+“name”: “Quarterfinals”,
+“slug”: “quarterfinals”,
+“cupRoundType”: 4</p>
+</div></blockquote>
+<p>},
+“customId”: “GObseUb”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 120,
+“description”: “AP”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 2,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Portugal”,
+“slug”: “portugal”,
+“shortName”: “Portugal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 1382625,
+“nameCode”: “POR”,
+“ranking”: 6,
+“national”: true,
+“type”: 0,
+“id”: 4704,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “PT”,
+“alpha3”: “PRT”,
+“name”: “Portugal”,
+“slug”: “portugal”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#66cc66”,
+“text”: “#66cc66”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “البرتغال”,
+“ru”: “Португалия”,
+“hi”: “पुर्तगाल”,
+“bn”: “পর্তুগাল”</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “France”,
+“slug”: “france”,
+“shortName”: “France”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 1155922,
+“nameCode”: “FRA”,
+“ranking”: 2,
+“disabled”: false,
+“national”: true,
+“type”: 0,
+“id”: 4481,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “FR”,
+“alpha3”: “FRA”,
+“name”: “France”,
+“slug”: “france”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#01509e”,
+“secondary”: “#e30613”,
+“text”: “#e30613”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “فرنسا”,
+“ru”: “Франция”,
+“hi”: “फ्रांस”,
+“bn”: “ফ্রান্স”</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 3,
+“display”: 0,
+“period1”: 0,
+“period2”: 0,
+“normaltime”: 0,
+“extra1”: 0,
+“extra2”: 0,
+“overtime”: 0,
+“penalties”: 3</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 5,
+“display”: 0,
+“period1”: 0,
+“period2”: 0,
+“normaltime”: 0,
+“extra1”: 0,
+“extra2”: 0,
+“overtime”: 0,
+“penalties”: 5</p>
+</div></blockquote>
+<p>},
+“time”: {</p>
+<blockquote>
+<div><p>“injuryTime1”: 0,
+“injuryTime2”: 3,
+“injuryTime3”: 0,
+“injuryTime4”: 0,
+“currentPeriodStartTimestamp”: 1720214035</p>
+</div></blockquote>
+<p>},
+“changes”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“changes”: [</dt><dd><p>“status.code”,
+“status.description”,
+“status.type”,
+“homeScore.display”,
+“homeScore.penalties”,
+“awayScore.display”,
+“awayScore.penalties”</p>
+</dd>
+</dl>
+<p>],
+“changeTimestamp”: 1720215795</p>
+</div></blockquote>
+<p>},
+“hasGlobalHighlights”: false,
+“hasXg”: true,
+“hasEventPlayerStatistics”: true,
+“hasEventPlayerHeatMap”: true,
+“detailId”: 1,
+“crowdsourcingDataDisplayEnabled”: false,
+“id”: 11874026,
+“startTimestamp”: 1720206000,
+“slug”: “portugal-france”,
+“finalResultOnly”: false,
+“feedLocked”: true,
+“isEditor”: false</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.league_stats">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">league_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.league_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.league_stats" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the player’s statistics for a specific league and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>league_id</strong> (<em>int</em>) – The unique ID of the league.</p></li>
+<li><p><strong>season</strong> (<em>int</em>) – The season ID.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the player’s statistics for the specified league and season.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“statistics”: {</dt><dd><p>“rating”: 6.9,
+“totalRating”: 34.5,
+“countRating”: 5,
+“goals”: 0,
+“bigChancesCreated”: 0,
+“bigChancesMissed”: 0,
+“assists”: 0,
+“expectedAssists”: 0.14556703,
+“goalsAssistsSum”: 0,
+“accuratePasses”: 127,
+“inaccuratePasses”: 16,
+“totalPasses”: 143,
+“accuratePassesPercentage”: 88.811188811189,
+“accurateOwnHalfPasses”: 64,
+“accurateOppositionHalfPasses”: 64,
+“accurateFinalThirdPasses”: 31,
+“keyPasses”: 2,
+“successfulDribbles”: 2,
+“successfulDribblesPercentage”: 50,
+“tackles”: 10,
+“interceptions”: 3,
+“yellowCards”: 1,
+“directRedCards”: 0,
+“redCards”: 0,
+“accurateCrosses”: 1,
+“accurateCrossesPercentage”: 100,
+“totalShots”: 4,
+“shotsOnTarget”: 1,
+“shotsOffTarget”: 3,
+“groundDuelsWon”: 15,
+“groundDuelsWonPercentage”: 46.875,
+“aerialDuelsWon”: 3,
+“aerialDuelsWonPercentage”: 50,
+“totalDuelsWon”: 18,
+“totalDuelsWonPercentage”: 47.368421052632,
+“minutesPlayed”: 327,
+“goalConversionPercentage”: 0,
+“penaltiesTaken”: 0,
+“penaltyGoals”: 0,
+“penaltyWon”: 0,
+“penaltyConceded”: 0,
+“shotFromSetPiece”: 0,
+“freeKickGoal”: 0,
+“goalsFromInsideTheBox”: 0,
+“goalsFromOutsideTheBox”: 0,
+“shotsFromInsideTheBox”: 1,
+“shotsFromOutsideTheBox”: 3,
+“headedGoals”: 0,
+“leftFootGoals”: 0,
+“rightFootGoals”: 0,
+“accurateLongBalls”: 1,
+“accurateLongBallsPercentage”: 25,
+“clearances”: 7,
+“errorLeadToGoal”: 0,
+“errorLeadToShot”: 0,
+“dispossessed”: 4,
+“possessionLost”: 30,
+“possessionWonAttThird”: 1,
+“totalChippedPasses”: 3,
+“accurateChippedPasses”: 1,
+“touches”: 211,
+“wasFouled”: 3,
+“fouls”: 5,
+“hitWoodwork”: 0,
+“ownGoals”: 0,
+“dribbledPast”: 6,
+“offsides”: 1,
+“blockedShots”: 0,
+“passToAssist”: 0,
+“saves”: 0,
+“cleanSheet”: 1,
+“penaltyFaced”: 0,
+“penaltySave”: 0,
+“savedShotsFromInsideTheBox”: 0,
+“savedShotsFromOutsideTheBox”: 0,
+“goalsConcededInsideTheBox”: 1,
+“goalsConcededOutsideTheBox”: 1,
+“punches”: 0,
+“runsOut”: 0,
+“successfulRunsOut”: 0,
+“highClaims”: 0,
+“crossesNotClaimed”: 0,
+“matchesStarted”: 4,
+“penaltyConversion”: 0,
+“setPieceConversion”: 0,
+“totalAttemptAssist”: 2,
+“totalContest”: 4,
+“totalCross”: 1,
+“duelLost”: 20,
+“aerialLost”: 3,
+“attemptPenaltyMiss”: 0,
+“attemptPenaltyPost”: 0,
+“attemptPenaltyTarget”: 0,
+“totalLongBalls”: 4,
+“goalsConceded”: 2,
+“tacklesWon”: 9,
+“tacklesWonPercentage”: 90,
+“scoringFrequency”: 0,
+“yellowRedCards”: 0,
+“savesCaught”: 0,
+“savesParried”: 0,
+“totalOwnHalfPasses”: 66,
+“totalOppositionHalfPasses”: 78,
+“totwAppearances”: 0,
+“expectedGoals”: 0.1684,
+“goalKicks”: 0,
+“ballRecovery”: 11,
+“id”: 1595217,
+“type”: “overall”,
+“appearances”: 5</p>
+</dd>
+</dl>
+<p>},
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.national_stats">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">national_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.national_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.national_stats" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the player’s statistics for their national team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the player’s national team statistics, including appearances, goals, and debut information.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“statistics”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“team”: {</dt><dd><p>“name”: “Italy”,
+“slug”: “italy”,
+“shortName”: “Italy”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 905551,
+“nameCode”: “ITA”,
+“ranking”: 9,
+“disabled”: false,
+“national”: true,
+“type”: 0,
+“id”: 4707,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0066ff”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “إيطاليا”,
+“ru”: “Италия”,
+“hi”: “इटली”,
+“bn”: “ইতালি”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “إيطاليا”,
+“hi”: “इटली”,
+“bn”: “ইতালি”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“appearances”: 8,
+“goals”: 0,
+“debutTimestamp”: 1717459200</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.transfer_history">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfer_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.transfer_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.transfer_history" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the transfer history of the player.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the player’s transfer history.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“transferHistory”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Cristiano Ronaldo”,
+“slug”: “cristiano-ronaldo”,
+“shortName”: “C. Ronaldo”,
+“position”: “F”,
+“jerseyNumber”: “7”,
+“userCount”: 1067318,
+“id”: 750,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “كريستيانو رونالدو”,
+“hi”: “क्रिस्टियानो रोनाल्डो”,
+“bn”: “ক্রিশ্চিয়ানো রোনালদো”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ك. رونالدو”,
+“hi”: “सी. रोनाल्डो”,
+“bn”: “সি. রোনালদো”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“transferFrom”: {</p>
+<blockquote>
+<div><p>“name”: “No team”,
+“slug”: “no-team”,
+“shortName”: “No team”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 10,
+“nameCode”: “NTE”,
+“disabled”: true,
+“national”: false,
+“type”: 0,
+“id”: 241802,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#d0d0d0”,
+“secondary”: “#000000”,
+“text”: “#000000”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“transferTo”: {</p>
+<blockquote>
+<div><p>“name”: “Al-Nassr”,
+“slug”: “al-nassr”,
+“shortName”: “Al-Nassr”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 1481629,
+“nameCode”: “ALN”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 23400,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#ffff00”,
+“secondary”: “#ffff00”,
+“text”: “#ffff00”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “النصر”,
+“ru”: “Аль-Наср”,
+“hi”: “अल-नासर”,
+“bn”: “আল-নাসর”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “النصر”,
+“hi”: “अल-नासर”,
+“bn”: “আল-নাসর”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“fromTeamName”: “No team”,
+“toTeamName”: “Al-Nassr”,
+“type”: 3,
+“transferFee”: 0,
+“transferFeeDescription”: “Free”,
+“id”: 1529662,
+“transferDateTimestamp”: 1672531200</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.PlayerSearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.player.</span></span><span class="sig-name descname"><span class="pre">PlayerSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#PlayerSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.PlayerSearch" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api</strong> (<a class="reference internal" href="sofascore_wrapper.html#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p></li>
+<li><p><strong>query</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.PlayerSearch.search_player">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_player</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#PlayerSearch.search_player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.PlayerSearch.search_player" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a dedicated player search. This endpoint is more specific than the general search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing player search results.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“players”: [</dt><dd><dl>
+<dt>{</dt><dd><p>“name”: “Cole Palmer”,
+“slug”: “cole-palmer”,
+“shortName”: “C. Palmer”,
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Chelsea”,
+“slug”: “chelsea”,
+“shortName”: “Chelsea”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“primaryUniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“userCount”: 2130321,
+“nameCode”: “CHE”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 38,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0310a7”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “تشيلسي”,
+“ru”: “Челси”,
+“hi”: “चेल्सी”,
+“bn”: “চেলসি”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “تشيلسي”,
+“hi”: “चेल्सी”,
+“bn”: “চেলসি”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“position”: “M”,
+“jerseyNumber”: “20”,
+“userCount”: 234297,
+“id”: 982780,
+“dateOfBirthTimestamp”: 1020643200,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “كول بالمر”,
+“hi”: “कोल पाल्मर”,
+“bn”: “কোল পামার”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ك. بالمر”,
+“hi”: “सी. पाल्मर”,
+“bn”: “সি. পামার”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sofascore_wrapper.team">
+<span id="team"></span><h2>Team<a class="headerlink" href="#module-sofascore_wrapper.team" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.team.</span></span><span class="sig-name descname"><span class="pre">Team</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api</strong> (<a class="reference internal" href="sofascore_wrapper.html#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p></li>
+<li><p><strong>team_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.get_team">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_team</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.get_team"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.get_team" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves detailed information about the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing team details such as name, slug, short name, gender, sport, category, tournament, and more.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“team”: {</dt><dd><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীग”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“primaryUniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীग”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“manager”: {</p>
+<blockquote>
+<div><p>“name”: “Mikel Arteta”,
+“slug”: “mikel-arteta”,
+“shortName”: “M. Arteta”,
+“id”: 794075,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “ES”,
+“alpha3”: “ESP”,
+“name”: “Spain”,
+“slug”: “spain”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ميكيل أرتيتا”,
+“hi”: “मिकेल आर्टेटा”,
+“bn”: “মিকেল আর্তেতা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “م. أرتيتا”,
+“hi”: “एम. आर्टेटा”,
+“bn”: “এম. আরতেতা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“venue”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“city”: {</dt><dd><p>“name”: “London”</p>
+</dd>
+</dl>
+<p>},
+“venueCoordinates”: {</p>
+<blockquote>
+<div><p>“latitude”: 51.55504,
+“longitude”: -0.1084</p>
+</div></blockquote>
+<p>},
+“hidden”: false,
+“slug”: “emirates-stadium”,
+“name”: “Emirates Stadium”,
+“capacity”: 60260,
+“id”: 624,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الإمارات”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>},
+“stadium”: {</p>
+<blockquote>
+<div><p>“name”: “Emirates Stadium”,
+“capacity”: 60260</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“nameCode”: “ARS”,
+“class”: 4,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“fullName”: “Arsenal”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“foundationDateTimestamp”: -2627164800,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“pregameForm”: {</p>
+<blockquote>
+<div><p>“avgRating”: “7.04”,
+“position”: 2,
+“value”: “47”,
+“form”: [</p>
+<blockquote>
+<div><p>“W”,
+“D”,
+“W”,
+“D”,
+“W”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.image">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.image" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the URL of the team’s image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The URL of the team’s image.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example Response:</dt><dd><p>“<a class="reference external" href="https://img.sofascore.com/api/v1/team/42/image">https://img.sofascore.com/api/v1/team/42/image</a>”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.last_fixtures">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_fixtures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.last_fixtures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.last_fixtures" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the last fixtures for the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing details about the past fixtures, including tournament, season, round, teams, scores, and more.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “EFL Cup”,
+“slug”: “efl-cup”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “EFL Cup”,
+“slug”: “efl-cup”,
+“primaryColorHex”: “#203e93”,
+“secondaryColorHex”: “#bc1723”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 167174,
+“id”: 21,
+“country”: {},
+“hasPerformanceGraphFeature”: false,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 426,
+“isGroup”: false,
+“isLive”: false,
+“id”: 17</p>
+</dd>
+</dl>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “EFL Cup 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 62483</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 3,
+“name”: “Round 3”,
+“slug”: “round-3”</p>
+</div></blockquote>
+<p>},
+“customId”: “fsR”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 1,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Bolton Wanderers”,
+“slug”: “bolton-wanderers”,
+“shortName”: “Bolton”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 21304,
+“nameCode”: “BOL”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 5,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#ffffff”,
+“secondary”: “#000033”,
+“text”: “#000033”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “بولتون وانديريرز”,
+“ru”: “Болтон Уондерерс”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 5,
+“display”: 5,
+“period1”: 2,
+“period2”: 3,
+“normaltime”: 5</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 0,
+“period2”: 1,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“time”: {</p>
+<blockquote>
+<div><p>“injuryTime1”: 3,
+“injuryTime2”: 4,
+“currentPeriodStartTimestamp”: 1727293717</p>
+</div></blockquote>
+<p>},
+“changes”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“changes”: [</dt><dd><p>“status.code”,
+“status.description”,
+“status.type”</p>
+</dd>
+</dl>
+<p>],
+“changeTimestamp”: 1727296678</p>
+</div></blockquote>
+<p>},
+“hasGlobalHighlights”: false,
+“hasEventPlayerStatistics”: true,
+“hasEventPlayerHeatMap”: true,
+“detailId”: 1,
+“crowdsourcingDataDisplayEnabled”: false,
+“id”: 12785412,
+“startTimestamp”: 1727289900,
+“slug”: “arsenal-bolton-wanderers”,
+“finalResultOnly”: false,
+“feedLocked”: true,
+“isEditor”: false</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.latest_highlights">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">latest_highlights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.latest_highlights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.latest_highlights" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the latest highlights for the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the latest highlights, including titles, subtitles, URLs, and thumbnails.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“media”: [</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“title”: “Wolves 0 - 1 Arsenal”,
+“subtitle”: “Full Highlights”,
+“url”: “<a class="reference external" href="https://www.youtube.com/watch?v=HUBQ9rFeDCc">https://www.youtube.com/watch?v=HUBQ9rFeDCc</a>”,
+“thumbnailUrl”: “<a class="reference external" href="https://i.ytimg.com/vi/HUBQ9rFeDCc/hqdefault.jpg">https://i.ytimg.com/vi/HUBQ9rFeDCc/hqdefault.jpg</a>”,
+“mediaType”: 1,
+“doFollow”: false,
+“keyHighlight”: false,
+“id”: 6193182,
+“createdAtTimestamp”: 1737844523,
+“sourceUrl”: “<a class="reference external" href="https://www.youtube.com/watch?v=HUBQ9rFeDCc">https://www.youtube.com/watch?v=HUBQ9rFeDCc</a>”</p>
+</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div><p>“title”: “Wolves 0 - 1 Arsenal”,
+“subtitle”: “Full Highlights”,
+“url”: “<a class="reference external" href="https://www.youtube.com/watch?v=4SxKKSNOxRI">https://www.youtube.com/watch?v=4SxKKSNOxRI</a>”,
+“thumbnailUrl”: “<a class="reference external" href="https://i.ytimg.com/vi/4SxKKSNOxRI/hqdefault.jpg">https://i.ytimg.com/vi/4SxKKSNOxRI/hqdefault.jpg</a>”,
+“mediaType”: 1,
+“forCountries”: [</p>
+<blockquote>
+<div><p>“BA”,
+“HR”,
+“ME”,
+“MK”,
+“RS”,
+“SI”</p>
+</div></blockquote>
+<p>],
+“doFollow”: false,
+“keyHighlight”: false,
+“id”: 6192993,
+“createdAtTimestamp”: 1737827674,
+“sourceUrl”: “<a class="reference external" href="https://www.youtube.com/watch?v=4SxKKSNOxRI">https://www.youtube.com/watch?v=4SxKKSNOxRI</a>”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.league_stats">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">league_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.league_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.league_stats" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the league statistics of the team for a specific league and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>league_id</strong> (<em>int</em>) – The unique identifier for the league.</p></li>
+<li><p><strong>season</strong> (<em>int</em>) – The season year.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the team’s statistics in the league, including goals scored, goals conceded, assists, shots, and more.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“statistics”: {</dt><dd><p>“goalsScored”: 16,
+“goalsConceded”: 3,
+“ownGoals”: 0,
+“assists”: 9,
+“shots”: 107,
+“penaltyGoals”: 2,
+“penaltiesTaken”: 4,
+“freeKickGoals”: 1,
+“freeKickShots”: 2,
+“goalsFromInsideTheBox”: 13,
+“goalsFromOutsideTheBox”: 2,
+“shotsFromInsideTheBox”: 83,
+“shotsFromOutsideTheBox”: 24,
+“headedGoals”: 4,
+“leftFootGoals”: 7,
+“rightFootGoals”: 4,
+“bigChances”: 27,
+“bigChancesCreated”: 17,
+“bigChancesMissed”: 15,
+“shotsOnTarget”: 43,
+“shotsOffTarget”: 35,
+“blockedScoringAttempt”: 29,
+“successfulDribbles”: 79,
+“dribbleAttempts”: 153,
+“corners”: 51,
+“hitWoodwork”: 2,
+“fastBreaks”: 3,
+“fastBreakGoals”: 0,
+“fastBreakShots”: 3,
+“averageBallPossession”: 53.375,
+“totalPasses”: 3885,
+“accuratePasses”: 3384,
+“accuratePassesPercentage”: 87.104247104247,
+“totalOwnHalfPasses”: 1638,
+“accurateOwnHalfPasses”: 1517,
+“accurateOwnHalfPassesPercentage”: 92.612942612943,
+“totalOppositionHalfPasses”: 2387,
+“accurateOppositionHalfPasses”: 1909,
+“accurateOppositionHalfPassesPercentage”: 79.974863845832,
+“totalLongBalls”: 154,
+“accurateLongBalls”: 82,
+“accurateLongBallsPercentage”: 53.246753246753,
+“totalCrosses”: 140,
+“accurateCrosses”: 42,
+“accurateCrossesPercentage”: 30,
+“cleanSheets”: 5,
+“tackles”: 136,
+“interceptions”: 57,
+“saves”: 17,
+“errorsLeadingToGoal”: 1,
+“errorsLeadingToShot”: 5,
+“penaltiesCommited”: 2,
+“penaltyGoalsConceded”: 1,
+“clearances”: 100,
+“clearancesOffLine”: 0,
+“lastManTackles”: 2,
+“totalDuels”: 735,
+“duelsWon”: 380,
+“duelsWonPercentage”: 51.700680272109,
+“totalGroundDuels”: 544,
+“groundDuelsWon”: 278,
+“groundDuelsWonPercentage”: 51.102941176471,
+“totalAerialDuels”: 191,
+“aerialDuelsWon”: 102,
+“aerialDuelsWonPercentage”: 53.403141361257,
+“possessionLost”: 881,
+“offsides”: 13,
+“fouls”: 88,
+“yellowCards”: 12,
+“yellowRedCards”: 0,
+“redCards”: 0,
+“avgRating”: 7.0694214876033,
+“accurateFinalThirdPassesAgainst”: 647,
+“accurateOppositionHalfPassesAgainst”: 1400,
+“accurateOwnHalfPassesAgainst”: 1608,
+“accuratePassesAgainst”: 2982,
+“bigChancesAgainst”: 5,
+“bigChancesCreatedAgainst”: 2,
+“bigChancesMissedAgainst”: 3,
+“clearancesAgainst”: 192,
+“cornersAgainst”: 27,
+“crossesSuccessfulAgainst”: 26,
+“crossesTotalAgainst”: 101,
+“dribbleAttemptsTotalAgainst”: 101,
+“dribbleAttemptsWonAgainst”: 48,
+“errorsLeadingToGoalAgainst”: 4,
+“errorsLeadingToShotAgainst”: 3,
+“hitWoodworkAgainst”: 4,
+“interceptionsAgainst”: 56,
+“keyPassesAgainst”: 58,
+“longBallsSuccessfulAgainst”: 139,
+“longBallsTotalAgainst”: 339,
+“offsidesAgainst”: 9,
+“redCardsAgainst”: 0,
+“shotsAgainst”: 72,
+“shotsBlockedAgainst”: 18,
+“shotsFromInsideTheBoxAgainst”: 37,
+“shotsFromOutsideTheBoxAgainst”: 35,
+“shotsOffTargetAgainst”: 35,
+“shotsOnTargetAgainst”: 19,
+“blockedScoringAttemptAgainst”: 18,
+“tacklesAgainst”: 140,
+“totalFinalThirdPassesAgainst”: 829,
+“oppositionHalfPassesTotalAgainst”: 1776,
+“ownHalfPassesTotalAgainst”: 1825,
+“totalPassesAgainst”: 3500,
+“yellowCardsAgainst”: 13,
+“throwIns”: 119,
+“goalKicks”: 41,
+“ballRecovery”: 339,
+“freeKicks”: 65,
+“id”: 26614,
+“matches”: 8,
+“awardedMatches”: 0</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.next_fixtures">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">next_fixtures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.next_fixtures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.next_fixtures" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the next fixtures for the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing details about the upcoming fixtures, including tournament, season, round, teams, scores, and more.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “EFL Cup”,
+“slug”: “efl-cup”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “EFL Cup”,
+“slug”: “efl-cup”,
+“primaryColorHex”: “#203e93”,
+“secondaryColorHex”: “#bc1723”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 167174,
+“id”: 21,
+“country”: {},
+“hasPerformanceGraphFeature”: false,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 426,
+“isGroup”: false,
+“isLive”: false,
+“id”: 17</p>
+</dd>
+</dl>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “EFL Cup 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 62483</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 3,
+“name”: “Round 3”,
+“slug”: “round-3”</p>
+</div></blockquote>
+<p>},
+“customId”: “fsR”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 1,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Bolton Wanderers”,
+“slug”: “bolton-wanderers”,
+“shortName”: “Bolton”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 21304,
+“nameCode”: “BOL”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 5,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#ffffff”,
+“secondary”: “#000033”,
+“text”: “#000033”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “بولتون وانديريرز”,
+“ru”: “Болтон Уондерерс”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 5,
+“display”: 5,
+“period1”: 2,
+“period2”: 3,
+“normaltime”: 5</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 0,
+“period2”: 1,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“time”: {</p>
+<blockquote>
+<div><p>“injuryTime1”: 3,
+“injuryTime2”: 4,
+“currentPeriodStartTimestamp”: 1727293717</p>
+</div></blockquote>
+<p>},
+“changes”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“changes”: [</dt><dd><p>“status.code”,
+“status.description”,
+“status.type”</p>
+</dd>
+</dl>
+<p>],
+“changeTimestamp”: 1727296678</p>
+</div></blockquote>
+<p>},
+“hasGlobalHighlights”: false,
+“hasEventPlayerStatistics”: true,
+“hasEventPlayerHeatMap”: true,
+“detailId”: 1,
+“crowdsourcingDataDisplayEnabled”: false,
+“id”: 12785412,
+“startTimestamp”: 1727289900,
+“slug”: “arsenal-bolton-wanderers”,
+“finalResultOnly”: false,
+“feedLocked”: true,
+“isEditor”: false</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.performance">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">performance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.performance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.performance" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the performance data of the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing performance data such as events, tournament details, and team statistics.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“events”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 18</p>
+</div></blockquote>
+<p>},
+“customId”: “HsR”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 1,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Ipswich Town”,
+“slug”: “ipswich-town”,
+“shortName”: “Ipswich”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 154510,
+“nameCode”: “IPS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 32,
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0000ff”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ايبسويتش تاون”,
+“ru”: “Ипсвич Таун”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 1,
+“period2”: 0,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 0,
+“display”: 0,
+“period1”: 0,
+“period2”: 0,
+“normaltime”: 0</p>
+</div></blockquote>
+<p>},
+“time”: {</p>
+<blockquote>
+<div><p>“injuryTime1”: 1,
+“injuryTime2”: 4,
+“currentPeriodStartTimestamp”: 1735334227</p>
+</div></blockquote>
+<p>},
+“changes”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“changes”: [</dt><dd><p>“status.code”,
+“status.description”,
+“status.type”</p>
+</dd>
+</dl>
+<p>],
+“changeTimestamp”: 1735337210</p>
+</div></blockquote>
+<p>},
+“hasGlobalHighlights”: false,
+“hasXg”: true,
+“hasEventPlayerStatistics”: true,
+“hasEventPlayerHeatMap”: true,
+“detailId”: 1,
+“crowdsourcingDataDisplayEnabled”: false,
+“id”: 12436472,
+“startTimestamp”: 1735330500,
+“slug”: “arsenal-ipswich-town”,
+“finalResultOnly”: false,
+“feedLocked”: true,
+“isEditor”: false</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.performance_graph">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">performance_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.performance_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.performance_graph" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the performance graph data for the team in a specific league and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>league_id</strong> (<em>int</em>) – The unique identifier for the league.</p></li>
+<li><p><strong>season</strong> (<em>int</em>) – The season year.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the performance graph data, including events, week, position, and timeframe.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“graphData”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“events”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1364893,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“customId”: “NsU”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 3,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Chelsea”,
+“slug”: “chelsea”,
+“shortName”: “Chelsea”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2114080,
+“nameCode”: “CHE”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 38,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0310a7”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “تشيلسي”,
+“ru”: “Челси”,
+“hi”: “चेल्सी”,
+“bn”: “চেলসি”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “تشيلسي”,
+“hi”: “चेल्सी”,
+“bn”: “চেলসি”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Liverpool”,
+“slug”: “liverpool”,
+“shortName”: “Liverpool”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2572976,
+“nameCode”: “LIV”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 44,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ليفربول”,
+“ru”: “Ливерпуль”,
+“hi”: “लिवरपूल”,
+“bn”: “লিভারপুল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ليفربول”,
+“hi”: “लिवरपूल”,
+“bn”: “লিভারপুল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 1,
+“period2”: 0,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 1,
+“period2”: 0,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“hasXg”: true,
+“id”: 11352316,
+“startTimestamp”: 1691940600,
+“slug”: “liverpool-chelsea”,
+“finalResultOnly”: false</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>],
+“week”: 1,
+“position”: 12,
+“timeframeStart”: 1691712000,
+“timeframeEnd”: 1692316800</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.seasons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seasons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.seasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.seasons" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the seasons in which the team has participated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the unique tournament seasons.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“uniqueTournamentSeasons”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“uniqueTournament”: {</dt><dd><p>“name”: “UEFA Champions League”,
+“slug”: “uefa-champions-league”,
+“primaryColorHex”: “#062b5c”,
+“secondaryColorHex”: “#086aab”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “Europe”,
+“slug”: “europe”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1465,
+“flag”: “europe”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1321299,
+“id”: 7,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “دوري أبطال أوروبا”,
+“hi”: “यूईएफए चैंपियंस लीग”,
+“bn”: “উয়েফা চ্যাম্পিয়ন্স লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“seasons”: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>“name”: “UEFA Champions League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“seasonCoverageInfo”: {},
+“id”: 61644</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.squad">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">squad</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.squad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.squad" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the squad of the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the players in the team’s squad, including their details, positions, and statistics.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“players”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Bukayo Saka”,
+“firstName”: “”,
+“lastName”: “”,
+“slug”: “bukayo-saka”,
+“shortName”: “B. Saka”,
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“primaryUniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“position”: “F”,
+“jerseyNumber”: “7”,
+“height”: 178,
+“preferredFoot”: “Left”,
+“retired”: false,
+“userCount”: 168684,
+“gender”: “M”,
+“id”: 934235,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“shirtNumber”: 7,
+“dateOfBirthTimestamp”: 999648000,
+“contractUntilTimestamp”: 1814313600,
+“proposedMarketValue”: 157000000,
+“proposedMarketValueRaw”: {</p>
+<blockquote>
+<div><p>“value”: 157000000,
+“currency”: “EUR”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “بوكايو ساكا”,
+“hi”: “बुकायो साका”,
+“bn”: “বুকায়ো সাকা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ب. ساكا”,
+“hi”: “बी. साका”,
+“bn”: “বি. সাকা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.top_players">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_players</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.top_players"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.top_players" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the top players of the team for a specific league and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>league_id</strong> (<em>int</em>) – The unique identifier for the league.</p></li>
+<li><p><strong>season</strong> (<em>int</em>) – The season year.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the top players of the team, including their statistics and performance metrics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“topPlayers”: {</dt><dd><dl>
+<dt>“rating”: [</dt><dd><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“statistics”: {</dt><dd><p>“rating”: 7.8,
+“id”: 1595229,
+“type”: “overall”,
+“appearances”: 5</p>
+</dd>
+</dl>
+<p>},
+“playedEnough”: true,
+“player”: {</p>
+<blockquote>
+<div><p>“name”: “Bukayo Saka”,
+“slug”: “bukayo-saka”,
+“shortName”: “B. Saka”,
+“position”: “F”,
+“userCount”: 168684,
+“id”: 934235,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “بوكايو ساكا”,
+“hi”: “बुकायो साका”,
+“bn”: “বুকায়ো সাকা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ب. ساكা”,
+“hi”: “बी. साका”,
+“bn”: “বি. সাকা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.transfers_in">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfers_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.transfers_in"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.transfers_in" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a list of players who have transferred into the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing details about each transfer, including player information, transfer details, and fees.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Charles Sagoe Jr.”,
+“slug”: “charles-sagoe-jr”,
+“shortName”: “C. S. Jr.”,
+“position”: “F”,
+“jerseyNumber”: “15”,
+“userCount”: 841,
+“id”: 1119436,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “تشارلز ساغو جونيور”,
+“hi”: “चार्ल्स सागो जूनियर.”,
+“bn”: “চার্লস সাগো জুনিয়র”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ت. ساغو جونيور”,
+“hi”: “सी.एस. जूनियर.”,
+“bn”: “সি. এস. জুনিয়র”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“transferFrom”: {</p>
+<blockquote>
+<div><p>“name”: “Shrewsbury Town”,
+“slug”: “shrewsbury-town”,
+“shortName”: “Shrewsbury”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 6164,
+“nameCode”: “SHR”,
+“national”: false,
+“type”: 0,
+“id”: 82,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0000ff”,
+“secondary”: “#ffff00”,
+“text”: “#ffff00”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “شوروسبري تاون”,
+“ru”: “Шрусбери Таун”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“transferTo”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“fromTeamName”: “Shrewsbury Town”,
+“toTeamName”: “Arsenal”,
+“type”: 2,
+“transferFee”: 0,
+“transferFeeDescription”: “-“,
+“id”: 2131805,
+“transferDateTimestamp”: 1736121600,
+“transferFeeRaw”: {</p>
+<blockquote>
+<div><p>“value”: 0,
+“currency”: “EUR”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.team.Team.transfers_out">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transfers_out</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team.transfers_out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team.transfers_out" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves a list of players who have transferred out of the team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing details about each transfer, including player information, transfer details, and fees.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Marquinhos”,
+“firstName”: “Marquinhos”,
+“slug”: “marquinhos”,
+“shortName”: “Marquinhos”,
+“position”: “M”,
+“jerseyNumber”: “17”,
+“userCount”: 4202,
+“id”: 1116954,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ماركينيوس”,
+“hi”: “मार्क्विन्होस”,
+“bn”: “মারকুইনহোস”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ماركينيوس”,
+“hi”: “मार्क्विन्होस”,
+“bn”: “মারকুইনহোস”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“transferFrom”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: False,
+“national”: False,
+“type”: 0,
+“id”: 42,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“transferTo”: {</p>
+<blockquote>
+<div><p>“name”: “Cruzeiro”,
+“slug”: “cruzeiro”,
+“shortName”: “Cruzeiro”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 248252,
+“nameCode”: “CRU”,
+“disabled”: False,
+“national”: False,
+“type”: 0,
+“id”: 1954,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0033cc”,
+“secondary”: “#0033cc”,
+“text”: “#0033cc”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ru”: “Крузейро”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“fromTeamName”: “Arsenal”,
+“toTeamName”: “Cruzeiro”,
+“type”: 1,
+“transferFee”: 0,
+“transferFeeDescription”: “-“,
+“id”: 2234559,
+“transferDateTimestamp”: 1736380800,
+“transferFeeRaw”: {</p>
+<blockquote>
+<div><p>“value”: 0,
+“currency”: “USD”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="match">
+<h2>Match<a class="headerlink" href="#match" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-sofascore_wrapper.search">
+<span id="search"></span><h2>Search<a class="headerlink" href="#module-sofascore_wrapper.search" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.search.Search">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.search.</span></span><span class="sig-name descname"><span class="pre">Search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api</strong> (<a class="reference internal" href="sofascore_wrapper.html#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p></li>
+<li><p><strong>search_string</strong> (<em>str</em>)</p></li>
+<li><p><strong>page</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.search.Search.search_all">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search.search_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search.search_all" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a search across all categories (teams, players, matches, leagues, managers).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing search results across all categories.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“results”: [</dt><dd><dl>
+<dt>{</dt><dd><p>“type”: “team”,
+“entity”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“score”: 1358595.1</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.search.Search.search_leagues">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_leagues</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search.search_leagues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search.search_leagues" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a search specifically for leagues.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing league details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><p>“type”: “uniqueTournament”,
+“entity”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“score”: 577963.7</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.search.Search.search_match">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_match</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search.search_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search.search_match" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a search specifically for matches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing match details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><p>“type”: “event”,
+“entity”: {</p>
+<blockquote>
+<div><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“country”: {},
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“customId”: “PR”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 3,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Aston Villa”,
+“slug”: “aston-villa”,
+“shortName”: “Aston Villa”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 878821,
+“nameCode”: “AVL”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 40,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#670e36”,
+“secondary”: “#94bee5”,
+“text”: “#94bee5”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “أستون فيلا”,
+“ru”: “Астон Вилла”,
+“hi”: “एस्टन विला”,
+“bn”: “অ্যাস্টন ভিলা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “أستون فيلا”,
+“hi”: “एस्टन विला”,
+“bn”: “অ্যাস্টন ভিলা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 2,
+“display”: 2,
+“period1”: 1,
+“period2”: 1,
+“normaltime”: 2</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 2,
+“display”: 2,
+“period1”: 0,
+“period2”: 2,
+“normaltime”: 2</p>
+</div></blockquote>
+<p>},
+“hasXg”: true,
+“id”: 12436443,
+“startTimestamp”: 1737221400,
+“slug”: “arsenal-aston-villa”,
+“finalResultOnly”: false</p>
+</div></blockquote>
+<p>},
+“score”: 7288.5156</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.search.Search.search_players">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_players</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search.search_players"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search.search_players" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a search specifically for players.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing player details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><p>“type”: “player”,
+“entity”: {</p>
+<blockquote>
+<div><p>“name”: “Bukayo Saka”,
+“firstName”: “”,
+“lastName”: “”,
+“slug”: “bukayo-saka”,
+“shortName”: “B. Saka”,
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“position”: “F”,
+“jerseyNumber”: “7”,
+“userCount”: 168684,
+“id”: 934235,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “بوكايو ساكا”,
+“hi”: “बुकायो साका”,
+“bn”: “বুকায়ো সাকা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ب. ساكا”,
+“hi”: “बी. साका”,
+“bn”: “বি. সাকা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“score”: 90030.805</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.search.Search.search_teams">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_teams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search.search_teams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search.search_teams" title="Link to this definition">¶</a></dt>
+<dd><p>Perform a search specifically for teams.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing team details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><p>“type”: “team”,
+“entity”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“score”: 1357694.8</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sofascore_wrapper.league">
+<span id="league"></span><h2>League<a class="headerlink" href="#module-sofascore_wrapper.league" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.league.</span></span><span class="sig-name descname"><span class="pre">League</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api</strong> (<a class="reference internal" href="sofascore_wrapper.html#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p></li>
+<li><p><strong>league_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.current_round">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_round</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.current_round"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.current_round" title="Link to this definition">¶</a></dt>
+<dd><p>Get the current round for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch the current round for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current round number.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example Response:</dt><dd><p>24</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.featured_game">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">featured_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.featured_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.featured_game" title="Link to this definition">¶</a></dt>
+<dd><p>Get the featured game for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch the featured game for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the featured game details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“featuredEvents”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“country”: {},
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 24</p>
+</div></blockquote>
+<p>},
+“customId”: “osF”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 0,
+“description”: “Not started”,
+“type”: “notstarted”</p>
+</div></blockquote>
+<p>},
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Nottingham Forest”,
+“slug”: “nottingham-forest”,
+“shortName”: “Forest”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 349426,
+“nameCode”: “NFO”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 14,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#cc0000”,
+“text”: “#cc0000”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Brighton &amp; Hove Albion”,
+“slug”: “brighton-and-hove-albion”,
+“shortName”: “Brighton”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 621440,
+“nameCode”: “BHA”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 30,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“subTeams”: [],
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#0054a6”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {},
+“awayScore”: {},
+“time”: {},
+“changes”: {</p>
+<blockquote>
+<div><p>“changeTimestamp”: 0</p>
+</div></blockquote>
+<p>},
+“hasGlobalHighlights”: false,
+“detailId”: 1,
+“crowdsourcingDataDisplayEnabled”: false,
+“id”: 12436930,
+“startTimestamp”: 1738413000,
+“slug”: “brighton-and-hove-albion-nottingham-forest”,
+“finalResultOnly”: false,
+“feedLocked”: true,
+“isEditor”: false</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_image">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dark'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_image" title="Link to this definition">¶</a></dt>
+<dd><p>Get the league image URL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_type</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of image (“dark” or “light”). Defaults to “dark”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The URL for the requested league image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Example Response:</dt><dd><p>“<a class="reference external" href="https://img.sofascore.com/api/v1/unique-tournament/17/image/dark">https://img.sofascore.com/api/v1/unique-tournament/17/image/dark</a>”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_info">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch statistical information about the league for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch information for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing league statistics for the season.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“info”: {</dt><dd><p>“goals”: 691,
+“homeTeamWins”: 89,
+“awayTeamWins”: 79,
+“draws”: 61,
+“yellowCards”: 1041,
+“redCards”: 31,
+“newcomersUpperDivision”: [],
+“newcomersLowerDivision”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “Leicester City”,
+“slug”: “leicester-city”,
+“shortName”: “Leicester”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 536747,
+“nameCode”: “LEI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 31,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “EN”,
+“alpha3”: “ENG”,
+“name”: “England”,
+“slug”: “england”</p>
+</div></blockquote>
+<p>},
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#003090”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ليستر سيتي”,
+“ru”: “Лестер Сити”,
+“hi”: “लीसेस्टर सिटी”,
+“bn”: “লেস্টার সিটি”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ليستر”,
+“hi”: “लीसेस्टर”,
+“bn”: “লেস্টার”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_latest_highlights">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_latest_highlights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_latest_highlights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_latest_highlights" title="Link to this definition">¶</a></dt>
+<dd><p>Get the latest match highlights for the league.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the latest match highlights.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“media”: [</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“title”: “Fulham 0 - 1 Man Utd”,
+“subtitle”: “Full Highlights”,
+“url”: “<a class="reference external" href="https://www.youtube.com/watch?v=1BYRn04UOaw">https://www.youtube.com/watch?v=1BYRn04UOaw</a>”,
+“thumbnailUrl”: “<a class="reference external" href="https://i.ytimg.com/vi/1BYRn04UOaw/hqdefault.jpg">https://i.ytimg.com/vi/1BYRn04UOaw/hqdefault.jpg</a>”,
+“mediaType”: 1,
+“doFollow”: false,
+“keyHighlight”: false,
+“id”: 6193980,
+“createdAtTimestamp”: 1737944333,
+“sourceUrl”: “<a class="reference external" href="https://www.youtube.com/watch?v=1BYRn04UOaw">https://www.youtube.com/watch?v=1BYRn04UOaw</a>”</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_league">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_league</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_league"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_league" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch general information about the league.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing league details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><p>“id”: 17,
+“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_seasons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_seasons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_seasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_seasons" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch all available seasons for the league.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of season objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl class="simple">
+<dt>[</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.player_of_the_season">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player_of_the_season</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.player_of_the_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.player_of_the_season" title="Link to this definition">¶</a></dt>
+<dd><p>Get the player of the season for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch the player of the season for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the player of the season details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Rodri”,
+“slug”: “rodri”,
+“shortName”: “Rodri”,
+“position”: “M”,
+“userCount”: 100726,
+“id”: 827606,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “رودري”,
+“hi”: “रोड्री”,
+“bn”: “রডরি”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “رودري”,
+“hi”: “रोड्री”,
+“bn”: “রডরি”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“statistics”: {</p>
+<blockquote>
+<div><p>“rating”: 8.0117647058824,
+“id”: 1069463,
+“type”: “overall”,
+“appearances”: 34</p>
+</div></blockquote>
+<p>},
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Manchester City”,
+“slug”: “manchester-city”,
+“shortName”: “Manchester City”,
+“userCount”: 2901739,
+“national”: false,
+“id”: 17,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#374df5”,
+“secondary”: “#374df5”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.rounds">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.rounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.rounds" title="Link to this definition">¶</a></dt>
+<dd><p>Get the available rounds for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch rounds for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the available rounds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“currentRound”: {</dt><dd><p>“round”: 24</p>
+</dd>
+</dl>
+<p>},
+“rounds”: [</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>“round”: 1</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.standings">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">standings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.standings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.standings" title="Link to this definition">¶</a></dt>
+<dd><p>Get the current league standings for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch standings for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the league standings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Dict[str, Any]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“standings”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“type”: “total”,
+“name”: “Premier League”,
+“descriptions”: [],
+“tieBreakingRule”: {</p>
+<blockquote>
+<div><p>“text”: “In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H”,
+“id”: 2393</p>
+</div></blockquote>
+<p>},
+“rows”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl>
+<dt>“team”: {</dt><dd><p>“name”: “Liverpool”,
+“slug”: “liverpool”,
+“shortName”: “Liverpool”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2600079,
+“nameCode”: “LIV”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 44,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“descriptions”: [],
+“promotion”: {</p>
+<blockquote>
+<div><p>“text”: “Champions League”,
+“id”: 804</p>
+</div></blockquote>
+<p>},
+“position”: 1,
+“matches”: 22,
+“wins”: 16,
+“scoresFor”: 54,
+“scoresAgainst”: 21,
+“id”: 1134312,
+“losses”: 1,
+“draws”: 5,
+“points”: 53,
+“scoreDiffFormatted”: “+33”</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.standings_away">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">standings_away</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.standings_away"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.standings_away" title="Link to this definition">¶</a></dt>
+<dd><p>Get the current league standings for away games in a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch away standings for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the away standings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Dict[str, Any]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“standings”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“type”: “away”,
+“name”: “Premier League”,
+“descriptions”: [],
+“tieBreakingRule”: {</p>
+<blockquote>
+<div><p>“text”: “In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H”,
+“id”: 2393</p>
+</div></blockquote>
+<p>},
+“rows”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl>
+<dt>“team”: {</dt><dd><p>“name”: “Liverpool”,
+“slug”: “liverpool”,
+“shortName”: “Liverpool”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2600079,
+“nameCode”: “LIV”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 44,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“descriptions”: [],
+“promotion”: {</p>
+<blockquote>
+<div><p>“text”: “Champions League”,
+“id”: 804</p>
+</div></blockquote>
+<p>},
+“position”: 1,
+“matches”: 11,
+“wins”: 8,
+“scoresFor”: 30,
+“scoresAgainst”: 12,
+“id”: 1134352,
+“losses”: 0,
+“draws”: 3,
+“points”: 27,
+“scoreDiffFormatted”: “+18”</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.standings_home">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">standings_home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.standings_home"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.standings_home" title="Link to this definition">¶</a></dt>
+<dd><p>Get the current league standings for home games in a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch home standings for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the home standings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Dict[str, Any]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“standings”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“type”: “home”,
+“name”: “Premier League”,
+“descriptions”: [],
+“tieBreakingRule”: {</p>
+<blockquote>
+<div><p>“text”: “In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H”,
+“id”: 2393</p>
+</div></blockquote>
+<p>},
+“rows”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl>
+<dt>“team”: {</dt><dd><p>“name”: “Liverpool”,
+“slug”: “liverpool”,
+“shortName”: “Liverpool”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2600079,
+“nameCode”: “LIV”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 44,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“descriptions”: [],
+“promotion”: {</p>
+<blockquote>
+<div><p>“text”: “Champions League”,
+“id”: 804</p>
+</div></blockquote>
+<p>},
+“position”: 1,
+“matches”: 11,
+“wins”: 8,
+“scoresFor”: 24,
+“scoresAgainst”: 9,
+“id”: 1134332,
+“losses”: 1,
+“draws”: 2,
+“points”: 26,
+“scoreDiffFormatted”: “+15”</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.top_players">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_players</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.top_players"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.top_players" title="Link to this definition">¶</a></dt>
+<dd><p>Get top players for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch top players for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing top players’ statistics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“topPlayers”: {</dt><dd><dl>
+<dt>“rating”: [</dt><dd><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“statistics”: {</dt><dd><p>“rating”: 8.0090909090909,
+“id”: 1508984,
+“type”: “overall”,
+“appearances”: 22</p>
+</dd>
+</dl>
+<p>},
+“playedEnough”: true,
+“player”: {</p>
+<blockquote>
+<div><p>“name”: “Mohamed Salah”,
+“slug”: “mohamed-salah”,
+“shortName”: “M. Salah”,
+“position”: “F”,
+“userCount”: 345702,
+“id”: 159665,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “محمد صلاح”,
+“hi”: “मोहम्मद सलाह”,
+“bn”: “মোহাম্মদ সালাহ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “م. صلاح”,
+“hi”: “एम. सलाह”,
+“bn”: “এম. সালাহ”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Liverpool”,
+“slug”: “liverpool”,
+“shortName”: “Liverpool”,
+“userCount”: 2600079,
+“national”: false,
+“id”: 44,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#374df5”,
+“secondary”: “#374df5”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.top_players_per_game">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_players_per_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.top_players_per_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.top_players_per_game" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch the top players per game for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch top players for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of top players with their statistics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><p>“statistic”: 10,
+“player”: {</p>
+<blockquote>
+<div><p>“name”: “Phil Foden”,
+“slug”: “phil-foden”,
+“shortName”: “P. Foden”,
+“position”: “M”,
+“jerseyNumber”: “47”,
+“userCount”: 212999,
+“id”: 859765,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “فيل فودين”,
+“hi”: “फिल फोडेन”,
+“bn”: “ফিল ফোডেন”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ف. فودين”,
+“hi”: “पी. फोडेन”,
+“bn”: “পি. ফোডেন”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“event”: {</p>
+<blockquote>
+<div><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“customId”: “rP”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 1,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Manchester City”,
+“slug”: “manchester-city”,
+“shortName”: “Man City”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 2901739,
+“nameCode”: “MCI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 17,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#66ccff”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Aston Villa”,
+“slug”: “aston-villa”,
+“shortName”: “Aston Villa”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 878821,
+“nameCode”: “AVL”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 40,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#670e36”,
+“secondary”: “#94bee5”,
+“text”: “#94bee5”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 4,
+“display”: 4,
+“period1”: 2,
+“period2”: 2,
+“normaltime”: 4</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 1,
+“period2”: 0,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“hasXg”: true,
+“id”: 11352352,
+“startTimestamp”: 1712171700,
+“slug”: “aston-villa-manchester-city”,
+“finalResultOnly”: false</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.top_teams">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_teams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.top_teams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.top_teams" title="Link to this definition">¶</a></dt>
+<dd><p>Get top teams for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch top teams for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing top teams’ statistics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“topTeams”: {</dt><dd><dl>
+<dt>“avgRating”: [</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“team”: {</dt><dd><p>“name”: “Manchester City”,
+“slug”: “manchester-city”,
+“shortName”: “Manchester City”,
+“gender”: “M”,
+“userCount”: 2901739,
+“national”: false,
+“type”: 0,
+“id”: 17,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#374df5”,
+“secondary”: “#374df5”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“statistics”: {</p>
+<blockquote>
+<div><p>“avgRating”: 7.1757097791798,
+“id”: 24789,
+“matches”: 23,
+“awardedMatches”: 0</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.totw">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">totw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.totw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.totw" title="Link to this definition">¶</a></dt>
+<dd><p>Get the team of the week for a specific round in a season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>season</strong> (<em>int</em>) – The season ID to fetch the team of the week for.</p></li>
+<li><p><strong>round</strong> (<em>int</em>) – The round ID to fetch the team of the week for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the team of the week details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><p>“formation”: “3-4-3”,
+“players”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl>
+<dt>“player”: {</dt><dd><p>“name”: “Jakub Stolarczyk”,
+“firstName”: “”,
+“lastName”: “”,
+“slug”: “jakub-stolarczyk”,
+“shortName”: “J. Stolarczyk”,
+“position”: “G”,
+“jerseyNumber”: “41”,
+“userCount”: 952,
+“id”: 997830,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ياكوب ستولارتشيك”,
+“hi”: “जकूब स्टोलार्स्की”,
+“bn”: “জ্যাকুব স্টোলারকজিক”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ي. ستولارتشيك”,
+“hi”: “जे. स्टोलार्स्की”,
+“bn”: “জে. স্টোলারজিক”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>},
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Leicester City”,
+“slug”: “leicester-city”,
+“shortName”: “Leicester”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 536747,
+“nameCode”: “LEI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 31,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#003090”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“event”: {</p>
+<blockquote>
+<div><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“customId”: “MXpf”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Ended”,
+“type”: “finished”</p>
+</div></blockquote>
+<p>},
+“winnerCode”: 2,
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Tottenham Hotspur”,
+“slug”: “tottenham-hotspur”,
+“shortName”: “Tottenham “,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 1327772,
+“nameCode”: “TOT”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 33,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#ffffff”,
+“secondary”: “#000066”,
+“text”: “#000066”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Leicester City”,
+“slug”: “leicester-city”,
+“shortName”: “Leicester”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 536747,
+“nameCode”: “LEI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 31,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#003090”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“homeScore”: {</p>
+<blockquote>
+<div><p>“current”: 1,
+“display”: 1,
+“period1”: 1,
+“period2”: 0,
+“normaltime”: 1</p>
+</div></blockquote>
+<p>},
+“awayScore”: {</p>
+<blockquote>
+<div><p>“current”: 2,
+“display”: 2,
+“period1”: 0,
+“period2”: 2,
+“normaltime”: 2</p>
+</div></blockquote>
+<p>},
+“hasXg”: true,
+“id”: 12436907,
+“startTimestamp”: 1737900000,
+“slug”: “tottenham-hotspur-leicester-city”,
+“finalResultOnly”: false</p>
+</div></blockquote>
+<p>},
+“rating”: “8.1”,
+“order”: 1,
+“id”: 198034</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.totw_rounds">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">totw_rounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.totw_rounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.totw_rounds" title="Link to this definition">¶</a></dt>
+<dd><p>Get the available team of the week rounds for a specific season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch team of the week rounds for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the available rounds.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“rounds”: [</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“roundId”: 23,
+“roundName”: “23”,
+“roundSlug”: “23:23”,
+“id”: 16987,
+“createdAtTimestamp”: 1737966749</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sofascore_wrapper.manager">
+<span id="manager"></span><h2>Manager<a class="headerlink" href="#module-sofascore_wrapper.manager" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.manager.Manager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.manager.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manager_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/manager.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.manager.Manager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api</strong> (<a class="reference internal" href="sofascore_wrapper.html#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p></li>
+<li><p><strong>manager_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.manager.Manager.get_manager">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/manager.html#Manager.get_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.manager.Manager.get_manager" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves detailed information about the manager.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing manager details such as name, slug, short name, sport, teams, preferred formation, and more.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“manager”: {</dt><dd><p>“name”: “Mikel Arteta”,
+“slug”: “mikel-arteta”,
+“shortName”: “M. Arteta”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“teams”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“primaryUniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“preferredFormation”: “4-3-3”,
+“deceased”: false,
+“id”: 794075,
+“country”: {</p>
+<blockquote>
+<div><p>“alpha2”: “ES”,
+“name”: “Spain”</p>
+</div></blockquote>
+<p>},
+“team”: {</p>
+<blockquote>
+<div><p>“name”: “Arsenal”,
+“slug”: “arsenal”,
+“shortName”: “Arsenal”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isLive”: false,
+“id”: 1,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“primaryUniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1361165,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“displayInverseHomeAwayTeams”: false,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “الدوري الإنجليزي الممتاز”,
+“hi”: “प्रिमियर लीग”,
+“bn”: “প্রিমিয়ার লীগ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“userCount”: 2341486,
+“nameCode”: “ARS”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 42,
+“entityType”: “team”,
+“teamColors”: {</p>
+<blockquote>
+<div><p>“primary”: “#cc0000”,
+“secondary”: “#ffffff”,
+“text”: “#ffffff”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ارسنال”,
+“ru”: “Арсенал”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ارسنال”,
+“hi”: “आर्सेनल”,
+“bn”: “আর্সেনাল”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“formerPlayerId”: 1152,
+“nationality”: “ESP”,
+“nationalityISO2”: “ES”,
+“performance”: {</p>
+<blockquote>
+<div><p>“total”: 267,
+“wins”: 162,
+“draws”: 43,
+“losses”: 62,
+“goalsScored”: 526,
+“goalsConceded”: 281,
+“totalPoints”: 529</p>
+</div></blockquote>
+<p>},
+“dateOfBirthTimestamp”: 385948800,
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “ميكيل أرتيتا”,
+“hi”: “मिकेल आर्टेटा”,
+“bn”: “মিকেল আর্তেতা”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “م. أرتيتا”,
+“hi”: “एम. आर्टेटा”,
+“bn”: “এম. আরতেতা”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="flag">
+<h2>Flag<a class="headerlink" href="#flag" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to sofascore-wrapper’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
