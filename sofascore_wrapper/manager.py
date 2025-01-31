@@ -21,6 +21,7 @@ class Manager:
             Dict: A dictionary containing manager details such as name, slug, short name, sport, teams, preferred formation, and more.
 
         Example Response:
+            .. code-block:: json
             {
                 "manager": {
                     "name": "Mikel Arteta",

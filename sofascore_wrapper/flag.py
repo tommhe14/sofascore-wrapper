@@ -1,5 +1,4 @@
 from .api import SofascoreAPI
-from typing import str
 
 class Flag:
     def __init__(self, api: SofascoreAPI, flag_code: str):

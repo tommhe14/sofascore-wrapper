@@ -24,6 +24,7 @@ class PlayerSearch:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "players": [
                     {
@@ -198,6 +199,7 @@ class Player:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "player": {
                     "name": "Bukayo Saka",
@@ -402,6 +404,7 @@ class Player:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "transferHistory": [
                     {
@@ -512,6 +515,7 @@ class Player:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             [
                 {
                     "tournament": {
@@ -723,6 +727,7 @@ class Player:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "averageAttributeOverviews": [
                     {
@@ -767,6 +772,7 @@ class Player:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "statistics": {
                     "rating": 6.9,
@@ -923,6 +929,7 @@ class Player:
     async def image(self) -> str:
         """
         Example Response:
+            .. code-block:: json
 
         https://img.sofascore.com/api/v1/player/934235/image
         """
@@ -939,6 +946,7 @@ class Player:
             Exception: If the API request fails.
 
         Example Response:
+            .. code-block:: json
             {
                 "statistics": [
                     {
