@@ -1,5 +1,6 @@
 import os
 import sys
+import sphinx_rtd_theme
 
 # Ensure Sphinx can find your package
 sys.path.insert(0, os.path.abspath('../../'))
@@ -27,4 +28,5 @@ autodoc_default_options = {
 autodoc_typehints = "description"
 
 html_theme = 'sphinx_rtd_theme'  # Or 'sphinx_rtd_theme' for ReadTheDocs theme
-html_static_path = ['_static']  # Ensure this folder exists
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_static_path = ['_static']
