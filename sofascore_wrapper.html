@@ -2555,6 +2555,113 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.match.Match.best_home_players">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_home_players</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match.best_home_players"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match.best_home_players" title="Link to this definition"></a></dt>
+<dd><p>Fetches the best-rated players of the Home team for the specified match.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl>
+<dt>A list of dictionaries containing the best-rated players of the away team.</dt><dd><dl class="simple">
+<dt>Each dictionary includes:</dt><dd><ul class="simple">
+<li><p>value (str): The rating value of the player.</p></li>
+<li><p>label (str): The label for the value (e.g., “rating”).</p></li>
+<li><dl class="simple">
+<dt>player (Dict[str, Any]): Details about the player, including:</dt><dd><ul>
+<li><p>name (str): The player’s full name.</p></li>
+<li><p>slug (str): The player’s slug or unique identifier.</p></li>
+<li><p>shortName (str): The player’s short name.</p></li>
+<li><p>position (str): The player’s position on the field.</p></li>
+<li><p>jerseyNumber (str): The player’s jersey number.</p></li>
+<li><p>height (int): The player’s height in centimeters.</p></li>
+<li><p>userCount (int): The number of users following the player.</p></li>
+<li><p>id (int): The player’s unique ID.</p></li>
+<li><p>marketValueCurrency (str): The currency of the player’s market value.</p></li>
+<li><p>dateOfBirthTimestamp (int): The player’s date of birth as a timestamp.</p></li>
+<li><dl class="simple">
+<dt>proposedMarketValueRaw (Dict[str, Any]): The player’s proposed market value, including:</dt><dd><ul>
+<li><p>value (int): The market value amount.</p></li>
+<li><p>currency (str): The currency of the market value.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>fieldTranslations (Dict[str, Any]): Translations of the player’s name and short name in various languages.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>Returns <cite>None</cite> if no data is available.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[List[Dict[str, Any]]]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<dl>
+<dt>[</dt><dd><dl>
+<dt>{</dt><dd><p>“value”: “7.8”,
+“label”: “rating”,
+“player”: {</p>
+<blockquote>
+<div><p>“name”: “Pau López”,
+“slug”: “pau-lopez”,
+“shortName”: “P. López”,
+“position”: “G”,
+“jerseyNumber”: “25”,
+“height”: 189,
+“userCount”: 1060,
+“id”: 548848,
+“marketValueCurrency”: “EUR”,
+“dateOfBirthTimestamp”: 787276800,
+“proposedMarketValueRaw”: {</p>
+<blockquote>
+<div><p>“value”: 3700000,
+“currency”: “EUR”</p>
+</div></blockquote>
+<p>},
+“fieldTranslations”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“nameTranslation”: {</dt><dd><p>“ar”: “باو لوبيز”,
+“hi”: “पाऊ लोपेज़”,
+“bn”: “পাউ লোপেজ”</p>
+</dd>
+</dl>
+<p>},
+“shortNameTranslation”: {</p>
+<blockquote>
+<div><p>“ar”: “ب. لوبيز”,
+“hi”: “पी. लोपेज़”,
+“bn”: “পি. লোপেজ”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails or returns an error.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>List</em>[<em>Dict</em>[str, <em>Any</em>]] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sofascore_wrapper.match.Match.commentary">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match.commentary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match.commentary" title="Link to this definition"></a></dt>
 <dd><p>Retrieves commentary and highlights for the given match.</p>

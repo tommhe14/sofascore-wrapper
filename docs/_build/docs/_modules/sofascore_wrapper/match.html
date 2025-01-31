@@ -1001,6 +1001,77 @@
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bestAwayTeamPlayers&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
 
     
+<div class="viewcode-block" id="Match.best_home_players">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.best_home_players">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">best_home_players</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the best-rated players of the Home team for the specified match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries containing the best-rated players of the away team.</span>
+<span class="sd">                Each dictionary includes:</span>
+<span class="sd">                    - value (str): The rating value of the player.</span>
+<span class="sd">                    - label (str): The label for the value (e.g., &quot;rating&quot;).</span>
+<span class="sd">                    - player (Dict[str, Any]): Details about the player, including:</span>
+<span class="sd">                        - name (str): The player&#39;s full name.</span>
+<span class="sd">                        - slug (str): The player&#39;s slug or unique identifier.</span>
+<span class="sd">                        - shortName (str): The player&#39;s short name.</span>
+<span class="sd">                        - position (str): The player&#39;s position on the field.</span>
+<span class="sd">                        - jerseyNumber (str): The player&#39;s jersey number.</span>
+<span class="sd">                        - height (int): The player&#39;s height in centimeters.</span>
+<span class="sd">                        - userCount (int): The number of users following the player.</span>
+<span class="sd">                        - id (int): The player&#39;s unique ID.</span>
+<span class="sd">                        - marketValueCurrency (str): The currency of the player&#39;s market value.</span>
+<span class="sd">                        - dateOfBirthTimestamp (int): The player&#39;s date of birth as a timestamp.</span>
+<span class="sd">                        - proposedMarketValueRaw (Dict[str, Any]): The player&#39;s proposed market value, including:</span>
+<span class="sd">                            - value (int): The market value amount.</span>
+<span class="sd">                            - currency (str): The currency of the market value.</span>
+<span class="sd">                        - fieldTranslations (Dict[str, Any]): Translations of the player&#39;s name and short name in various languages.</span>
+<span class="sd">                Returns `None` if no data is available.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;value&quot;: &quot;7.8&quot;,</span>
+<span class="sd">                    &quot;label&quot;: &quot;rating&quot;,</span>
+<span class="sd">                    &quot;player&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Pau López&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;pau-lopez&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;P. López&quot;,</span>
+<span class="sd">                        &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                        &quot;jerseyNumber&quot;: &quot;25&quot;,</span>
+<span class="sd">                        &quot;height&quot;: 189,</span>
+<span class="sd">                        &quot;userCount&quot;: 1060,</span>
+<span class="sd">                        &quot;id&quot;: 548848,</span>
+<span class="sd">                        &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                        &quot;dateOfBirthTimestamp&quot;: 787276800,</span>
+<span class="sd">                        &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                            &quot;value&quot;: 3700000,</span>
+<span class="sd">                            &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;باو لوبيز&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;पाऊ लोपेज़&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;পাউ লোপেজ&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ب. لوبيز&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;पी. लोपेज़&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;পি. লোপেজ&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/best-players/summary&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bestHomeTeamPlayers&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+    
 <div class="viewcode-block" id="Match.motm">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.motm">[docs]</a>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">motm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>

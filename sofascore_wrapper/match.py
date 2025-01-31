@@ -904,6 +904,74 @@ class Match:
         data = await self.api._get(f"/event/{self.match_id}/best-players/summary")
         return data.get("bestAwayTeamPlayers", None)
     
+    async def best_home_players(self) -> Optional[List[Dict[str, Any]]]:
+        """
+        Fetches the best-rated players of the Home team for the specified match.
+
+        Returns:
+            Optional[List[Dict[str, Any]]]: A list of dictionaries containing the best-rated players of the away team.
+                Each dictionary includes:
+                    - value (str): The rating value of the player.
+                    - label (str): The label for the value (e.g., "rating").
+                    - player (Dict[str, Any]): Details about the player, including:
+                        - name (str): The player's full name.
+                        - slug (str): The player's slug or unique identifier.
+                        - shortName (str): The player's short name.
+                        - position (str): The player's position on the field.
+                        - jerseyNumber (str): The player's jersey number.
+                        - height (int): The player's height in centimeters.
+                        - userCount (int): The number of users following the player.
+                        - id (int): The player's unique ID.
+                        - marketValueCurrency (str): The currency of the player's market value.
+                        - dateOfBirthTimestamp (int): The player's date of birth as a timestamp.
+                        - proposedMarketValueRaw (Dict[str, Any]): The player's proposed market value, including:
+                            - value (int): The market value amount.
+                            - currency (str): The currency of the market value.
+                        - fieldTranslations (Dict[str, Any]): Translations of the player's name and short name in various languages.
+                Returns `None` if no data is available.
+
+        Example:
+            [
+                {
+                    "value": "7.8",
+                    "label": "rating",
+                    "player": {
+                        "name": "Pau López",
+                        "slug": "pau-lopez",
+                        "shortName": "P. López",
+                        "position": "G",
+                        "jerseyNumber": "25",
+                        "height": 189,
+                        "userCount": 1060,
+                        "id": 548848,
+                        "marketValueCurrency": "EUR",
+                        "dateOfBirthTimestamp": 787276800,
+                        "proposedMarketValueRaw": {
+                            "value": 3700000,
+                            "currency": "EUR"
+                        },
+                        "fieldTranslations": {
+                            "nameTranslation": {
+                                "ar": "باو لوبيز",
+                                "hi": "पाऊ लोपेज़",
+                                "bn": "পাউ লোপেজ"
+                            },
+                            "shortNameTranslation": {
+                                "ar": "ب. لوبيز",
+                                "hi": "पी. लोपेज़",
+                                "bn": "পি. লোপেজ"
+                            }
+                        }
+                    }
+                }
+            ]
+
+        Raises:
+            Exception: If the API request fails or returns an error.
+        """
+        data = await self.api._get(f"/event/{self.match_id}/best-players/summary")
+        return data.get("bestHomeTeamPlayers", None)
+    
     async def motm(self) -> dict:
         """
         Get the Man of the Match (MOTM) for the given game.
