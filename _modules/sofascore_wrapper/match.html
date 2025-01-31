@@ -1648,7 +1648,99 @@
 <span class="sd">                }</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/highlights&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.commentary">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.commentary">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">commentary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves commentary and highlights for the given match.</span>
+
+<span class="sd">        This function fetches the live commentary and highlights for a specific match,</span>
+<span class="sd">        including text comments such as match events, player actions, and game status updates.</span>
+
+<span class="sd">        :returns: A dictionary containing a list of commentary objects, each of which includes details about</span>
+<span class="sd">                the comment, type, time, and optionally player information.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;comments&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;text&quot;: &quot;Match ends, Girona 1, Arsenal 2.&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;matchEnded&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 27698855,</span>
+<span class="sd">                            &quot;time&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;text&quot;: &quot;Second Half ends, Girona 1, Arsenal 2.&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;endSecondHalf&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 27698807,</span>
+<span class="sd">                            &quot;periodName&quot;: &quot;2ND&quot;,</span>
+<span class="sd">                            &quot;time&quot;: 96</span>
+<span class="sd">                        },</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;text&quot;: &quot;Foul by Cristhian Stuani (Girona).&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;freeKickLost&quot;,</span>
+<span class="sd">                            &quot;isHome&quot;: true,</span>
+<span class="sd">                            &quot;player&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Cristhian Stuani&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;cristhian-stuani&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;C. Stuani&quot;,</span>
+<span class="sd">                                &quot;position&quot;: &quot;F&quot;,</span>
+<span class="sd">                                &quot;jerseyNumber&quot;: &quot;7&quot;,</span>
+<span class="sd">                                &quot;height&quot;: 184,</span>
+<span class="sd">                                &quot;userCount&quot;: 1757,</span>
+<span class="sd">                                &quot;id&quot;: 32048,</span>
+<span class="sd">                                &quot;marketValueCurrency&quot;: &quot;EUR&quot;,</span>
+<span class="sd">                                &quot;dateOfBirthTimestamp&quot;: 529459200,</span>
+<span class="sd">                                &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                                    &quot;value&quot;: 1100000,</span>
+<span class="sd">                                    &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;كريستيان ستواني&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;क्रिस्टियन स्टुआनी&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;ক্রিশ্চিয়ান স্টুয়ানি&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ك. ستواني&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;सी. स्टुआनी&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;সি. স্টুয়ানি&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 27698809,</span>
+<span class="sd">                            &quot;periodName&quot;: &quot;2ND&quot;,</span>
+<span class="sd">                            &quot;time&quot;: 96</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Commentary Object Details:</span>
+<span class="sd">            - ``text``: The text of the commentary, describing the match event or action.</span>
+<span class="sd">            - ``type``: The type of comment (e.g., &quot;matchEnded&quot;, &quot;freeKickLost&quot;).</span>
+<span class="sd">            - ``id``: Unique identifier for the comment.</span>
+<span class="sd">            - ``time``: The time (in seconds) when the comment occurred in the match.</span>
+<span class="sd">            - ``periodName`` (optional): The name of the period, such as &quot;1ST&quot;, &quot;2ND&quot;.</span>
+<span class="sd">            - ``isHome`` (optional): Boolean indicating if the event relates to the home team.</span>
+<span class="sd">            - ``player`` (optional): Player information for player-related events.</span>
+<span class="sd">                - ``name``: Player&#39;s full name.</span>
+<span class="sd">                - ``slug``: URL-friendly identifier for the player.</span>
+<span class="sd">                - ``shortName``: Shortened player name.</span>
+<span class="sd">                - ``position``: Player&#39;s position (e.g., &quot;F&quot; for forward).</span>
+<span class="sd">                - ``jerseyNumber``: Player&#39;s jersey number.</span>
+<span class="sd">                - ``height``: Player&#39;s height in centimeters.</span>
+<span class="sd">                - ``marketValueCurrency``: The currency for the player&#39;s market value.</span>
+<span class="sd">                - ``proposedMarketValueRaw``: Proposed market value for the player, including currency.</span>
+<span class="sd">                - ``fieldTranslations``: Translations for the player&#39;s name and short name in different languages.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/comments&quot;</span><span class="p">)</span></div>
 </div>
+
 
 
 

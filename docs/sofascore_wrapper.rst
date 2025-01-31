@@ -68,3 +68,10 @@ sofascore\_wrapper.team module
    :undoc-members:
    :show-inheritance:
 
+Module contents
+---------------
+
+.. automodule:: sofascore_wrapper
+   :members:
+   :undoc-members:
+   :show-inheritance:

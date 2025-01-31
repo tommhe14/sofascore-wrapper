@@ -1516,6 +1516,95 @@ class Match:
                 }
         """
         return await self.api._get(f"/event/{self.match_id}/highlights")
+    
+    async def commentary(self) -> Dict[str, int]:
+        """
+        Retrieves commentary and highlights for the given match.
+
+        This function fetches the live commentary and highlights for a specific match,
+        including text comments such as match events, player actions, and game status updates.
+
+        :returns: A dictionary containing a list of commentary objects, each of which includes details about
+                the comment, type, time, and optionally player information.
+        :rtype: dict
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "comments": [
+                        {
+                            "text": "Match ends, Girona 1, Arsenal 2.",
+                            "type": "matchEnded",
+                            "id": 27698855,
+                            "time": 0
+                        },
+                        {
+                            "text": "Second Half ends, Girona 1, Arsenal 2.",
+                            "type": "endSecondHalf",
+                            "id": 27698807,
+                            "periodName": "2ND",
+                            "time": 96
+                        },
+                        {
+                            "text": "Foul by Cristhian Stuani (Girona).",
+                            "type": "freeKickLost",
+                            "isHome": true,
+                            "player": {
+                                "name": "Cristhian Stuani",
+                                "slug": "cristhian-stuani",
+                                "shortName": "C. Stuani",
+                                "position": "F",
+                                "jerseyNumber": "7",
+                                "height": 184,
+                                "userCount": 1757,
+                                "id": 32048,
+                                "marketValueCurrency": "EUR",
+                                "dateOfBirthTimestamp": 529459200,
+                                "proposedMarketValueRaw": {
+                                    "value": 1100000,
+                                    "currency": "EUR"
+                                },
+                                "fieldTranslations": {
+                                    "nameTranslation": {
+                                        "ar": "كريستيان ستواني",
+                                        "hi": "क्रिस्टियन स्टुआनी",
+                                        "bn": "ক্রিশ্চিয়ান স্টুয়ানি"
+                                    },
+                                    "shortNameTranslation": {
+                                        "ar": "ك. ستواني",
+                                        "hi": "सी. स्टुआनी",
+                                        "bn": "সি. স্টুয়ানি"
+                                    }
+                                }
+                            },
+                            "id": 27698809,
+                            "periodName": "2ND",
+                            "time": 96
+                        }
+                    ]
+                }
+
+        Commentary Object Details:
+            - ``text``: The text of the commentary, describing the match event or action.
+            - ``type``: The type of comment (e.g., "matchEnded", "freeKickLost").
+            - ``id``: Unique identifier for the comment.
+            - ``time``: The time (in seconds) when the comment occurred in the match.
+            - ``periodName`` (optional): The name of the period, such as "1ST", "2ND".
+            - ``isHome`` (optional): Boolean indicating if the event relates to the home team.
+            - ``player`` (optional): Player information for player-related events.
+                - ``name``: Player's full name.
+                - ``slug``: URL-friendly identifier for the player.
+                - ``shortName``: Shortened player name.
+                - ``position``: Player's position (e.g., "F" for forward).
+                - ``jerseyNumber``: Player's jersey number.
+                - ``height``: Player's height in centimeters.
+                - ``marketValueCurrency``: The currency for the player's market value.
+                - ``proposedMarketValueRaw``: Proposed market value for the player, including currency.
+                - ``fieldTranslations``: Translations for the player's name and short name in different languages.
+            """
+        return await self.api._get(f"/event/{self.match_id}/comments")
+
 
 
     

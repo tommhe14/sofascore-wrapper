@@ -79,6 +79,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -2549,6 +2550,105 @@
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>List</em>[<em>Dict</em>[str, <em>Any</em>]] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.match.Match.commentary">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">commentary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match.commentary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match.commentary" title="Link to this definition"></a></dt>
+<dd><p>Retrieves commentary and highlights for the given match.</p>
+<p>This function fetches the live commentary and highlights for a specific match,
+including text comments such as match events, player actions, and game status updates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing a list of commentary objects, each of which includes details about
+the comment, type, time, and optionally player information.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Match ends, Girona 1, Arsenal 2.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;matchEnded&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">27698855</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Second Half ends, Girona 1, Arsenal 2.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;endSecondHalf&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">27698807</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;periodName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2ND&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Foul by Cristhian Stuani (Girona).&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;freeKickLost&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;isHome&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;player&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cristhian Stuani&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cristhian-stuani&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;shortName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C. Stuani&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;F&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;jerseyNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">184</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;userCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1757</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32048</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;marketValueCurrency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;dateOfBirthTimestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">529459200</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;proposedMarketValueRaw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1100000</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EUR&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;fieldTranslations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;nameTranslation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;ar&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;كريستيان ستواني&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;hi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;क्रिस्टियन स्टुआनी&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;bn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ক্রিশ্চিয়ান স্টুয়ানি&quot;</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nt">&quot;shortNameTranslation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nt">&quot;ar&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ك. ستواني&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;hi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;सी. स्टुआनी&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nt">&quot;bn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;সি. স্টুয়ানি&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">27698809</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;periodName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2ND&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>Commentary Object Details:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">text</span></code>: The text of the commentary, describing the match event or action.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: The type of comment (e.g., “matchEnded”, “freeKickLost”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>: Unique identifier for the comment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>: The time (in seconds) when the comment occurred in the match.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">periodName</span></code> (optional): The name of the period, such as “1ST”, “2ND”.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isHome</span></code> (optional): Boolean indicating if the event relates to the home team.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">player</span></code> (optional): Player information for player-related events.</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Player’s full name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slug</span></code>: URL-friendly identifier for the player.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shortName</span></code>: Shortened player name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span></code>: Player’s position (e.g., “F” for forward).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jerseyNumber</span></code>: Player’s jersey number.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">height</span></code>: Player’s height in centimeters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marketValueCurrency</span></code>: The currency for the player’s market value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">proposedMarketValueRaw</span></code>: Proposed market value for the player, including currency.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fieldTranslations</span></code>: Translations for the player’s name and short name in different languages.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -8700,6 +8800,9 @@ is the first item in the list.</p>
 
 </dd></dl>
 
+</section>
+<section id="module-sofascore_wrapper">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sofascore_wrapper" title="Link to this heading"></a></h2>
 </section>
 </section>
 
