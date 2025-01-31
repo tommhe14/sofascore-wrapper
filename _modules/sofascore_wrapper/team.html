@@ -1,0 +1,1950 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.team &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.team</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.team</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
+
+<div class="viewcode-block" id="Team">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team">[docs]</a>
+<span class="k">class</span> <span class="nc">Team</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Team class with the SofascoreAPI instance and team ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            api (SofascoreAPI): An instance of the SofascoreAPI class.</span>
+<span class="sd">            team_id (int): The unique identifier for the team.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">team_id</span> <span class="o">=</span> <span class="n">team_id</span>
+
+<div class="viewcode-block" id="Team.get_team">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.get_team">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_team</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves detailed information about the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing team details such as name, slug, short name, gender, sport, category, tournament, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;team&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;category&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;id&quot;: 1,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;tournament&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                            &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                            &quot;id&quot;: 17,</span>
+<span class="sd">                            &quot;country&quot;: {},</span>
+<span class="sd">                            &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;প্রিমিয়ার লীग&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;priority&quot;: 617,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 1,</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;primaryUniqueTournament&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                        &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                        &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                        &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                        &quot;id&quot;: 17,</span>
+<span class="sd">                        &quot;country&quot;: {},</span>
+<span class="sd">                        &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;প্রিমিয়ার লীग&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                    &quot;manager&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Mikel Arteta&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;mikel-arteta&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;M. Arteta&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 794075,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;ES&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ESP&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;Spain&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;spain&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ميكيل أرتيتا&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;मिकेल आर्टेटा&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;মিকেল আর্তেতা&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;م. أرتيتا&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;एम. आर्टेटा&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;এম. আরতেতা&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;venue&quot;: {</span>
+<span class="sd">                        &quot;city&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;London&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;venueCoordinates&quot;: {</span>
+<span class="sd">                            &quot;latitude&quot;: 51.55504,</span>
+<span class="sd">                            &quot;longitude&quot;: -0.1084</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;hidden&quot;: false,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;emirates-stadium&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Emirates Stadium&quot;,</span>
+<span class="sd">                        &quot;capacity&quot;: 60260,</span>
+<span class="sd">                        &quot;id&quot;: 624,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;الإمارات&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;stadium&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Emirates Stadium&quot;,</span>
+<span class="sd">                            &quot;capacity&quot;: 60260</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                    &quot;class&quot;: 4,</span>
+<span class="sd">                    &quot;disabled&quot;: false,</span>
+<span class="sd">                    &quot;national&quot;: false,</span>
+<span class="sd">                    &quot;type&quot;: 0,</span>
+<span class="sd">                    &quot;id&quot;: 42,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                        &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                    &quot;fullName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                    &quot;teamColors&quot;: {</span>
+<span class="sd">                        &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                        &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                        &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;foundationDateTimestamp&quot;: -2627164800,</span>
+<span class="sd">                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                            &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                            &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                            &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                            &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                            &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                            &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                            &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;pregameForm&quot;: {</span>
+<span class="sd">                    &quot;avgRating&quot;: &quot;7.04&quot;,</span>
+<span class="sd">                    &quot;position&quot;: 2,</span>
+<span class="sd">                    &quot;value&quot;: &quot;47&quot;,</span>
+<span class="sd">                    &quot;form&quot;: [</span>
+<span class="sd">                        &quot;W&quot;,</span>
+<span class="sd">                        &quot;D&quot;,</span>
+<span class="sd">                        &quot;W&quot;,</span>
+<span class="sd">                        &quot;D&quot;,</span>
+<span class="sd">                        &quot;W&quot;</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.image">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.image">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the URL of the team&#39;s image.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The URL of the team&#39;s image.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            &quot;https://img.sofascore.com/api/v1/team/42/image&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://img.sofascore.com/api/v1/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/image&quot;</span></div>
+
+
+<div class="viewcode-block" id="Team.performance">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.performance">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">performance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the performance data of the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing performance data such as events, tournament details, and team statistics.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;events&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;tournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                                &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 1,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                                &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                                &quot;id&quot;: 17,</span>
+<span class="sd">                                &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                                &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;priority&quot;: 617,</span>
+<span class="sd">                            &quot;isGroup&quot;: false,</span>
+<span class="sd">                            &quot;isLive&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;season&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Premier League 24/25&quot;,</span>
+<span class="sd">                            &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                            &quot;editor&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 61627</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;roundInfo&quot;: {</span>
+<span class="sd">                            &quot;round&quot;: 18</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;customId&quot;: &quot;HsR&quot;,</span>
+<span class="sd">                        &quot;status&quot;: {</span>
+<span class="sd">                            &quot;code&quot;: 100,</span>
+<span class="sd">                            &quot;description&quot;: &quot;Ended&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;finished&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;winnerCode&quot;: 1,</span>
+<span class="sd">                        &quot;homeTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: false,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 42,</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;subTeams&quot;: [],</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Ipswich Town&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;ipswich-town&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Ipswich&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 154510,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;IPS&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: false,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 32,</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;subTeams&quot;: [],</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#0000ff&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ايبسويتش تاون&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Ипсвич Таун&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 1,</span>
+<span class="sd">                            &quot;display&quot;: 1,</span>
+<span class="sd">                            &quot;period1&quot;: 1,</span>
+<span class="sd">                            &quot;period2&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;period2&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;time&quot;: {</span>
+<span class="sd">                            &quot;injuryTime1&quot;: 1,</span>
+<span class="sd">                            &quot;injuryTime2&quot;: 4,</span>
+<span class="sd">                            &quot;currentPeriodStartTimestamp&quot;: 1735334227</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;changes&quot;: {</span>
+<span class="sd">                            &quot;changes&quot;: [</span>
+<span class="sd">                                &quot;status.code&quot;,</span>
+<span class="sd">                                &quot;status.description&quot;,</span>
+<span class="sd">                                &quot;status.type&quot;</span>
+<span class="sd">                            ],</span>
+<span class="sd">                            &quot;changeTimestamp&quot;: 1735337210</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                        &quot;hasXg&quot;: true,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                        &quot;hasEventPlayerHeatMap&quot;: true,</span>
+<span class="sd">                        &quot;detailId&quot;: 1,</span>
+<span class="sd">                        &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 12436472,</span>
+<span class="sd">                        &quot;startTimestamp&quot;: 1735330500,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal-ipswich-town&quot;,</span>
+<span class="sd">                        &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                        &quot;feedLocked&quot;: true,</span>
+<span class="sd">                        &quot;isEditor&quot;: false</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/performance&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.transfers_in">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.transfers_in">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">transfers_in</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of players who have transferred into the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List: A list of dictionaries containing details about each transfer, including player information, transfer details, and fees.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;player&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Charles Sagoe Jr.&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;charles-sagoe-jr&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;C. S. Jr.&quot;,</span>
+<span class="sd">                        &quot;position&quot;: &quot;F&quot;,</span>
+<span class="sd">                        &quot;jerseyNumber&quot;: &quot;15&quot;,</span>
+<span class="sd">                        &quot;userCount&quot;: 841,</span>
+<span class="sd">                        &quot;id&quot;: 1119436,</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;تشارلز ساغو جونيور&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;चार्ल्स सागो जूनियर.&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;চার্লস সাগো জুনিয়র&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ت. ساغو جونيور&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;सी.एस. जूनियर.&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;সি. এস. জুনিয়র&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;transferFrom&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Shrewsbury Town&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;shrewsbury-town&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Shrewsbury&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 6164,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;SHR&quot;,</span>
+<span class="sd">                        &quot;national&quot;: false,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 82,</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#0000ff&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#ffff00&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;شوروسبري تاون&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Шрусбери Таун&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;transferTo&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: false,</span>
+<span class="sd">                        &quot;national&quot;: false,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 42,</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;fromTeamName&quot;: &quot;Shrewsbury Town&quot;,</span>
+<span class="sd">                    &quot;toTeamName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                    &quot;type&quot;: 2,</span>
+<span class="sd">                    &quot;transferFee&quot;: 0,</span>
+<span class="sd">                    &quot;transferFeeDescription&quot;: &quot;-&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 2131805,</span>
+<span class="sd">                    &quot;transferDateTimestamp&quot;: 1736121600,</span>
+<span class="sd">                    &quot;transferFeeRaw&quot;: {</span>
+<span class="sd">                        &quot;value&quot;: 0,</span>
+<span class="sd">                        &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/transfers&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;transfersIn&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>  
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;transfersIn&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Team.transfers_out">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.transfers_out">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">transfers_out</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of players who have transferred out of the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List: A list of dictionaries containing details about each transfer, including player information, transfer details, and fees.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;player&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Marquinhos&quot;,</span>
+<span class="sd">                        &quot;firstName&quot;: &quot;Marquinhos&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;marquinhos&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Marquinhos&quot;,</span>
+<span class="sd">                        &quot;position&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;jerseyNumber&quot;: &quot;17&quot;,</span>
+<span class="sd">                        &quot;userCount&quot;: 4202,</span>
+<span class="sd">                        &quot;id&quot;: 1116954,</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ماركينيوس&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;मार्क्विन्होस&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;মারকুইনহোস&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ماركينيوس&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;मार्क्विन्होस&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;মারকুইনহোস&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;transferFrom&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: False,</span>
+<span class="sd">                        &quot;national&quot;: False,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 42,</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;transferTo&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Cruzeiro&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;cruzeiro&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Cruzeiro&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 248252,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;CRU&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: False,</span>
+<span class="sd">                        &quot;national&quot;: False,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 1954,</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#0033cc&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#0033cc&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#0033cc&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Крузейро&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;fromTeamName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                    &quot;toTeamName&quot;: &quot;Cruzeiro&quot;,</span>
+<span class="sd">                    &quot;type&quot;: 1,</span>
+<span class="sd">                    &quot;transferFee&quot;: 0,</span>
+<span class="sd">                    &quot;transferFeeDescription&quot;: &quot;-&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 2234559,</span>
+<span class="sd">                    &quot;transferDateTimestamp&quot;: 1736380800,</span>
+<span class="sd">                    &quot;transferFeeRaw&quot;: {</span>
+<span class="sd">                        &quot;value&quot;: 0,</span>
+<span class="sd">                        &quot;currency&quot;: &quot;USD&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/transfers&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;transfersOut&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>  
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;transfersOut&quot;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="Team.next_fixtures">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.next_fixtures">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">next_fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the next fixtures for the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List: A list of dictionaries containing details about the upcoming fixtures, including tournament, season, round, teams, scores, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;tournament&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;EFL Cup&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;efl-cup&quot;,</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;EFL Cup&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;efl-cup&quot;,</span>
+<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#203e93&quot;,</span>
+<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#bc1723&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 167174,</span>
+<span class="sd">                            &quot;id&quot;: 21,</span>
+<span class="sd">                            &quot;country&quot;: {},</span>
+<span class="sd">                            &quot;hasPerformanceGraphFeature&quot;: false,</span>
+<span class="sd">                            &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                            &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;priority&quot;: 426,</span>
+<span class="sd">                        &quot;isGroup&quot;: false,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 17</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;season&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;EFL Cup 24/25&quot;,</span>
+<span class="sd">                        &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                        &quot;editor&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 62483</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;roundInfo&quot;: {</span>
+<span class="sd">                        &quot;round&quot;: 3,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Round 3&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;round-3&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;customId&quot;: &quot;fsR&quot;,</span>
+<span class="sd">                    &quot;status&quot;: {</span>
+<span class="sd">                        &quot;code&quot;: 100,</span>
+<span class="sd">                        &quot;description&quot;: &quot;Ended&quot;,</span>
+<span class="sd">                        &quot;type&quot;: &quot;finished&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;winnerCode&quot;: 1,</span>
+<span class="sd">                    &quot;homeTeam&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: false,</span>
+<span class="sd">                        &quot;national&quot;: false,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 42,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;subTeams&quot;: [],</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;awayTeam&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Bolton Wanderers&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;bolton-wanderers&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Bolton&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 21304,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;BOL&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: false,</span>
+<span class="sd">                        &quot;national&quot;: false,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 5,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;subTeams&quot;: [],</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#000033&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#000033&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;بولتون وانديريرز&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Болтон Уондерерс&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;homeScore&quot;: {</span>
+<span class="sd">                        &quot;current&quot;: 5,</span>
+<span class="sd">                        &quot;display&quot;: 5,</span>
+<span class="sd">                        &quot;period1&quot;: 2,</span>
+<span class="sd">                        &quot;period2&quot;: 3,</span>
+<span class="sd">                        &quot;normaltime&quot;: 5</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;awayScore&quot;: {</span>
+<span class="sd">                        &quot;current&quot;: 1,</span>
+<span class="sd">                        &quot;display&quot;: 1,</span>
+<span class="sd">                        &quot;period1&quot;: 0,</span>
+<span class="sd">                        &quot;period2&quot;: 1,</span>
+<span class="sd">                        &quot;normaltime&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;time&quot;: {</span>
+<span class="sd">                        &quot;injuryTime1&quot;: 3,</span>
+<span class="sd">                        &quot;injuryTime2&quot;: 4,</span>
+<span class="sd">                        &quot;currentPeriodStartTimestamp&quot;: 1727293717</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;changes&quot;: {</span>
+<span class="sd">                        &quot;changes&quot;: [</span>
+<span class="sd">                            &quot;status.code&quot;,</span>
+<span class="sd">                            &quot;status.description&quot;,</span>
+<span class="sd">                            &quot;status.type&quot;</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;changeTimestamp&quot;: 1727296678</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                    &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                    &quot;hasEventPlayerHeatMap&quot;: true,</span>
+<span class="sd">                    &quot;detailId&quot;: 1,</span>
+<span class="sd">                    &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                    &quot;id&quot;: 12785412,</span>
+<span class="sd">                    &quot;startTimestamp&quot;: 1727289900,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;arsenal-bolton-wanderers&quot;,</span>
+<span class="sd">                    &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                    &quot;feedLocked&quot;: true,</span>
+<span class="sd">                    &quot;isEditor&quot;: false</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/events/next/0&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>  
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Team.last_fixtures">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.last_fixtures">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">last_fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the last fixtures for the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List: A list of dictionaries containing details about the past fixtures, including tournament, season, round, teams, scores, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;tournament&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;EFL Cup&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;efl-cup&quot;,</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;EFL Cup&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;efl-cup&quot;,</span>
+<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#203e93&quot;,</span>
+<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#bc1723&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 167174,</span>
+<span class="sd">                            &quot;id&quot;: 21,</span>
+<span class="sd">                            &quot;country&quot;: {},</span>
+<span class="sd">                            &quot;hasPerformanceGraphFeature&quot;: false,</span>
+<span class="sd">                            &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                            &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;priority&quot;: 426,</span>
+<span class="sd">                        &quot;isGroup&quot;: false,</span>
+<span class="sd">                        &quot;isLive&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 17</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;season&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;EFL Cup 24/25&quot;,</span>
+<span class="sd">                        &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                        &quot;editor&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 62483</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;roundInfo&quot;: {</span>
+<span class="sd">                        &quot;round&quot;: 3,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Round 3&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;round-3&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;customId&quot;: &quot;fsR&quot;,</span>
+<span class="sd">                    &quot;status&quot;: {</span>
+<span class="sd">                        &quot;code&quot;: 100,</span>
+<span class="sd">                        &quot;description&quot;: &quot;Ended&quot;,</span>
+<span class="sd">                        &quot;type&quot;: &quot;finished&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;winnerCode&quot;: 1,</span>
+<span class="sd">                    &quot;homeTeam&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: false,</span>
+<span class="sd">                        &quot;national&quot;: false,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 42,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;subTeams&quot;: [],</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;awayTeam&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Bolton Wanderers&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;bolton-wanderers&quot;,</span>
+<span class="sd">                        &quot;shortName&quot;: &quot;Bolton&quot;,</span>
+<span class="sd">                        &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 21304,</span>
+<span class="sd">                        &quot;nameCode&quot;: &quot;BOL&quot;,</span>
+<span class="sd">                        &quot;disabled&quot;: false,</span>
+<span class="sd">                        &quot;national&quot;: false,</span>
+<span class="sd">                        &quot;type&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 5,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                        &quot;subTeams&quot;: [],</span>
+<span class="sd">                        &quot;teamColors&quot;: {</span>
+<span class="sd">                            &quot;primary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                            &quot;secondary&quot;: &quot;#000033&quot;,</span>
+<span class="sd">                            &quot;text&quot;: &quot;#000033&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                &quot;ar&quot;: &quot;بولتون وانديريرز&quot;,</span>
+<span class="sd">                                &quot;ru&quot;: &quot;Болтон Уондерерс&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                        }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;homeScore&quot;: {</span>
+<span class="sd">                        &quot;current&quot;: 5,</span>
+<span class="sd">                        &quot;display&quot;: 5,</span>
+<span class="sd">                        &quot;period1&quot;: 2,</span>
+<span class="sd">                        &quot;period2&quot;: 3,</span>
+<span class="sd">                        &quot;normaltime&quot;: 5</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;awayScore&quot;: {</span>
+<span class="sd">                        &quot;current&quot;: 1,</span>
+<span class="sd">                        &quot;display&quot;: 1,</span>
+<span class="sd">                        &quot;period1&quot;: 0,</span>
+<span class="sd">                        &quot;period2&quot;: 1,</span>
+<span class="sd">                        &quot;normaltime&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;time&quot;: {</span>
+<span class="sd">                        &quot;injuryTime1&quot;: 3,</span>
+<span class="sd">                        &quot;injuryTime2&quot;: 4,</span>
+<span class="sd">                        &quot;currentPeriodStartTimestamp&quot;: 1727293717</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;changes&quot;: {</span>
+<span class="sd">                        &quot;changes&quot;: [</span>
+<span class="sd">                            &quot;status.code&quot;,</span>
+<span class="sd">                            &quot;status.description&quot;,</span>
+<span class="sd">                            &quot;status.type&quot;</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;changeTimestamp&quot;: 1727296678</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                    &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                    &quot;hasEventPlayerHeatMap&quot;: true,</span>
+<span class="sd">                    &quot;detailId&quot;: 1,</span>
+<span class="sd">                    &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                    &quot;id&quot;: 12785412,</span>
+<span class="sd">                    &quot;startTimestamp&quot;: 1727289900,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;arsenal-bolton-wanderers&quot;,</span>
+<span class="sd">                    &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                    &quot;feedLocked&quot;: true,</span>
+<span class="sd">                    &quot;isEditor&quot;: false</span>
+<span class="sd">                }</span>
+<span class="sd">            ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/events/last/0&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>  
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Team.seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the seasons in which the team has participated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing the unique tournament seasons.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;uniqueTournamentSeasons&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;UEFA Champions League&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;uefa-champions-league&quot;,</span>
+<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#062b5c&quot;,</span>
+<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#086aab&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Europe&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;europe&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1465,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;europe&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 1321299,</span>
+<span class="sd">                            &quot;id&quot;: 7,</span>
+<span class="sd">                            &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;دوري أبطال أوروبا&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;यूईएफए चैंपियंस लीग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;উয়েফা চ্যাম্পিয়ন্স লীগ&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;seasons&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;name&quot;: &quot;UEFA Champions League 24/25&quot;,</span>
+<span class="sd">                                &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                                &quot;editor&quot;: false,</span>
+<span class="sd">                                &quot;seasonCoverageInfo&quot;: {},</span>
+<span class="sd">                                &quot;id&quot;: 61644</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/team-statistics/seasons&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.squad">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.squad">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">squad</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the squad of the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing the players in the team&#39;s squad, including their details, positions, and statistics.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;players&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;player&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Bukayo Saka&quot;,</span>
+<span class="sd">                            &quot;firstName&quot;: &quot;&quot;,</span>
+<span class="sd">                            &quot;lastName&quot;: &quot;&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;bukayo-saka&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;B. Saka&quot;,</span>
+<span class="sd">                            &quot;team&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;tournament&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                    &quot;category&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                        &quot;sport&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                            &quot;id&quot;: 1</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;id&quot;: 1,</span>
+<span class="sd">                                        &quot;country&quot;: {</span>
+<span class="sd">                                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                        &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                        &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                                        &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                                        &quot;category&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                            &quot;sport&quot;: {</span>
+<span class="sd">                                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                                &quot;id&quot;: 1</span>
+<span class="sd">                                            },</span>
+<span class="sd">                                            &quot;id&quot;: 1,</span>
+<span class="sd">                                            &quot;country&quot;: {</span>
+<span class="sd">                                                &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                                &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                                &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                            },</span>
+<span class="sd">                                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                                        &quot;id&quot;: 17,</span>
+<span class="sd">                                        &quot;country&quot;: {},</span>
+<span class="sd">                                        &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                                &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                                &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                                &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                            },</span>
+<span class="sd">                                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                        }</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;priority&quot;: 617,</span>
+<span class="sd">                                    &quot;isLive&quot;: false,</span>
+<span class="sd">                                    &quot;id&quot;: 1,</span>
+<span class="sd">                                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;primaryUniqueTournament&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                    &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                                    &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                                    &quot;category&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                        &quot;sport&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                            &quot;id&quot;: 1</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;id&quot;: 1,</span>
+<span class="sd">                                        &quot;country&quot;: {</span>
+<span class="sd">                                            &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                            &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                        &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                                    &quot;id&quot;: 17,</span>
+<span class="sd">                                    &quot;country&quot;: {},</span>
+<span class="sd">                                    &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                                &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                                &quot;disabled&quot;: false,</span>
+<span class="sd">                                &quot;national&quot;: false,</span>
+<span class="sd">                                &quot;type&quot;: 0,</span>
+<span class="sd">                                &quot;id&quot;: 42,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                &quot;teamColors&quot;: {</span>
+<span class="sd">                                    &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                    &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                        &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;position&quot;: &quot;F&quot;,</span>
+<span class="sd">                            &quot;jerseyNumber&quot;: &quot;7&quot;,</span>
+<span class="sd">                            &quot;height&quot;: 178,</span>
+<span class="sd">                            &quot;preferredFoot&quot;: &quot;Left&quot;,</span>
+<span class="sd">                            &quot;retired&quot;: false,</span>
+<span class="sd">                            &quot;userCount&quot;: 168684,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 934235,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ENG&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;shirtNumber&quot;: 7,</span>
+<span class="sd">                            &quot;dateOfBirthTimestamp&quot;: 999648000,</span>
+<span class="sd">                            &quot;contractUntilTimestamp&quot;: 1814313600,</span>
+<span class="sd">                            &quot;proposedMarketValue&quot;: 157000000,</span>
+<span class="sd">                            &quot;proposedMarketValueRaw&quot;: {</span>
+<span class="sd">                                &quot;value&quot;: 157000000,</span>
+<span class="sd">                                &quot;currency&quot;: &quot;EUR&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;بوكايو ساكا&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;बुकायो साका&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;বুকায়ো সাকা&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ب. ساكا&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;बी. साका&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;বি. সাকা&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/players&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.top_players">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.top_players">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">top_players</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top players of the team for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            league_id (int): The unique identifier for the league.</span>
+<span class="sd">            season (int): The season year.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing the top players of the team, including their statistics and performance metrics.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;topPlayers&quot;: {</span>
+<span class="sd">                    &quot;rating&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;statistics&quot;: {</span>
+<span class="sd">                                &quot;rating&quot;: 7.8,</span>
+<span class="sd">                                &quot;id&quot;: 1595229,</span>
+<span class="sd">                                &quot;type&quot;: &quot;overall&quot;,</span>
+<span class="sd">                                &quot;appearances&quot;: 5</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;playedEnough&quot;: true,</span>
+<span class="sd">                            &quot;player&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Bukayo Saka&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;bukayo-saka&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;B. Saka&quot;,</span>
+<span class="sd">                                &quot;position&quot;: &quot;F&quot;,</span>
+<span class="sd">                                &quot;userCount&quot;: 168684,</span>
+<span class="sd">                                &quot;id&quot;: 934235,</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;بوكايو ساكا&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;बुकायो साका&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;বুকায়ো সাকা&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;ب. ساكা&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;बी. साका&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;বি. সাকা&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/top-players/overall&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.league_stats">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.league_stats">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">league_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the league statistics of the team for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            league_id (int): The unique identifier for the league.</span>
+<span class="sd">            season (int): The season year.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing the team&#39;s statistics in the league, including goals scored, goals conceded, assists, shots, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;statistics&quot;: {</span>
+<span class="sd">                    &quot;goalsScored&quot;: 16,</span>
+<span class="sd">                    &quot;goalsConceded&quot;: 3,</span>
+<span class="sd">                    &quot;ownGoals&quot;: 0,</span>
+<span class="sd">                    &quot;assists&quot;: 9,</span>
+<span class="sd">                    &quot;shots&quot;: 107,</span>
+<span class="sd">                    &quot;penaltyGoals&quot;: 2,</span>
+<span class="sd">                    &quot;penaltiesTaken&quot;: 4,</span>
+<span class="sd">                    &quot;freeKickGoals&quot;: 1,</span>
+<span class="sd">                    &quot;freeKickShots&quot;: 2,</span>
+<span class="sd">                    &quot;goalsFromInsideTheBox&quot;: 13,</span>
+<span class="sd">                    &quot;goalsFromOutsideTheBox&quot;: 2,</span>
+<span class="sd">                    &quot;shotsFromInsideTheBox&quot;: 83,</span>
+<span class="sd">                    &quot;shotsFromOutsideTheBox&quot;: 24,</span>
+<span class="sd">                    &quot;headedGoals&quot;: 4,</span>
+<span class="sd">                    &quot;leftFootGoals&quot;: 7,</span>
+<span class="sd">                    &quot;rightFootGoals&quot;: 4,</span>
+<span class="sd">                    &quot;bigChances&quot;: 27,</span>
+<span class="sd">                    &quot;bigChancesCreated&quot;: 17,</span>
+<span class="sd">                    &quot;bigChancesMissed&quot;: 15,</span>
+<span class="sd">                    &quot;shotsOnTarget&quot;: 43,</span>
+<span class="sd">                    &quot;shotsOffTarget&quot;: 35,</span>
+<span class="sd">                    &quot;blockedScoringAttempt&quot;: 29,</span>
+<span class="sd">                    &quot;successfulDribbles&quot;: 79,</span>
+<span class="sd">                    &quot;dribbleAttempts&quot;: 153,</span>
+<span class="sd">                    &quot;corners&quot;: 51,</span>
+<span class="sd">                    &quot;hitWoodwork&quot;: 2,</span>
+<span class="sd">                    &quot;fastBreaks&quot;: 3,</span>
+<span class="sd">                    &quot;fastBreakGoals&quot;: 0,</span>
+<span class="sd">                    &quot;fastBreakShots&quot;: 3,</span>
+<span class="sd">                    &quot;averageBallPossession&quot;: 53.375,</span>
+<span class="sd">                    &quot;totalPasses&quot;: 3885,</span>
+<span class="sd">                    &quot;accuratePasses&quot;: 3384,</span>
+<span class="sd">                    &quot;accuratePassesPercentage&quot;: 87.104247104247,</span>
+<span class="sd">                    &quot;totalOwnHalfPasses&quot;: 1638,</span>
+<span class="sd">                    &quot;accurateOwnHalfPasses&quot;: 1517,</span>
+<span class="sd">                    &quot;accurateOwnHalfPassesPercentage&quot;: 92.612942612943,</span>
+<span class="sd">                    &quot;totalOppositionHalfPasses&quot;: 2387,</span>
+<span class="sd">                    &quot;accurateOppositionHalfPasses&quot;: 1909,</span>
+<span class="sd">                    &quot;accurateOppositionHalfPassesPercentage&quot;: 79.974863845832,</span>
+<span class="sd">                    &quot;totalLongBalls&quot;: 154,</span>
+<span class="sd">                    &quot;accurateLongBalls&quot;: 82,</span>
+<span class="sd">                    &quot;accurateLongBallsPercentage&quot;: 53.246753246753,</span>
+<span class="sd">                    &quot;totalCrosses&quot;: 140,</span>
+<span class="sd">                    &quot;accurateCrosses&quot;: 42,</span>
+<span class="sd">                    &quot;accurateCrossesPercentage&quot;: 30,</span>
+<span class="sd">                    &quot;cleanSheets&quot;: 5,</span>
+<span class="sd">                    &quot;tackles&quot;: 136,</span>
+<span class="sd">                    &quot;interceptions&quot;: 57,</span>
+<span class="sd">                    &quot;saves&quot;: 17,</span>
+<span class="sd">                    &quot;errorsLeadingToGoal&quot;: 1,</span>
+<span class="sd">                    &quot;errorsLeadingToShot&quot;: 5,</span>
+<span class="sd">                    &quot;penaltiesCommited&quot;: 2,</span>
+<span class="sd">                    &quot;penaltyGoalsConceded&quot;: 1,</span>
+<span class="sd">                    &quot;clearances&quot;: 100,</span>
+<span class="sd">                    &quot;clearancesOffLine&quot;: 0,</span>
+<span class="sd">                    &quot;lastManTackles&quot;: 2,</span>
+<span class="sd">                    &quot;totalDuels&quot;: 735,</span>
+<span class="sd">                    &quot;duelsWon&quot;: 380,</span>
+<span class="sd">                    &quot;duelsWonPercentage&quot;: 51.700680272109,</span>
+<span class="sd">                    &quot;totalGroundDuels&quot;: 544,</span>
+<span class="sd">                    &quot;groundDuelsWon&quot;: 278,</span>
+<span class="sd">                    &quot;groundDuelsWonPercentage&quot;: 51.102941176471,</span>
+<span class="sd">                    &quot;totalAerialDuels&quot;: 191,</span>
+<span class="sd">                    &quot;aerialDuelsWon&quot;: 102,</span>
+<span class="sd">                    &quot;aerialDuelsWonPercentage&quot;: 53.403141361257,</span>
+<span class="sd">                    &quot;possessionLost&quot;: 881,</span>
+<span class="sd">                    &quot;offsides&quot;: 13,</span>
+<span class="sd">                    &quot;fouls&quot;: 88,</span>
+<span class="sd">                    &quot;yellowCards&quot;: 12,</span>
+<span class="sd">                    &quot;yellowRedCards&quot;: 0,</span>
+<span class="sd">                    &quot;redCards&quot;: 0,</span>
+<span class="sd">                    &quot;avgRating&quot;: 7.0694214876033,</span>
+<span class="sd">                    &quot;accurateFinalThirdPassesAgainst&quot;: 647,</span>
+<span class="sd">                    &quot;accurateOppositionHalfPassesAgainst&quot;: 1400,</span>
+<span class="sd">                    &quot;accurateOwnHalfPassesAgainst&quot;: 1608,</span>
+<span class="sd">                    &quot;accuratePassesAgainst&quot;: 2982,</span>
+<span class="sd">                    &quot;bigChancesAgainst&quot;: 5,</span>
+<span class="sd">                    &quot;bigChancesCreatedAgainst&quot;: 2,</span>
+<span class="sd">                    &quot;bigChancesMissedAgainst&quot;: 3,</span>
+<span class="sd">                    &quot;clearancesAgainst&quot;: 192,</span>
+<span class="sd">                    &quot;cornersAgainst&quot;: 27,</span>
+<span class="sd">                    &quot;crossesSuccessfulAgainst&quot;: 26,</span>
+<span class="sd">                    &quot;crossesTotalAgainst&quot;: 101,</span>
+<span class="sd">                    &quot;dribbleAttemptsTotalAgainst&quot;: 101,</span>
+<span class="sd">                    &quot;dribbleAttemptsWonAgainst&quot;: 48,</span>
+<span class="sd">                    &quot;errorsLeadingToGoalAgainst&quot;: 4,</span>
+<span class="sd">                    &quot;errorsLeadingToShotAgainst&quot;: 3,</span>
+<span class="sd">                    &quot;hitWoodworkAgainst&quot;: 4,</span>
+<span class="sd">                    &quot;interceptionsAgainst&quot;: 56,</span>
+<span class="sd">                    &quot;keyPassesAgainst&quot;: 58,</span>
+<span class="sd">                    &quot;longBallsSuccessfulAgainst&quot;: 139,</span>
+<span class="sd">                    &quot;longBallsTotalAgainst&quot;: 339,</span>
+<span class="sd">                    &quot;offsidesAgainst&quot;: 9,</span>
+<span class="sd">                    &quot;redCardsAgainst&quot;: 0,</span>
+<span class="sd">                    &quot;shotsAgainst&quot;: 72,</span>
+<span class="sd">                    &quot;shotsBlockedAgainst&quot;: 18,</span>
+<span class="sd">                    &quot;shotsFromInsideTheBoxAgainst&quot;: 37,</span>
+<span class="sd">                    &quot;shotsFromOutsideTheBoxAgainst&quot;: 35,</span>
+<span class="sd">                    &quot;shotsOffTargetAgainst&quot;: 35,</span>
+<span class="sd">                    &quot;shotsOnTargetAgainst&quot;: 19,</span>
+<span class="sd">                    &quot;blockedScoringAttemptAgainst&quot;: 18,</span>
+<span class="sd">                    &quot;tacklesAgainst&quot;: 140,</span>
+<span class="sd">                    &quot;totalFinalThirdPassesAgainst&quot;: 829,</span>
+<span class="sd">                    &quot;oppositionHalfPassesTotalAgainst&quot;: 1776,</span>
+<span class="sd">                    &quot;ownHalfPassesTotalAgainst&quot;: 1825,</span>
+<span class="sd">                    &quot;totalPassesAgainst&quot;: 3500,</span>
+<span class="sd">                    &quot;yellowCardsAgainst&quot;: 13,</span>
+<span class="sd">                    &quot;throwIns&quot;: 119,</span>
+<span class="sd">                    &quot;goalKicks&quot;: 41,</span>
+<span class="sd">                    &quot;ballRecovery&quot;: 339,</span>
+<span class="sd">                    &quot;freeKicks&quot;: 65,</span>
+<span class="sd">                    &quot;id&quot;: 26614,</span>
+<span class="sd">                    &quot;matches&quot;: 8,</span>
+<span class="sd">                    &quot;awardedMatches&quot;: 0</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/statistics/overall&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.latest_highlights">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.latest_highlights">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">latest_highlights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the latest highlights for the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing the latest highlights, including titles, subtitles, URLs, and thumbnails.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;media&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;title&quot;: &quot;Wolves 0 - 1 Arsenal&quot;,</span>
+<span class="sd">                        &quot;subtitle&quot;: &quot;Full Highlights&quot;,</span>
+<span class="sd">                        &quot;url&quot;: &quot;https://www.youtube.com/watch?v=HUBQ9rFeDCc&quot;,</span>
+<span class="sd">                        &quot;thumbnailUrl&quot;: &quot;https://i.ytimg.com/vi/HUBQ9rFeDCc/hqdefault.jpg&quot;,</span>
+<span class="sd">                        &quot;mediaType&quot;: 1,</span>
+<span class="sd">                        &quot;doFollow&quot;: false,</span>
+<span class="sd">                        &quot;keyHighlight&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 6193182,</span>
+<span class="sd">                        &quot;createdAtTimestamp&quot;: 1737844523,</span>
+<span class="sd">                        &quot;sourceUrl&quot;: &quot;https://www.youtube.com/watch?v=HUBQ9rFeDCc&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;title&quot;: &quot;Wolves 0 - 1 Arsenal&quot;,</span>
+<span class="sd">                        &quot;subtitle&quot;: &quot;Full Highlights&quot;,</span>
+<span class="sd">                        &quot;url&quot;: &quot;https://www.youtube.com/watch?v=4SxKKSNOxRI&quot;,</span>
+<span class="sd">                        &quot;thumbnailUrl&quot;: &quot;https://i.ytimg.com/vi/4SxKKSNOxRI/hqdefault.jpg&quot;,</span>
+<span class="sd">                        &quot;mediaType&quot;: 1,</span>
+<span class="sd">                        &quot;forCountries&quot;: [</span>
+<span class="sd">                            &quot;BA&quot;,</span>
+<span class="sd">                            &quot;HR&quot;,</span>
+<span class="sd">                            &quot;ME&quot;,</span>
+<span class="sd">                            &quot;MK&quot;,</span>
+<span class="sd">                            &quot;RS&quot;,</span>
+<span class="sd">                            &quot;SI&quot;</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;doFollow&quot;: false,</span>
+<span class="sd">                        &quot;keyHighlight&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 6192993,</span>
+<span class="sd">                        &quot;createdAtTimestamp&quot;: 1737827674,</span>
+<span class="sd">                        &quot;sourceUrl&quot;: &quot;https://www.youtube.com/watch?v=4SxKKSNOxRI&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/media&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Team.performance_graph">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.team.Team.performance_graph">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">performance_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the performance graph data for the team in a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            league_id (int): The unique identifier for the league.</span>
+<span class="sd">            season (int): The season year.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict: A dictionary containing the performance graph data, including events, week, position, and timeframe.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;graphData&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;events&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;tournament&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                    &quot;category&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                        &quot;sport&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                            &quot;id&quot;: 1</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;id&quot;: 1,</span>
+<span class="sd">                                        &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                        &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                        &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                                        &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                                        &quot;category&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                            &quot;sport&quot;: {</span>
+<span class="sd">                                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                                &quot;id&quot;: 1</span>
+<span class="sd">                                            },</span>
+<span class="sd">                                            &quot;id&quot;: 1,</span>
+<span class="sd">                                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;userCount&quot;: 1364893,</span>
+<span class="sd">                                        &quot;id&quot;: 17,</span>
+<span class="sd">                                        &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                                        &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                            &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                                &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                                &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                                &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                            },</span>
+<span class="sd">                                            &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                        }</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;priority&quot;: 617,</span>
+<span class="sd">                                    &quot;isLive&quot;: false,</span>
+<span class="sd">                                    &quot;id&quot;: 1,</span>
+<span class="sd">                                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;customId&quot;: &quot;NsU&quot;,</span>
+<span class="sd">                                &quot;status&quot;: {</span>
+<span class="sd">                                    &quot;code&quot;: 100,</span>
+<span class="sd">                                    &quot;description&quot;: &quot;Ended&quot;,</span>
+<span class="sd">                                    &quot;type&quot;: &quot;finished&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;winnerCode&quot;: 3,</span>
+<span class="sd">                                &quot;homeTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Chelsea&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;chelsea&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;Chelsea&quot;,</span>
+<span class="sd">                                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;userCount&quot;: 2114080,</span>
+<span class="sd">                                    &quot;nameCode&quot;: &quot;CHE&quot;,</span>
+<span class="sd">                                    &quot;disabled&quot;: false,</span>
+<span class="sd">                                    &quot;national&quot;: false,</span>
+<span class="sd">                                    &quot;type&quot;: 0,</span>
+<span class="sd">                                    &quot;id&quot;: 38,</span>
+<span class="sd">                                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                    &quot;teamColors&quot;: {</span>
+<span class="sd">                                        &quot;primary&quot;: &quot;#0310a7&quot;,</span>
+<span class="sd">                                        &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                        &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;تشيلسي&quot;,</span>
+<span class="sd">                                            &quot;ru&quot;: &quot;Челси&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;चेल्सी&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;চেলসি&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;تشيلسي&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;चेल्सी&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;চেলসি&quot;</span>
+<span class="sd">                                        }</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;awayTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Liverpool&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;liverpool&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;Liverpool&quot;,</span>
+<span class="sd">                                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;userCount&quot;: 2572976,</span>
+<span class="sd">                                    &quot;nameCode&quot;: &quot;LIV&quot;,</span>
+<span class="sd">                                    &quot;disabled&quot;: false,</span>
+<span class="sd">                                    &quot;national&quot;: false,</span>
+<span class="sd">                                    &quot;type&quot;: 0,</span>
+<span class="sd">                                    &quot;id&quot;: 44,</span>
+<span class="sd">                                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                    &quot;teamColors&quot;: {</span>
+<span class="sd">                                        &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                        &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                        &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;ليفربول&quot;,</span>
+<span class="sd">                                            &quot;ru&quot;: &quot;Ливерпуль&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;लिवरपूल&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;লিভারপুল&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;ليفربول&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;लिवरपूल&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;লিভারপুল&quot;</span>
+<span class="sd">                                        }</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;homeScore&quot;: {</span>
+<span class="sd">                                    &quot;current&quot;: 1,</span>
+<span class="sd">                                    &quot;display&quot;: 1,</span>
+<span class="sd">                                    &quot;period1&quot;: 1,</span>
+<span class="sd">                                    &quot;period2&quot;: 0,</span>
+<span class="sd">                                    &quot;normaltime&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;awayScore&quot;: {</span>
+<span class="sd">                                    &quot;current&quot;: 1,</span>
+<span class="sd">                                    &quot;display&quot;: 1,</span>
+<span class="sd">                                    &quot;period1&quot;: 1,</span>
+<span class="sd">                                    &quot;period2&quot;: 0,</span>
+<span class="sd">                                    &quot;normaltime&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;hasXg&quot;: true,</span>
+<span class="sd">                                &quot;id&quot;: 11352316,</span>
+<span class="sd">                                &quot;startTimestamp&quot;: 1691940600,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;liverpool-chelsea&quot;,</span>
+<span class="sd">                                &quot;finalResultOnly&quot;: false</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ],</span>
+<span class="sd">                        &quot;week&quot;: 1,</span>
+<span class="sd">                        &quot;position&quot;: 12,</span>
+<span class="sd">                        &quot;timeframeStart&quot;: 1691712000,</span>
+<span class="sd">                        &quot;timeframeEnd&quot;: 1692316800</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/team/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/team-performance-graph-data&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
