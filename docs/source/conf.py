@@ -25,3 +25,6 @@ autodoc_default_options = {
 
 # If your module has type hints, this will include them
 autodoc_typehints = "description"
+
+html_theme = 'sphinx_rtd_theme'  # Or 'sphinx_rtd_theme' for ReadTheDocs theme
+html_static_path = ['_static']  # Ensure this folder exists
