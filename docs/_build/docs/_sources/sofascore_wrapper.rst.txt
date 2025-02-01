@@ -1,10 +1,5 @@
-sofascore\_wrapper package
-==========================
 
-Submodules
-----------
-
-sofascore\_wrapper.api module
+sofascore\_wrapper.api
 -----------------------------
 
 .. automodule:: sofascore_wrapper.api
@@ -12,7 +7,7 @@ sofascore\_wrapper.api module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.flag module
+sofascore\_wrapper.flag
 ------------------------------
 
 .. automodule:: sofascore_wrapper.flag
@@ -20,7 +15,7 @@ sofascore\_wrapper.flag module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.league module
+sofascore\_wrapper.league
 --------------------------------
 
 .. automodule:: sofascore_wrapper.league
@@ -28,7 +23,7 @@ sofascore\_wrapper.league module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.manager module
+sofascore\_wrapper.manager
 ---------------------------------
 
 .. automodule:: sofascore_wrapper.manager
@@ -36,7 +31,7 @@ sofascore\_wrapper.manager module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.match module
+sofascore\_wrapper.match
 -------------------------------
 
 .. automodule:: sofascore_wrapper.match
@@ -44,7 +39,7 @@ sofascore\_wrapper.match module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.player module
+sofascore\_wrapper.player
 --------------------------------
 
 .. automodule:: sofascore_wrapper.player
@@ -52,7 +47,7 @@ sofascore\_wrapper.player module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.search module
+sofascore\_wrapper.search
 --------------------------------
 
 .. automodule:: sofascore_wrapper.search
@@ -60,7 +55,7 @@ sofascore\_wrapper.search module
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.team module
+sofascore\_wrapper.team
 ------------------------------
 
 .. automodule:: sofascore_wrapper.team
@@ -68,10 +63,3 @@ sofascore\_wrapper.team module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: sofascore_wrapper
-   :members:
-   :undoc-members:
-   :show-inheritance:

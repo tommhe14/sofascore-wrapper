@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sofascore_wrapper package &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+  <title>sofascore_wrapper.api &mdash; SofaScore Wrapper 1.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -44,42 +44,130 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">sofascore_wrapper</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">sofascore_wrapper package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.api">sofascore_wrapper.api module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI"><code class="docutils literal notranslate"><span class="pre">SofascoreAPI</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">sofascore_wrapper.api</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI"><code class="docutils literal notranslate"><span class="pre">SofascoreAPI</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI.close"><code class="docutils literal notranslate"><span class="pre">SofascoreAPI.close()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.flag">sofascore_wrapper.flag module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.flag.Flag"><code class="docutils literal notranslate"><span class="pre">Flag</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.league">sofascore_wrapper.league module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League"><code class="docutils literal notranslate"><span class="pre">League</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.flag">sofascore_wrapper.flag</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.flag.Flag"><code class="docutils literal notranslate"><span class="pre">Flag</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.flag.Flag.image"><code class="docutils literal notranslate"><span class="pre">Flag.image()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.manager">sofascore_wrapper.manager module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.manager.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.match">sofascore_wrapper.match module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match"><code class="docutils literal notranslate"><span class="pre">Match</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.league">sofascore_wrapper.league</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.league.League"><code class="docutils literal notranslate"><span class="pre">League</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.current_round"><code class="docutils literal notranslate"><span class="pre">League.current_round()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.current_season"><code class="docutils literal notranslate"><span class="pre">League.current_season()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.featured_game"><code class="docutils literal notranslate"><span class="pre">League.featured_game()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.fixtures"><code class="docutils literal notranslate"><span class="pre">League.fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_image"><code class="docutils literal notranslate"><span class="pre">League.get_image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_info"><code class="docutils literal notranslate"><span class="pre">League.get_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_latest_highlights"><code class="docutils literal notranslate"><span class="pre">League.get_latest_highlights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_league"><code class="docutils literal notranslate"><span class="pre">League.get_league()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.get_seasons"><code class="docutils literal notranslate"><span class="pre">League.get_seasons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.last_fixtures"><code class="docutils literal notranslate"><span class="pre">League.last_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.next_fixtures"><code class="docutils literal notranslate"><span class="pre">League.next_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.player_of_the_season"><code class="docutils literal notranslate"><span class="pre">League.player_of_the_season()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.rounds"><code class="docutils literal notranslate"><span class="pre">League.rounds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.standings"><code class="docutils literal notranslate"><span class="pre">League.standings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.standings_away"><code class="docutils literal notranslate"><span class="pre">League.standings_away()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.standings_home"><code class="docutils literal notranslate"><span class="pre">League.standings_home()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.top_players"><code class="docutils literal notranslate"><span class="pre">League.top_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.top_players_per_game"><code class="docutils literal notranslate"><span class="pre">League.top_players_per_game()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.top_teams"><code class="docutils literal notranslate"><span class="pre">League.top_teams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.totw"><code class="docutils literal notranslate"><span class="pre">League.totw()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.league.League.totw_rounds"><code class="docutils literal notranslate"><span class="pre">League.totw_rounds()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.player">sofascore_wrapper.player module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.PlayerSearch"><code class="docutils literal notranslate"><span class="pre">PlayerSearch</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.search">sofascore_wrapper.search module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.manager">sofascore_wrapper.manager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.manager.Manager"><code class="docutils literal notranslate"><span class="pre">Manager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.manager.Manager.get_manager"><code class="docutils literal notranslate"><span class="pre">Manager.get_manager()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.team">sofascore_wrapper.team module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.match">sofascore_wrapper.match</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.match.Match"><code class="docutils literal notranslate"><span class="pre">Match</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.Any"><code class="docutils literal notranslate"><span class="pre">Match.Any</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.Dict"><code class="docutils literal notranslate"><span class="pre">Match.Dict</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.List"><code class="docutils literal notranslate"><span class="pre">Match.List</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.best_away_players"><code class="docutils literal notranslate"><span class="pre">Match.best_away_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.best_home_players"><code class="docutils literal notranslate"><span class="pre">Match.best_home_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.commentary"><code class="docutils literal notranslate"><span class="pre">Match.commentary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.featured_odds"><code class="docutils literal notranslate"><span class="pre">Match.featured_odds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.games_by_date"><code class="docutils literal notranslate"><span class="pre">Match.games_by_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.get_channel"><code class="docutils literal notranslate"><span class="pre">Match.get_channel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.h2h"><code class="docutils literal notranslate"><span class="pre">Match.h2h()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.heatmap"><code class="docutils literal notranslate"><span class="pre">Match.heatmap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.highlight"><code class="docutils literal notranslate"><span class="pre">Match.highlight()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.incidents"><code class="docutils literal notranslate"><span class="pre">Match.incidents()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.lineups_away"><code class="docutils literal notranslate"><span class="pre">Match.lineups_away()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.lineups_home"><code class="docutils literal notranslate"><span class="pre">Match.lineups_home()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.live_games"><code class="docutils literal notranslate"><span class="pre">Match.live_games()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.managers"><code class="docutils literal notranslate"><span class="pre">Match.managers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.match_channels"><code class="docutils literal notranslate"><span class="pre">Match.match_channels()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.match_odds"><code class="docutils literal notranslate"><span class="pre">Match.match_odds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.motm"><code class="docutils literal notranslate"><span class="pre">Match.motm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.pre_match_form"><code class="docutils literal notranslate"><span class="pre">Match.pre_match_form()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.shotmap"><code class="docutils literal notranslate"><span class="pre">Match.shotmap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.stats"><code class="docutils literal notranslate"><span class="pre">Match.stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.total_games"><code class="docutils literal notranslate"><span class="pre">Match.total_games()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.match.Match.votes"><code class="docutils literal notranslate"><span class="pre">Match.votes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.player">sofascore_wrapper.player</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.player.Player"><code class="docutils literal notranslate"><span class="pre">Player</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.attributes"><code class="docutils literal notranslate"><span class="pre">Player.attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.get_player"><code class="docutils literal notranslate"><span class="pre">Player.get_player()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.image"><code class="docutils literal notranslate"><span class="pre">Player.image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.last_fixtures"><code class="docutils literal notranslate"><span class="pre">Player.last_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.league_stats"><code class="docutils literal notranslate"><span class="pre">Player.league_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.national_stats"><code class="docutils literal notranslate"><span class="pre">Player.national_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.Player.transfer_history"><code class="docutils literal notranslate"><span class="pre">Player.transfer_history()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.player.PlayerSearch"><code class="docutils literal notranslate"><span class="pre">PlayerSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.player.PlayerSearch.search_player"><code class="docutils literal notranslate"><span class="pre">PlayerSearch.search_player()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.search">sofascore_wrapper.search</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.search.Search"><code class="docutils literal notranslate"><span class="pre">Search</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_all"><code class="docutils literal notranslate"><span class="pre">Search.search_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_leagues"><code class="docutils literal notranslate"><span class="pre">Search.search_leagues()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_match"><code class="docutils literal notranslate"><span class="pre">Search.search_match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_players"><code class="docutils literal notranslate"><span class="pre">Search.search_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.search.Search.search_teams"><code class="docutils literal notranslate"><span class="pre">Search.search_teams()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sofascore_wrapper.team">sofascore_wrapper.team</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sofascore_wrapper.team.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.get_team"><code class="docutils literal notranslate"><span class="pre">Team.get_team()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.image"><code class="docutils literal notranslate"><span class="pre">Team.image()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.last_fixtures"><code class="docutils literal notranslate"><span class="pre">Team.last_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.latest_highlights"><code class="docutils literal notranslate"><span class="pre">Team.latest_highlights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.league_stats"><code class="docutils literal notranslate"><span class="pre">Team.league_stats()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.next_fixtures"><code class="docutils literal notranslate"><span class="pre">Team.next_fixtures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.performance"><code class="docutils literal notranslate"><span class="pre">Team.performance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.performance_graph"><code class="docutils literal notranslate"><span class="pre">Team.performance_graph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.seasons"><code class="docutils literal notranslate"><span class="pre">Team.seasons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.squad"><code class="docutils literal notranslate"><span class="pre">Team.squad()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.top_players"><code class="docutils literal notranslate"><span class="pre">Team.top_players()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.transfers_in"><code class="docutils literal notranslate"><span class="pre">Team.transfers_in()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team.transfers_out"><code class="docutils literal notranslate"><span class="pre">Team.transfers_out()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -101,7 +189,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html">sofascore_wrapper</a></li>
-      <li class="breadcrumb-item active">sofascore_wrapper package</li>
+      <li class="breadcrumb-item active">sofascore_wrapper.api</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/sofascore_wrapper.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -111,13 +199,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="sofascore-wrapper-package">
-<h1>sofascore_wrapper package<a class="headerlink" href="#sofascore-wrapper-package" title="Link to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
-</section>
-<section id="module-sofascore_wrapper.api">
-<span id="sofascore-wrapper-api-module"></span><h2>sofascore_wrapper.api module<a class="headerlink" href="#module-sofascore_wrapper.api" title="Link to this heading"></a></h2>
+  <section id="module-sofascore_wrapper.api">
+<span id="sofascore-wrapper-api"></span><h1>sofascore_wrapper.api<a class="headerlink" href="#module-sofascore_wrapper.api" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.api.SofascoreAPI">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.api.</span></span><span class="sig-name descname"><span class="pre">SofascoreAPI</span></span><a class="reference internal" href="_modules/sofascore_wrapper/api.html#SofascoreAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.api.SofascoreAPI" title="Link to this definition"></a></dt>
@@ -131,7 +214,7 @@
 
 </section>
 <section id="module-sofascore_wrapper.flag">
-<span id="sofascore-wrapper-flag-module"></span><h2>sofascore_wrapper.flag module<a class="headerlink" href="#module-sofascore_wrapper.flag" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-flag"></span><h1>sofascore_wrapper.flag<a class="headerlink" href="#module-sofascore_wrapper.flag" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.flag.Flag">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.flag.</span></span><span class="sig-name descname"><span class="pre">Flag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag_code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/flag.html#Flag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.flag.Flag" title="Link to this definition"></a></dt>
@@ -166,7 +249,7 @@
 
 </section>
 <section id="module-sofascore_wrapper.league">
-<span id="sofascore-wrapper-league-module"></span><h2>sofascore_wrapper.league module<a class="headerlink" href="#module-sofascore_wrapper.league" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-league"></span><h1>sofascore_wrapper.league<a class="headerlink" href="#module-sofascore_wrapper.league" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.league.League">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.league.</span></span><span class="sig-name descname"><span class="pre">League</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League" title="Link to this definition"></a></dt>
@@ -598,7 +681,7 @@ Returns an empty list if no fixtures match the criteria.</p>
 </div></blockquote>
 </div></blockquote>
 <section id="id1">
-<h3>]<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<h2>]<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <p>Example usage:
 &gt;&gt;&gt; fixtures = await league.fixtures(season=61627, round=24)
 &gt;&gt;&gt; print(fixtures)</p>
@@ -2406,7 +2489,7 @@ it returns None.</p>
 
 </section>
 <section id="module-sofascore_wrapper.manager">
-<span id="sofascore-wrapper-manager-module"></span><h2>sofascore_wrapper.manager module<a class="headerlink" href="#module-sofascore_wrapper.manager" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-manager"></span><h1>sofascore_wrapper.manager<a class="headerlink" href="#module-sofascore_wrapper.manager" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.manager.Manager">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.manager.</span></span><span class="sig-name descname"><span class="pre">Manager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manager_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/manager.html#Manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.manager.Manager" title="Link to this definition"></a></dt>
@@ -2869,7 +2952,7 @@ it returns None.</p>
 
 </section>
 <section id="module-sofascore_wrapper.match">
-<span id="sofascore-wrapper-match-module"></span><h2>sofascore_wrapper.match module<a class="headerlink" href="#module-sofascore_wrapper.match" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-match"></span><h1>sofascore_wrapper.match<a class="headerlink" href="#module-sofascore_wrapper.match" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.match.Match">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.match.</span></span><span class="sig-name descname"><span class="pre">Match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match" title="Link to this definition"></a></dt>
@@ -4935,7 +5018,7 @@ different match outcomes and events.</p>
 
 </section>
 <section id="module-sofascore_wrapper.player">
-<span id="sofascore-wrapper-player-module"></span><h2>sofascore_wrapper.player module<a class="headerlink" href="#module-sofascore_wrapper.player" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-player"></span><h1>sofascore_wrapper.player<a class="headerlink" href="#module-sofascore_wrapper.player" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.player.Player">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.player.</span></span><span class="sig-name descname"><span class="pre">Player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player" title="Link to this definition"></a></dt>
@@ -6250,7 +6333,7 @@ is the first item in the list.</p>
 
 </section>
 <section id="module-sofascore_wrapper.search">
-<span id="sofascore-wrapper-search-module"></span><h2>sofascore_wrapper.search module<a class="headerlink" href="#module-sofascore_wrapper.search" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-search"></span><h1>sofascore_wrapper.search<a class="headerlink" href="#module-sofascore_wrapper.search" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.search.Search">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.search.</span></span><span class="sig-name descname"><span class="pre">Search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/search.html#Search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.search.Search" title="Link to this definition"></a></dt>
@@ -6924,7 +7007,7 @@ is the first item in the list.</p>
 
 </section>
 <section id="module-sofascore_wrapper.team">
-<span id="sofascore-wrapper-team-module"></span><h2>sofascore_wrapper.team module<a class="headerlink" href="#module-sofascore_wrapper.team" title="Link to this heading"></a></h2>
+<span id="sofascore-wrapper-team"></span><h1>sofascore_wrapper.team<a class="headerlink" href="#module-sofascore_wrapper.team" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sofascore_wrapper.team.Team">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.team.</span></span><span class="sig-name descname"><span class="pre">Team</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/team.html#Team"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.team.Team" title="Link to this definition"></a></dt>
@@ -9359,10 +9442,6 @@ is the first item in the list.</p>
 
 </dd></dl>
 
-</section>
-<section id="module-sofascore_wrapper">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sofascore_wrapper" title="Link to this heading"></a></h2>
-</section>
 </section>
 
 

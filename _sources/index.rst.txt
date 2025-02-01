@@ -1,14 +1,12 @@
 .. sofascore-wrapper documentation master file, created by
    sphinx-quickstart on Tue Jan 30 2025.
 
-Welcome to sofascore-wrapper's documentation!
+sofascore-wrapper documentation!
 ============================================
 
 This is the Python API wrapper for the Sofascore undocumented API.
 It allows you to fetch and interact with data from Sofascore, including information about matches, players, teams, and more.
 
-Contents:
----------
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
