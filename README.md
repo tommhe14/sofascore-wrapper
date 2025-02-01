@@ -2,6 +2,8 @@
 
 A Python API wrapper for the Sofascore undocumented API. This library allows you to fetch and interact with Sofascore data, including information about matches, players, teams, and more.
 
+[![PyPI Downloads](https://static.pepy.tech/badge/sofascore-wrapper)](https://pepy.tech/projects/sofascore-wrapper)
+
 ## 📖 Documentation
 For detailed usage and API reference, visit the official documentation:
 👉 [Sofascore Wrapper Docs](https://tommhe14.github.io/sofascore-wrapper)
