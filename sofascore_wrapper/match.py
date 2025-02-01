@@ -1268,9 +1268,13 @@ class Match:
         data = await self.api._get(f"/event/{self.match_id}/lineups")
         return {
             "confirmed": data["confirmed"],
-            "players": data["home"]["players"]
+            "formation": data["home"]["formation"],
+            "player_colour": data["home"]["playerColor"],
+            "goalkeeper_colour": data["home"]["goalkeeperColor"],
+            "missing_players": data["home"]["missingPlayers"],
+            "starters": [entry for entry in data["home"]["players"] if not entry["substitute"]],
+            "substitutes": [entry for entry in data["home"]["players"] if entry["substitute"]]
         }
-
 
     async def lineups_away(self) -> Dict:
         """
@@ -1333,7 +1337,12 @@ class Match:
         data = await self.api._get(f"/event/{self.match_id}/lineups")
         return {
             "confirmed": data["confirmed"],
-            "players": data["away"]["players"]
+            "formation": data["away"]["formation"],
+            "player_colour": data["away"]["playerColor"],
+            "goalkeeper_colour": data["away"]["goalkeeperColor"],
+            "missing_players": data["away"]["missingPlayers"],
+            "starters": [entry for entry in data["away"]["players"] if not entry["substitute"]],
+            "substitutes": [entry for entry in data["away"]["players"] if entry["substitute"]]
         }
 
 
