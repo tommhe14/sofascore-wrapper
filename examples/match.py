@@ -11,7 +11,7 @@ async def match():
     # Search for a match
     init_search = Search(api, search_string = "girona v arsenal")
     search_match = await init_search.search_match()
-    print(json.dumps(search_match, indent = 4))
+    #print(json.dumps(search_match, indent = 4))
 
     # Pick match from entries
     selected_match = search_match["results"][0]
@@ -22,15 +22,15 @@ async def match():
 
     # match stats
     match_stats = await match_init.stats()
-    print(json.dumps(match_stats, indent = 4))
+    #print(json.dumps(match_stats, indent = 4))
 
     # Live updated match commentary
     match_commentary = await match_init.commentary()
-    print(json.dumps(match_commentary, indent = 4))
+    #print(json.dumps(match_commentary, indent = 4))
 
     # List all match channels for each country
     channels = await match_init.match_channels()
-    print(json.dumps(channels, indent = 4))
+    #print(json.dumps(channels, indent = 4))
 
     # Select country and filter through the list of channels and grab the channel name
     gb_channel = channels["countryChannels"]["GB"]
@@ -39,8 +39,10 @@ async def match():
         channel_name = await match_init.get_channel(channel)
         channels.append(channel_name)
 
-    print("GB Channels:\n" + "\n".join(channels))
+    #print("GB Channels:\n" + "\n".join(channels))
 
+    match_lineups = await match_init.lineups_away()
+    print(json.dumps(match_lineups.keys(), indent = 4))
     await api.close()
 
 async def global_matches():
@@ -57,5 +59,7 @@ async def global_matches():
     todays_games = await match_init.games_by_date()
     print(json.dumps(todays_games, indent = 4))
 
+    await api.close()
+
 asyncio.run(match())
-asyncio.run(global_matches())
+#asyncio.run(global_matches())
