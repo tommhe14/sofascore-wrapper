@@ -500,7 +500,7 @@ class Player:
         """
         return await self.api._get(f"/player/{self.player_id}/transfer-history")
 
-    async def last_matches(self) -> List[Dict[str, Any]]:
+    async def last_fixtures(self) -> List[Dict[str, Any]]:
         """
         Fetch the last matches the player participated in.
 

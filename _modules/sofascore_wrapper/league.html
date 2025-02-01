@@ -155,6 +155,32 @@
         <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/seasons&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;seasons&quot;</span><span class="p">,</span> <span class="p">[])</span></div>
 
+    
+<div class="viewcode-block" id="League.current_season">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.league.League.current_season">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">current_season</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current season for the selected league.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Dict[str, Any]]: A list of season objects.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;name&quot;: &quot;Premier League 24/25&quot;,</span>
+<span class="sd">                &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                &quot;editor&quot;: false,</span>
+<span class="sd">                &quot;id&quot;: 61627</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/seasons&quot;</span><span class="p">)</span>
+        <span class="n">season_obj</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;seasons&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="n">season_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">season_obj</span> <span class="k">else</span> <span class="kc">None</span></div>
+
 
 <div class="viewcode-block" id="League.get_info">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.league.League.get_info">[docs]</a>
@@ -1438,7 +1464,394 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/rounds&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;currentRound&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="League.fixtures">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.league.League.fixtures">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">round</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch the fixtures for a specific season and round.</span>
+
+<span class="sd">        This method retrieves the fixtures of a particular round in a given season </span>
+<span class="sd">        for a league. It filters events where the status is &quot;Not Started&quot; (status </span>
+<span class="sd">        code 0).</span>
+
+<span class="sd">        :param season: The season ID for which to fetch the fixtures (e.g., 61627 for Premier League 24/25).</span>
+<span class="sd">        :param round: The round number for which to fetch the fixtures (e.g., 24).</span>
+
+<span class="sd">        :return: A dictionary of fixtures for the specified season and round, with </span>
+<span class="sd">                events where the status code is 0 (Not Started).</span>
+<span class="sd">                Returns an empty list if no fixtures match the criteria.</span>
+<span class="sd">        :rtype: dict</span>
+
+<span class="sd">        Example response:</span>
+<span class="sd">        {</span>
+<span class="sd">        &quot;events&quot;: [</span>
+<span class="sd">            {</span>
+<span class="sd">            &quot;tournament&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                &quot;category&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;id&quot;: 1,</span>
+<span class="sd">                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                &quot;category&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;id&quot;: 1,</span>
+<span class="sd">                    &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                    &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;userCount&quot;: 1360406,</span>
+<span class="sd">                &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                &quot;id&quot;: 17,</span>
+<span class="sd">                &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;priority&quot;: 617,</span>
+<span class="sd">                &quot;isGroup&quot;: false,</span>
+<span class="sd">                &quot;isLive&quot;: false,</span>
+<span class="sd">                &quot;id&quot;: 1</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;season&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Premier League 24/25&quot;,</span>
+<span class="sd">                &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                &quot;editor&quot;: false,</span>
+<span class="sd">                &quot;id&quot;: 61627</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;roundInfo&quot;: {</span>
+<span class="sd">                &quot;round&quot;: 24</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;customId&quot;: &quot;osF&quot;,</span>
+<span class="sd">            &quot;status&quot;: {</span>
+<span class="sd">                &quot;code&quot;: 0,</span>
+<span class="sd">                &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;homeTeam&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Nottingham Forest&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;nottingham-forest&quot;,</span>
+<span class="sd">                &quot;shortName&quot;: &quot;Forest&quot;,</span>
+<span class="sd">                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                &quot;sport&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;userCount&quot;: 350038,</span>
+<span class="sd">                &quot;nameCode&quot;: &quot;NFO&quot;,</span>
+<span class="sd">                &quot;disabled&quot;: false,</span>
+<span class="sd">                &quot;national&quot;: false,</span>
+<span class="sd">                &quot;type&quot;: 0,</span>
+<span class="sd">                &quot;id&quot;: 14</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;awayTeam&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Manchester City&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;manchester-city&quot;,</span>
+<span class="sd">                &quot;shortName&quot;: &quot;City&quot;,</span>
+<span class="sd">                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                &quot;sport&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;userCount&quot;: 498380,</span>
+<span class="sd">                &quot;nameCode&quot;: &quot;MCI&quot;,</span>
+<span class="sd">                &quot;disabled&quot;: false,</span>
+<span class="sd">                &quot;national&quot;: false,</span>
+<span class="sd">                &quot;type&quot;: 0,</span>
+<span class="sd">                &quot;id&quot;: 13</span>
+<span class="sd">            }</span>
+<span class="sd">            }</span>
+<span class="sd">        ]</span>
+<span class="sd">        }</span>
+
+<span class="sd">        Example usage:</span>
+<span class="sd">        &gt;&gt;&gt; fixtures = await league.fixtures(season=61627, round=24)</span>
+<span class="sd">        &gt;&gt;&gt; print(fixtures)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/round/</span><span class="si">{</span><span class="nb">round</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="League.next_fixtures">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.league.League.next_fixtures">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">next_fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch the next fixtures for the current season and round.</span>
+
+<span class="sd">        This method retrieves the next fixtures based on the current round of </span>
+<span class="sd">        the current season for a league. It filters events where the status is </span>
+<span class="sd">        &quot;Not Started&quot; (status code 0).</span>
+
+<span class="sd">        :return: A list of dictionaries representing the fixtures for the next round </span>
+<span class="sd">                where the status is &quot;Not Started&quot;. If no fixtures match the criteria, </span>
+<span class="sd">                it returns None.</span>
+<span class="sd">        :rtype: list or None</span>
+
+<span class="sd">        Example response:</span>
+<span class="sd">        [</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;tournament&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                &quot;category&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;id&quot;: 1,</span>
+<span class="sd">                    &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                    &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                    &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                    &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                    &quot;category&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;id&quot;: 1,</span>
+<span class="sd">                    &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                    &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 1360406,</span>
+<span class="sd">                    &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                    &quot;id&quot;: 17,</span>
+<span class="sd">                    &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                    &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;priority&quot;: 617,</span>
+<span class="sd">                &quot;isGroup&quot;: false,</span>
+<span class="sd">                &quot;isLive&quot;: false,</span>
+<span class="sd">                &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;season&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Premier League 24/25&quot;,</span>
+<span class="sd">                &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                &quot;editor&quot;: false,</span>
+<span class="sd">                &quot;id&quot;: 61627</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;roundInfo&quot;: {</span>
+<span class="sd">                &quot;round&quot;: 24</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;customId&quot;: &quot;osF&quot;,</span>
+<span class="sd">                &quot;status&quot;: {</span>
+<span class="sd">                &quot;code&quot;: 0,</span>
+<span class="sd">                &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;homeTeam&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Nottingham Forest&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;nottingham-forest&quot;,</span>
+<span class="sd">                &quot;shortName&quot;: &quot;Forest&quot;,</span>
+<span class="sd">                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;userCount&quot;: 350038,</span>
+<span class="sd">                &quot;nameCode&quot;: &quot;NFO&quot;,</span>
+<span class="sd">                &quot;disabled&quot;: false,</span>
+<span class="sd">                &quot;national&quot;: false,</span>
+<span class="sd">                &quot;type&quot;: 0,</span>
+<span class="sd">                &quot;id&quot;: 14</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;awayTeam&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Manchester City&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;manchester-city&quot;,</span>
+<span class="sd">                &quot;shortName&quot;: &quot;City&quot;,</span>
+<span class="sd">                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;userCount&quot;: 498380,</span>
+<span class="sd">                &quot;nameCode&quot;: &quot;MCI&quot;,</span>
+<span class="sd">                &quot;disabled&quot;: false,</span>
+<span class="sd">                &quot;national&quot;: false,</span>
+<span class="sd">                &quot;type&quot;: 0,</span>
+<span class="sd">                &quot;id&quot;: 13</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        ]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">season_obj</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_season</span><span class="p">()</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="n">season_obj</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="nb">round</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span><span class="p">(</span><span class="n">season</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/events/round/</span><span class="si">{</span><span class="nb">round</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fixtures</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;startTimestamp&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="n">fixtures</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+    
+<div class="viewcode-block" id="League.last_fixtures">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.league.League.last_fixtures">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">last_fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch the last fixtures for the current season and round or previous round.</span>
+<span class="sd">        </span>
+<span class="sd">        This method retrieves fixtures based on the current round of the current </span>
+<span class="sd">        season for a league. If there is at least one fixture with the status code </span>
+<span class="sd">        100, those fixtures are returned. If no such fixtures are found, it fetches </span>
+<span class="sd">        fixtures from the previous round (if the current round is not the first).</span>
+
+<span class="sd">        :return: A list of dictionaries representing the fixtures for the last round </span>
+<span class="sd">                with at least one fixture with status code 100, or from the previous </span>
+<span class="sd">                round if no fixtures match the criteria.</span>
+<span class="sd">        :rtype: list or None</span>
+
+<span class="sd">        Example response:</span>
+<span class="sd">        [</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;tournament&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                    &quot;category&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;id&quot;: 1,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                        &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                        &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 1360406,</span>
+<span class="sd">                        &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                        &quot;id&quot;: 17,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                        &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;priority&quot;: 617,</span>
+<span class="sd">                    &quot;isGroup&quot;: false,</span>
+<span class="sd">                    &quot;isLive&quot;: false,</span>
+<span class="sd">                    &quot;id&quot;: 1</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;season&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Premier League 24/25&quot;,</span>
+<span class="sd">                    &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                    &quot;editor&quot;: false,</span>
+<span class="sd">                    &quot;id&quot;: 61627</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;roundInfo&quot;: {</span>
+<span class="sd">                    &quot;round&quot;: 24</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;customId&quot;: &quot;osF&quot;,</span>
+<span class="sd">                &quot;status&quot;: {</span>
+<span class="sd">                    &quot;code&quot;: 100,</span>
+<span class="sd">                    &quot;description&quot;: &quot;Started&quot;,</span>
+<span class="sd">                    &quot;type&quot;: &quot;started&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;homeTeam&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Nottingham Forest&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;nottingham-forest&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;Forest&quot;,</span>
+<span class="sd">                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 350038,</span>
+<span class="sd">                    &quot;nameCode&quot;: &quot;NFO&quot;,</span>
+<span class="sd">                    &quot;disabled&quot;: false,</span>
+<span class="sd">                    &quot;national&quot;: false,</span>
+<span class="sd">                    &quot;type&quot;: 0,</span>
+<span class="sd">                    &quot;id&quot;: 14</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;awayTeam&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Manchester City&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;manchester-city&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;City&quot;,</span>
+<span class="sd">                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 498380,</span>
+<span class="sd">                    &quot;nameCode&quot;: &quot;MCI&quot;,</span>
+<span class="sd">                    &quot;disabled&quot;: false,</span>
+<span class="sd">                    &quot;national&quot;: false,</span>
+<span class="sd">                    &quot;type&quot;: 0,</span>
+<span class="sd">                    &quot;id&quot;: 13</span>
+<span class="sd">                }</span>
+<span class="sd">            }</span>
+<span class="sd">        ]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">season_obj</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_season</span><span class="p">()</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="n">season_obj</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">round_obj</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span><span class="p">(</span><span class="n">season</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/events/round/</span><span class="si">{</span><span class="n">round_obj</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">100</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">fixtures</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fixtures</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;startTimestamp&quot;</span><span class="p">],</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        
+        <span class="nb">round</span> <span class="o">=</span> <span class="n">round_obj</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">round_obj</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">1</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">/events/round/</span><span class="si">{</span><span class="nb">round</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">last_fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;code&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">100</span><span class="p">]</span>
+        <span class="n">fixtures</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">last_fixtures</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;startTimestamp&quot;</span><span class="p">],</span> <span class="n">reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fixtures</span> <span class="k">if</span> <span class="n">fixtures</span> <span class="k">else</span> <span class="kc">None</span></div>
 </div>
+
+    
 
 </pre></div>
 

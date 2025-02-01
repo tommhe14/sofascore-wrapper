@@ -207,6 +207,37 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.current_season">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_season</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.current_season"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.current_season" title="Link to this definition"></a></dt>
+<dd><p>Returns the current season for the selected league.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of season objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>{</dt><dd><p>“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sofascore_wrapper.league.League.featured_game">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">featured_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.featured_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.featured_game" title="Link to this definition"></a></dt>
 <dd><p>Get the featured game for a specific season.</p>
@@ -428,6 +459,150 @@
 <p>}</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.fixtures">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fixtures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.fixtures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.fixtures" title="Link to this definition"></a></dt>
+<dd><p>Fetch the fixtures for a specific season and round.</p>
+<p>This method retrieves the fixtures of a particular round in a given season
+for a league. It filters events where the status is “Not Started” (status
+code 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>season</strong> (<em>int</em>) – The season ID for which to fetch the fixtures (e.g., 61627 for Premier League 24/25).</p></li>
+<li><p><strong>round</strong> (<em>int</em>) – The round number for which to fetch the fixtures (e.g., 24).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary of fixtures for the specified season and round, with
+events where the status code is 0 (Not Started).
+Returns an empty list if no fixtures match the criteria.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p>Example response:
+{
+“events”: [</p>
+<blockquote>
+<div><p>{
+“tournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {
+“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”
+},
+“uniqueTournament”: {
+“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {
+“name”: “Football”,
+“slug”: “football”,
+“id”: 1
+},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1360406,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false
+},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 24</p>
+</div></blockquote>
+<p>},
+“customId”: “osF”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 0,
+“description”: “Not started”,
+“type”: “notstarted”</p>
+</div></blockquote>
+<p>},
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Nottingham Forest”,
+“slug”: “nottingham-forest”,
+“shortName”: “Forest”,
+“gender”: “M”,
+“sport”: {
+“name”: “Football”,
+“slug”: “football”,
+“id”: 1
+},
+“userCount”: 350038,
+“nameCode”: “NFO”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 14</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Manchester City”,
+“slug”: “manchester-city”,
+“shortName”: “City”,
+“gender”: “M”,
+“sport”: {
+“name”: “Football”,
+“slug”: “football”,
+“id”: 1
+},
+“userCount”: 498380,
+“nameCode”: “MCI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 13</p>
+</div></blockquote>
+</div></blockquote>
+<section id="id1">
+<h3>]<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Example usage:
+&gt;&gt;&gt; fixtures = await league.fixtures(season=61627, round=24)
+&gt;&gt;&gt; print(fixtures)</p>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -686,6 +861,283 @@
 <p>]</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.last_fixtures">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_fixtures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.last_fixtures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.last_fixtures" title="Link to this definition"></a></dt>
+<dd><p>Fetch the last fixtures for the current season and round or previous round.</p>
+<p>This method retrieves fixtures based on the current round of the current
+season for a league. If there is at least one fixture with the status code
+100, those fixtures are returned. If no such fixtures are found, it fetches
+fixtures from the previous round (if the current round is not the first).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries representing the fixtures for the last round
+with at least one fixture with status code 100, or from the previous
+round if no fixtures match the criteria.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list or None</p>
+</dd>
+</dl>
+<p>Example response:
+[</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl>
+<dt>“tournament”: {</dt><dd><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“userCount”: 1360406,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1</p>
+</dd>
+</dl>
+<p>},
+“season”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627</p>
+</div></blockquote>
+<p>},
+“roundInfo”: {</p>
+<blockquote>
+<div><p>“round”: 24</p>
+</div></blockquote>
+<p>},
+“customId”: “osF”,
+“status”: {</p>
+<blockquote>
+<div><p>“code”: 100,
+“description”: “Started”,
+“type”: “started”</p>
+</div></blockquote>
+<p>},
+“homeTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Nottingham Forest”,
+“slug”: “nottingham-forest”,
+“shortName”: “Forest”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 350038,
+“nameCode”: “NFO”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 14</p>
+</div></blockquote>
+<p>},
+“awayTeam”: {</p>
+<blockquote>
+<div><p>“name”: “Manchester City”,
+“slug”: “manchester-city”,
+“shortName”: “City”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 498380,
+“nameCode”: “MCI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 13</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.next_fixtures">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">next_fixtures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.next_fixtures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.next_fixtures" title="Link to this definition"></a></dt>
+<dd><p>Fetch the next fixtures for the current season and round.</p>
+<p>This method retrieves the next fixtures based on the current round of
+the current season for a league. It filters events where the status is
+“Not Started” (status code 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries representing the fixtures for the next round
+where the status is “Not Started”. If no fixtures match the criteria,
+it returns None.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list or None</p>
+</dd>
+</dl>
+<p>Example response:
+[</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“tournament”: {
+“name”: “Premier League”,
+“slug”: “premier-league”,
+“category”: {</p>
+<blockquote>
+<div><p>“name”: “England”,
+“slug”: “england”,
+“sport”: {
+“name”: “Football”,
+“slug”: “football”,
+“id”: 1
+},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”</p>
+</div></blockquote>
+<p>},
+“uniqueTournament”: {</p>
+<blockquote>
+<div><p>“name”: “Premier League”,
+“slug”: “premier-league”,
+“primaryColorHex”: “#3c1c5a”,
+“secondaryColorHex”: “#f80158”,
+“category”: {
+“name”: “England”,
+“slug”: “england”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“id”: 1,
+“flag”: “england”,
+“alpha2”: “EN”
+},
+“userCount”: 1360406,
+“hasPerformanceGraphFeature”: true,
+“id”: 17,
+“hasEventPlayerStatistics”: true,
+“displayInverseHomeAwayTeams”: false</p>
+</div></blockquote>
+<p>},
+“priority”: 617,
+“isGroup”: false,
+“isLive”: false,
+“id”: 1
+},
+“season”: {
+“name”: “Premier League 24/25”,
+“year”: “24/25”,
+“editor”: false,
+“id”: 61627
+},
+“roundInfo”: {
+“round”: 24
+},
+“customId”: “osF”,
+“status”: {
+“code”: 0,
+“description”: “Not started”,
+“type”: “notstarted”
+},
+“homeTeam”: {
+“name”: “Nottingham Forest”,
+“slug”: “nottingham-forest”,
+“shortName”: “Forest”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 350038,
+“nameCode”: “NFO”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 14
+},
+“awayTeam”: {
+“name”: “Manchester City”,
+“slug”: “manchester-city”,
+“shortName”: “City”,
+“gender”: “M”,
+“sport”: {</p>
+<blockquote>
+<div><p>“name”: “Football”,
+“slug”: “football”,
+“id”: 1</p>
+</div></blockquote>
+<p>},
+“userCount”: 498380,
+“nameCode”: “MCI”,
+“disabled”: false,
+“national”: false,
+“type”: 0,
+“id”: 13
+}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>]</p>
 </dd></dl>
 
 <dl class="py method">
@@ -4850,8 +5302,8 @@ different match outcomes and events.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.last_matches">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.last_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.last_matches" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.last_fixtures">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_fixtures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.last_fixtures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.last_fixtures" title="Link to this definition"></a></dt>
 <dd><p>Fetch the last matches the player participated in.</p>
 <p>The matches are returned in reverse chronological order, meaning the most recent match
 is the first item in the list.</p>
