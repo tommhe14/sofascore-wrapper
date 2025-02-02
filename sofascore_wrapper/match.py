@@ -436,7 +436,7 @@ class Match:
             raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
 
         endpoint = f"/sport/{sport.lower().replace(' ', '-')}/scheduled-events/{date}"
-        return await self._get(endpoint)
+        return await self.api._get(endpoint)
 
         
     async def match_odds(self) -> Dict[str, Any]:

@@ -118,7 +118,7 @@ class Search:
             to_return = {
                 "results": [
                     entry for entry in data["results"]
-                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                    if self.get_sport_id(entry) == self.enums["sports"][sport.lower().replace(' ', '-')]
                 ]
             }
             return to_return
@@ -344,7 +344,7 @@ class Search:
             to_return = {
                 "results": [
                     entry for entry in data["results"]
-                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                    if self.get_sport_id(entry) == self.enums["sports"][sport.lower().replace(' ', '-')]
                 ]
             }
             return to_return
@@ -461,7 +461,7 @@ class Search:
             to_return = {
                 "results": [
                     entry for entry in data["results"]
-                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                    if self.get_sport_id(entry) == self.enums["sports"][sport.lower().replace(' ', '-')]
                 ]
             }
             return to_return
@@ -550,7 +550,7 @@ class Search:
             to_return = {
                 "results": [
                     entry for entry in data["results"]
-                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                    if self.get_sport_id(entry) == self.enums["sports"][sport.lower().replace(' ', '-')]
                 ]
             }
             return to_return
@@ -632,7 +632,7 @@ class Search:
             to_return = {
                 "results": [
                     entry for entry in data["results"]
-                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                    if self.get_sport_id(entry) == self.enums["sports"][sport.lower().replace(' ', '-')]
                 ]
             }
             return to_return
