@@ -12,7 +12,7 @@ async def player_search():
     print(json.dumps(search_player, indent = 4))
 
     init_dedicated_search = PlayerSearch(api, query = "s1mple")
-    search = await init_dedicated_search.search_player(sport = "e-sports")
+    search = await init_dedicated_search.search_player()
     print(json.dumps(search, indent = 4))
 
     await api.close()
