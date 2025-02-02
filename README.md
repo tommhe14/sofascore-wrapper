@@ -40,6 +40,7 @@ Join our Discord community for support and discussions:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## From Me!
+While sofascore-wrapper lets you search for via sports, THERE IS ONLY SUPPORT FOR FOOTBALL (SOCCER). If you would like further sports added open up an issue and request for what specific things you're looking for with the front end example.
 
 - If you encounter any issues feel free to open an issue.
 - If you have any enhancement requests, feel free to open an issue with the front end proof of what you're looking to get.
