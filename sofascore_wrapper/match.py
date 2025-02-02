@@ -1,11 +1,19 @@
 from .api import SofascoreAPI
 import datetime
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
+from pathlib import Path
+import json
 
 class Match:
+    ENUMS_PATH = Path(__file__).parent / "tools" / "enums.json"
+
+    with open(ENUMS_PATH, "r", encoding="utf-8") as file:
+        ENUMS = json.load(file)
+
     def __init__(self, api: SofascoreAPI, match_id: int = None):
         self.api = api
         self.match_id = match_id
+        self.enums = self.ENUMS
 
     async def total_games(self) -> Dict[str, int]:
         """
@@ -220,12 +228,23 @@ class Match:
         """
         return await self.api._get("/sport/football/events/live")
 
-    async def games_by_date(self, date: str = None) -> Dict[str, Any]:
+    async def games_by_date(self, sport: str, date: str = None) -> Dict[str, Any]:
         """
         Retrieves the fixtures for today or a specific date.
 
         Args:
+            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.
             date (str, optional): The date in the format "YYYY-MM-DD". If not provided, today's date is used.
+
+        Arg sport (str, Any):
+            [
+                "football", "rugby", "cricket", "tennis", "mma", "motorsport", "darts", "snooker",
+                "cycling", "basketball", "table-tennis", "ice-hockey", "e-sports", "handball",
+                "volleyball", "baseball", "american-football", "futsal", "minifootball", "badminton",
+                "aussie-rules", "beach-volley", "waterpolo", "floorball", "bandy"
+            ]
+
+        }
 
         Returns:
             Dict[str, Any]: A dictionary containing the fixtures for the specified date, including match details, teams, and timings.
@@ -412,8 +431,12 @@ class Match:
         """
         if date is None:
             date = datetime.datetime.now().strftime("%Y-%m-%d")
-        
-        return await self.api._get(f"/sport/football/scheduled-events/{date}")
+
+        if sport.lower().replace(' ', '-') not in self.enums["sports"]:
+            raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
+
+        endpoint = f"/sport/{sport.lower().replace(' ', '-')}/scheduled-events/{date}"
+        return await self._get(endpoint)
 
         
     async def match_odds(self) -> Dict[str, Any]:

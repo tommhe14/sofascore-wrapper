@@ -3,10 +3,11 @@ import aiohttp
 BASE_URL = "https://www.sofascore.com/api/v1"
 
 class SofascoreAPI:
+    default_headers = {"User-Agent": "Mozilla/5.0"}
+    
     def __init__(self, headers: dict = None):
-        default_headers = {"User-Agent": "Mozilla/5.0"}
         self.session = None
-        self.headers = default_headers if not headers else headers
+        self.headers = self.default_headers if not headers else headers
 
 
     async def _get(self, endpoint):

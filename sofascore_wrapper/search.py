@@ -1,7 +1,14 @@
 from .api import SofascoreAPI
 from typing import Dict, List, Any
+from pathlib import Path
+import json
 
 class Search:
+    ENUMS_PATH = Path(__file__).parent / "tools" / "enums.json"
+
+    with open(ENUMS_PATH, "r", encoding="utf-8") as file:
+        ENUMS = json.load(file)
+
     def __init__(self, api: SofascoreAPI, search_string: str, page: int = 0):
         """
         Initialize the Search class with the API, search string, and page number.
@@ -14,10 +21,33 @@ class Search:
         self.api = api
         self.search_string = search_string.lower().replace(" ", "%20")
         self.page = page
+        self.enums = self.ENUMS
 
-    async def search_all(self) -> Dict[str, Any]:
+    def get_sport_id(entry):
+        if entry["type"] == "team":
+            return entry["entity"]["sport"]["id"]
+        elif entry["type"] == "player":
+            return entry["entity"]["team"]["sport"]["id"]
+        elif entry["type"] == "event":
+            return entry["entity"]["tournament"]["category"]["sport"]["id"]
+        elif entry["type"] == "uniqueTournament":
+            return entry["entity"]["category"]["sport"]["id"]
+        return None
+
+    async def search_all(self, sport: str = None) -> Dict[str, Any]:
         """
         Perform a search across all categories (teams, players, matches, leagues, managers).
+
+        Args:
+            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.
+
+        Arg sport (str, Any):
+            [
+                "football", "rugby", "cricket", "tennis", "mma", "motorsport", "darts", "snooker",
+                "cycling", "basketball", "table-tennis", "ice-hockey", "e-sports", "handball",
+                "volleyball", "baseball", "american-football", "futsal", "minifootball", "badminton",
+                "aussie-rules", "beach-volley", "waterpolo", "floorball", "bandy"
+            ]
 
         Returns:
             Dict[str, Any]: A dictionary containing search results across all categories.
@@ -79,11 +109,36 @@ class Search:
                 ]
             }
         """
+        if sport:
+            if sport.lower().replace(' ', '-') not in self.enums["sports"]:
+                raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
+            
+            data = await self.api._get(f"/search/all/?q={self.search_string}&page={self.page}")
+
+            to_return = {
+                "results": [
+                    entry for entry in data["results"]
+                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                ]
+            }
+            return to_return
+
         return await self.api._get(f"/search/all/?q={self.search_string}&page={self.page}")
 
-    async def search_match(self) -> List[Dict[str, Any]]:
+    async def search_match(self, sport: str = None) -> List[Dict[str, Any]]:
         """
         Perform a search specifically for matches.
+
+        Args:
+            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.
+
+        Arg sport (str, Any):
+            [
+                "football", "rugby", "cricket", "tennis", "mma", "motorsport", "darts", "snooker",
+                "cycling", "basketball", "table-tennis", "ice-hockey", "e-sports", "handball",
+                "volleyball", "baseball", "american-football", "futsal", "minifootball", "badminton",
+                "aussie-rules", "beach-volley", "waterpolo", "floorball", "bandy"
+            ]
 
         Returns:
             List[Dict[str, Any]]: A list of dictionaries containing match details.
@@ -280,11 +335,36 @@ class Search:
                 ...
             ]
         """
+        if sport:
+            if sport.lower().replace(' ', '-') not in self.enums["sports"]:
+                raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
+            
+            data = await self.api._get(f"/search/events/?q={self.search_string}&page={self.page}")
+            
+            to_return = {
+                "results": [
+                    entry for entry in data["results"]
+                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                ]
+            }
+            return to_return
+        
         return await self.api._get(f"/search/events/?q={self.search_string}&page={self.page}")
 
-    async def search_players(self) -> List[Dict[str, Any]]:
+    async def search_players(self, sport: str = None) -> List[Dict[str, Any]]:
         """
         Perform a search specifically for players.
+
+        Args:
+            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.
+
+        Arg sport (str, Any):
+            [
+                "football", "rugby", "cricket", "tennis", "mma", "motorsport", "darts", "snooker",
+                "cycling", "basketball", "table-tennis", "ice-hockey", "e-sports", "handball",
+                "volleyball", "baseball", "american-football", "futsal", "minifootball", "badminton",
+                "aussie-rules", "beach-volley", "waterpolo", "floorball", "bandy"
+            ]
 
         Returns:
             List[Dict[str, Any]]: A list of dictionaries containing player details.
@@ -372,11 +452,36 @@ class Search:
                 ...
             ]
         """
+        if sport:
+            if sport.lower().replace(' ', '-') not in self.enums["sports"]:
+                raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
+            
+            data = await self.api._get(f"/search/player-team-persons/?q={self.search_string}&page={self.page}")
+            
+            to_return = {
+                "results": [
+                    entry for entry in data["results"]
+                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                ]
+            }
+            return to_return
+        
         return await self.api._get(f"/search/player-team-persons/?q={self.search_string}&page={self.page}")
 
-    async def search_teams(self) -> List[Dict[str, Any]]:
+    async def search_teams(self, sport: str = None) -> List[Dict[str, Any]]:
         """
         Perform a search specifically for teams.
+
+        Args:
+            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.
+
+        Arg sport (str, Any):
+            [
+                "football", "rugby", "cricket", "tennis", "mma", "motorsport", "darts", "snooker",
+                "cycling", "basketball", "table-tennis", "ice-hockey", "e-sports", "handball",
+                "volleyball", "baseball", "american-football", "futsal", "minifootball", "badminton",
+                "aussie-rules", "beach-volley", "waterpolo", "floorball", "bandy"
+            ]
 
         Returns:
             List[Dict[str, Any]]: A list of dictionaries containing team details.
@@ -436,11 +541,36 @@ class Search:
                 ...
             ]
         """
+        if sport:
+            if sport.lower().replace(' ', '-') not in self.enums["sports"]:
+                raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
+            
+            data = await self.api._get(f"/search/teams/?q={self.search_string}&page={self.page}")
+            
+            to_return = {
+                "results": [
+                    entry for entry in data["results"]
+                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                ]
+            }
+            return to_return
+        
         return await self.api._get(f"/search/teams/?q={self.search_string}&page={self.page}")
 
-    async def search_leagues(self) -> List[Dict[str, Any]]:
+    async def search_leagues(self, sport: str = None) -> List[Dict[str, Any]]:
         """
         Perform a search specifically for leagues.
+
+        Args:
+            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.
+
+        Arg sport (str, Any):
+            [
+                "football", "rugby", "cricket", "tennis", "mma", "motorsport", "darts", "snooker",
+                "cycling", "basketball", "table-tennis", "ice-hockey", "e-sports", "handball",
+                "volleyball", "baseball", "american-football", "futsal", "minifootball", "badminton",
+                "aussie-rules", "beach-volley", "waterpolo", "floorball", "bandy"
+            ]
 
         Returns:
             List[Dict[str, Any]]: A list of dictionaries containing league details.
@@ -493,4 +623,18 @@ class Search:
                 ...
             ]
         """
+        if sport:
+            if sport.lower().replace(' ', '-') not in self.enums["sports"]:
+                raise ValueError(f"Invalid sport: {sport.lower().replace(' ', '-')}. Must be one of {list(self.enums['sports'].keys())}")
+            
+            data = await self.api._get(f"/search/unique-tournaments/?q={self.search_string}&page={self.page}")
+            
+            to_return = {
+                "results": [
+                    entry for entry in data["results"]
+                    if self.get_sport_id(entry) in self.enums["sports"].values()
+                ]
+            }
+            return to_return
+        
         return await self.api._get(f"/search/unique-tournaments/?q={self.search_string}&page={self.page}")

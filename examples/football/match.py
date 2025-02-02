@@ -10,7 +10,7 @@ async def match():
 
     # Search for a match
     init_search = Search(api, search_string = "girona v arsenal")
-    search_match = await init_search.search_match()
+    search_match = await init_search.search_match(sport = "football")
     print(json.dumps(search_match, indent = 4))
 
     # Pick match from entries
@@ -39,7 +39,7 @@ async def match():
         channel_name = await match_init.get_channel(channel)
         channels.append(channel_name)
 
-    #print("GB Channels:\n" + "\n".join(channels))
+    print("GB Channels:\n" + "\n".join(channels))
 
     match_lineups = await match_init.lineups_away()
     print(json.dumps(match_lineups.keys(), indent = 4))
@@ -49,14 +49,14 @@ async def global_matches():
     api = SofascoreAPI()
 
     # init match class
-    match_init = Match()
+    match_init = Match(api)
 
     # Get all current live games
     live_matches = await match_init.live_games()
     print(json.dumps(live_matches, indent = 4))
 
     # Get games from today or provide a date for a specific day
-    todays_games = await match_init.games_by_date()
+    todays_games = await match_init.games_by_date("football")
     print(json.dumps(todays_games, indent = 4))
 
     await api.close()
