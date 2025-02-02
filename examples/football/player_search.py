@@ -7,8 +7,8 @@ import json
 async def player_search():
     api = SofascoreAPI()
 
-    init_player = Search(api, search_string = "saka")
-    search_player = await init_player.search_players()
+    init_player = Search(api, search_string = "messi")
+    search_player = await init_player.search_players(sport="football")
     print(json.dumps(search_player, indent = 4))
 
     init_dedicated_search = PlayerSearch(api, query = "cristiano ronaldo")
