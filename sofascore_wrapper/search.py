@@ -23,7 +23,7 @@ class Search:
         self.page = page
         self.enums = self.ENUMS
 
-    def get_sport_id(entry):
+    def get_sport_id(self, entry):
         if entry["type"] == "team":
             return entry["entity"]["sport"]["id"]
         elif entry["type"] == "player":
