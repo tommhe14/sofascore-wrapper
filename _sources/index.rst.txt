@@ -1,12 +1,14 @@
 .. sofascore-wrapper documentation master file, created by
    sphinx-quickstart on Tue Jan 30 2025.
 
-sofascore-wrapper documentation!
+Welcome to sofascore-wrapper's documentation!
 ============================================
 
 This is the Python API wrapper for the Sofascore undocumented API.
 It allows you to fetch and interact with data from Sofascore, including information about matches, players, teams, and more.
 
+Contents:
+---------
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -52,6 +54,12 @@ Here's a simple example of how to use the wrapper to search for a player:
       asyncio.run(main())
 
 In this example, we initialize the `SofascoreAPI`, create a `Search` instance with the search string `"saka"`, and call `search_all()` to fetch the player data. The result is printed to the console.
+
+From the Developer:
+=============
+
+While sofascore-wrapper lets you search for via sports, THERE IS ONLY SUPPORT FOR FOOTBALL (SOCCER). If you would like further sports added open up an issue and request for what specific things you're looking for with the front end example.
+
 
 API Reference
 =============

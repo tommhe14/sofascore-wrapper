@@ -1,5 +1,10 @@
+sofascore\_wrapper package
+==========================
 
-sofascore\_wrapper.api
+Submodules
+----------
+
+sofascore\_wrapper.api module
 -----------------------------
 
 .. automodule:: sofascore_wrapper.api
@@ -7,7 +12,7 @@ sofascore\_wrapper.api
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.flag
+sofascore\_wrapper.flag module
 ------------------------------
 
 .. automodule:: sofascore_wrapper.flag
@@ -15,7 +20,7 @@ sofascore\_wrapper.flag
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.league
+sofascore\_wrapper.league module
 --------------------------------
 
 .. automodule:: sofascore_wrapper.league
@@ -23,7 +28,7 @@ sofascore\_wrapper.league
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.manager
+sofascore\_wrapper.manager module
 ---------------------------------
 
 .. automodule:: sofascore_wrapper.manager
@@ -31,7 +36,7 @@ sofascore\_wrapper.manager
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.match
+sofascore\_wrapper.match module
 -------------------------------
 
 .. automodule:: sofascore_wrapper.match
@@ -39,7 +44,7 @@ sofascore\_wrapper.match
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.player
+sofascore\_wrapper.player module
 --------------------------------
 
 .. automodule:: sofascore_wrapper.player
@@ -47,7 +52,7 @@ sofascore\_wrapper.player
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.search
+sofascore\_wrapper.search module
 --------------------------------
 
 .. automodule:: sofascore_wrapper.search
@@ -55,7 +60,7 @@ sofascore\_wrapper.search
    :undoc-members:
    :show-inheritance:
 
-sofascore\_wrapper.team
+sofascore\_wrapper.team module
 ------------------------------
 
 .. automodule:: sofascore_wrapper.team

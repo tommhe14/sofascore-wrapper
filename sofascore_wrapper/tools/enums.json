@@ -1,0 +1,29 @@
+{
+    "sports": {
+        "football":1,
+        "rugby":12,
+        "cricket":62,
+        "tennis":5,
+        "mma":76,
+        "motorsport":11,
+        "darts":22,
+        "snooker":19,
+        "cycling":65,
+        "basketball":2,
+        "table-tennis":20,
+        "ice-hockey":4,
+        "e-sports":72,
+        "handball":6,
+        "volleyball":23,
+        "baseball":64,
+        "american-football":63,
+        "futsal":29,
+        "minifootball":109,
+        "badminton":31,
+        "aussie-rules":13,
+        "beach-volley":34,
+        "waterpolo":26,
+        "floorball":7,
+        "bandy":15
+    }
+}

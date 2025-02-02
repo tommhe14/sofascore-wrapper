@@ -71,14 +71,22 @@
   <h1>Source code for sofascore_wrapper.match</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
 <div class="viewcode-block" id="Match">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match">[docs]</a>
 <span class="k">class</span> <span class="nc">Match</span><span class="p">:</span>
+    <span class="n">ENUMS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tools&quot;</span> <span class="o">/</span> <span class="s2">&quot;enums.json&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ENUMS_PATH</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">ENUMS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">,</span> <span class="n">match_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">match_id</span> <span class="o">=</span> <span class="n">match_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
 
 <div class="viewcode-block" id="Match.total_games">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.total_games">[docs]</a>
@@ -301,12 +309,23 @@
 
 <div class="viewcode-block" id="Match.games_by_date">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.games_by_date">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">games_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">games_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sport</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieves the fixtures for today or a specific date.</span>
 
 <span class="sd">        Args:</span>
+<span class="sd">            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.</span>
 <span class="sd">            date (str, optional): The date in the format &quot;YYYY-MM-DD&quot;. If not provided, today&#39;s date is used.</span>
+
+<span class="sd">        Arg sport (str, Any):</span>
+<span class="sd">            [</span>
+<span class="sd">                &quot;football&quot;, &quot;rugby&quot;, &quot;cricket&quot;, &quot;tennis&quot;, &quot;mma&quot;, &quot;motorsport&quot;, &quot;darts&quot;, &quot;snooker&quot;,</span>
+<span class="sd">                &quot;cycling&quot;, &quot;basketball&quot;, &quot;table-tennis&quot;, &quot;ice-hockey&quot;, &quot;e-sports&quot;, &quot;handball&quot;,</span>
+<span class="sd">                &quot;volleyball&quot;, &quot;baseball&quot;, &quot;american-football&quot;, &quot;futsal&quot;, &quot;minifootball&quot;, &quot;badminton&quot;,</span>
+<span class="sd">                &quot;aussie-rules&quot;, &quot;beach-volley&quot;, &quot;waterpolo&quot;, &quot;floorball&quot;, &quot;bandy&quot;</span>
+<span class="sd">            ]</span>
+
+<span class="sd">        }</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dict[str, Any]: A dictionary containing the fixtures for the specified date, including match details, teams, and timings.</span>
@@ -493,8 +512,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
-        
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/sport/football/scheduled-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+        <span class="k">if</span> <span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s2">&quot;sports&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid sport: </span><span class="si">{</span><span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">. Must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s1">&#39;sports&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/sport/</span><span class="si">{</span><span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/scheduled-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span></div>
 
 
         
@@ -1388,9 +1411,13 @@
         <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/lineups&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;confirmed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;confirmed&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;players&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span>
+            <span class="s2">&quot;formation&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;formation&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;player_colour&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;playerColor&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;goalkeeper_colour&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;goalkeeperColor&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;missing_players&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;missingPlayers&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;starters&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">entry</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;substitute&quot;</span><span class="p">]],</span>
+            <span class="s2">&quot;substitutes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">entry</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;home&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;substitute&quot;</span><span class="p">]]</span>
         <span class="p">}</span></div>
-
 
 
 <div class="viewcode-block" id="Match.lineups_away">
@@ -1456,7 +1483,12 @@
         <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/lineups&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;confirmed&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;confirmed&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;players&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span>
+            <span class="s2">&quot;formation&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;formation&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;player_colour&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;playerColor&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;goalkeeper_colour&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;goalkeeperColor&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;missing_players&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;missingPlayers&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;starters&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">entry</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;substitute&quot;</span><span class="p">]],</span>
+            <span class="s2">&quot;substitutes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">entry</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;away&quot;</span><span class="p">][</span><span class="s2">&quot;players&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;substitute&quot;</span><span class="p">]]</span>
         <span class="p">}</span></div>
 
 

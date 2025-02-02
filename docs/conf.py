@@ -35,6 +35,7 @@ autodoc_default_options = {
     'members': True,          # Include all functions and methods
     'undoc-members': True,    # Include even those without docstrings
     'show-inheritance': True,
+    'exclude-members': 'ENUMS_PATH,ENUMS,file,Any,Dict,default_headers,get_sport_id,List'
 }
 
 templates_path = ['_templates']
