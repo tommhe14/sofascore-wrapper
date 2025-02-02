@@ -6,7 +6,7 @@ class SofascoreAPI:
     def __init__(self, headers: dict = None):
         default_headers = {"User-Agent": "Mozilla/5.0"}
         self.session = None
-        self.headers = default_headers or headers
+        self.headers = default_headers if not headers else headers
 
 
     async def _get(self, endpoint):
