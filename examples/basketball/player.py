@@ -17,15 +17,12 @@ async def player_and_games():
 
     player_id = player_search["results"][0]["entity"]["id"]
     league_id = league_search["results"][0]["entity"]["id"]
-    # get current season for the league
-    league_init = League(api, league_id=league_id)
-    league_data = await league_init.current_season()
-
-    current_season = league_data["id"]
+    
     # get stats for Giannis 
     banggg = Basketball(api)
-    player = await banggg.player_stats(player_id = player_id, league_id = current_season, season_id = current_season)
+    player = await banggg.player_stats(player_id = player_id, league_id = league_id)
     print(json.dumps(player, indent = 4))
+
     # get all current live basketball games
     live_basketball_games = await banggg.live_games()
     print(json.dumps(live_basketball_games, indent = 4))
