@@ -1370,9 +1370,12 @@ class Match:
 
 
 
-    async def shotmap(self) -> Dict:
+    async def shotmap(self, team_id: int = None) -> Dict:
         """
         Retrieves the shot map for the given match.
+
+        Args:
+            team_id (int): Show specific shotmap data for one of the teams for the selected match, Some sports like basketball require the team_id as the request will fail without it.
 
         This function returns a list of shot events that occurred during the match, 
         including details about each shot, such as the player who took the shot, 
@@ -1461,8 +1464,10 @@ class Match:
                     ]
                 }
         """
+        if team_id:
+            return await self.api._get(f"/event/{self.match_id}/shotmap/{team_id}")
+        
         return await self.api._get(f"/event/{self.match_id}/shotmap")
-
 
     
     async def heatmap(self, team_id: int) -> Dict:
