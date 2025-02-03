@@ -1,0 +1,929 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.basketball &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.basketball</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.basketball</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<div class="viewcode-block" id="Basketball">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball">[docs]</a>
+<span class="k">class</span> <span class="nc">Basketball</span><span class="p">:</span>
+    <span class="n">ENUMS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tools&quot;</span> <span class="o">/</span> <span class="s2">&quot;enums.json&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ENUMS_PATH</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">ENUMS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
+
+<div class="viewcode-block" id="Basketball.total_games">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.total_games">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">total_games</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the total count of today&#39;s basketball games and how many are currently live.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+<span class="sd">                - &quot;live&quot;: The number of live basketball games.</span>
+<span class="sd">                - &quot;total&quot;: The total number of basketball games scheduled for today.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;live&quot;: 21,</span>
+<span class="sd">                &quot;total&quot;: 270</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/0/event-count&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;basketball&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
+
+
+
+<div class="viewcode-block" id="Basketball.live_games">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.live_games">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">live_games</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all currently live basketball games.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, List[Dict[str, Any]]]: A dictionary containing a list of live basketball games under the key &quot;events&quot;.</span>
+<span class="sd">                Each game is represented as a dictionary with details such as tournament, teams, scores, and match status.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;events&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;tournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;U20 CONMEBOL Championship, Group B&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;u20-conmebol-championship-group-b&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;South America&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;south-america&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1470,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;south-america&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;U20 CONMEBOL Championship&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;u20-conmebol-championship&quot;,</span>
+<span class="sd">                                &quot;primaryColorHex&quot;: &quot;#348925&quot;,</span>
+<span class="sd">                                &quot;secondaryColorHex&quot;: &quot;#afc402&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;South America&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;south-america&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 1470,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;south-america&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 11952,</span>
+<span class="sd">                                &quot;id&quot;: 632,</span>
+<span class="sd">                                &quot;hasPerformanceGraphFeature&quot;: false,</span>
+<span class="sd">                                &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                                &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;priority&quot;: 0,</span>
+<span class="sd">                            &quot;isGroup&quot;: true,</span>
+<span class="sd">                            &quot;groupName&quot;: &quot;Group B&quot;,</span>
+<span class="sd">                            &quot;isLive&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 10066</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;season&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;U20 CONMEBOL Ch.ship 2025&quot;,</span>
+<span class="sd">                            &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">                            &quot;editor&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 68914</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;roundInfo&quot;: {</span>
+<span class="sd">                            &quot;round&quot;: 4</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;customId&quot;: &quot;xdjsiAn&quot;,</span>
+<span class="sd">                        &quot;status&quot;: {</span>
+<span class="sd">                            &quot;code&quot;: 6,</span>
+<span class="sd">                            &quot;description&quot;: &quot;1st half&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;inprogress&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Ecuador U20&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;ecuador-u20&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Ecuador U20&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 4401,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;ECU&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: true,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 33758,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EC&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;ECU&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;Ecuador&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;ecuador&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#000063&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#000063&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;الإكوادور تحت 20&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Эквадор U20&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Brazil U20&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;brazil-u20&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Brazil U20&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 39092,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;BRA&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: true,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 22672,</span>
+<span class="sd">                            &quot;country&quot;: {</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;BR&quot;,</span>
+<span class="sd">                                &quot;alpha3&quot;: &quot;BRA&quot;,</span>
+<span class="sd">                                &quot;name&quot;: &quot;Brazil&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;brazil&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#009933&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#009933&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;البرازيل تحت 20&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Бразилия U20&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;time&quot;: {</span>
+<span class="sd">                            &quot;initial&quot;: 0,</span>
+<span class="sd">                            &quot;max&quot;: 2700,</span>
+<span class="sd">                            &quot;extra&quot;: 540,</span>
+<span class="sd">                            &quot;currentPeriodStartTimestamp&quot;: 1738279810</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;changes&quot;: {</span>
+<span class="sd">                            &quot;changes&quot;: [</span>
+<span class="sd">                                &quot;homeScore.period1&quot;,</span>
+<span class="sd">                                &quot;homeScore.normaltime&quot;,</span>
+<span class="sd">                                &quot;awayScore.period1&quot;,</span>
+<span class="sd">                                &quot;awayScore.normaltime&quot;</span>
+<span class="sd">                            ],</span>
+<span class="sd">                            &quot;changeTimestamp&quot;: 1738279909</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                        &quot;hasEventPlayerHeatMap&quot;: true,</span>
+<span class="sd">                        &quot;detailId&quot;: 1,</span>
+<span class="sd">                        &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 13123315,</span>
+<span class="sd">                        &quot;statusTime&quot;: {</span>
+<span class="sd">                            &quot;prefix&quot;: &quot;&quot;,</span>
+<span class="sd">                            &quot;initial&quot;: 0,</span>
+<span class="sd">                            &quot;max&quot;: 2700,</span>
+<span class="sd">                            &quot;timestamp&quot;: 1738279810,</span>
+<span class="sd">                            &quot;extra&quot;: 540</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;startTimestamp&quot;: 1738279800,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;ecuador-u20-brazil-u20&quot;,</span>
+<span class="sd">                        &quot;lastPeriod&quot;: &quot;period1&quot;,</span>
+<span class="sd">                        &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                        &quot;feedLocked&quot;: true,</span>
+<span class="sd">                        &quot;isEditor&quot;: false</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/basketball/events/live&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Basketball.games_by_date">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.games_by_date">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">games_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sport</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;basketball&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the fixtures for today or a specific date.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sport (str): The sport of which you wish to gain fixtures for. Check below for appropriate sport names.</span>
+<span class="sd">            date (str, optional): The date in the format &quot;YYYY-MM-DD&quot;. If not provided, today&#39;s date is used.</span>
+
+<span class="sd">        Arg sport (str, Any):</span>
+<span class="sd">            [</span>
+<span class="sd">                &quot;football&quot;, &quot;rugby&quot;, &quot;cricket&quot;, &quot;tennis&quot;, &quot;mma&quot;, &quot;motorsport&quot;, &quot;darts&quot;, &quot;snooker&quot;,</span>
+<span class="sd">                &quot;cycling&quot;, &quot;basketball&quot;, &quot;table-tennis&quot;, &quot;ice-hockey&quot;, &quot;e-sports&quot;, &quot;handball&quot;,</span>
+<span class="sd">                &quot;volleyball&quot;, &quot;baseball&quot;, &quot;american-football&quot;, &quot;futsal&quot;, &quot;minifootball&quot;, &quot;badminton&quot;,</span>
+<span class="sd">                &quot;aussie-rules&quot;, &quot;beach-volley&quot;, &quot;waterpolo&quot;, &quot;floorball&quot;, &quot;bandy&quot;</span>
+<span class="sd">            ]</span>
+
+<span class="sd">        }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the fixtures for the specified date, including match details, teams, and timings.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;events&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;tournament&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 1</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 1,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Premier League&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;premier-league&quot;,</span>
+<span class="sd">                                &quot;primaryColorHex&quot;: &quot;#3c1c5a&quot;,</span>
+<span class="sd">                                &quot;secondaryColorHex&quot;: &quot;#f80158&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;England&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;england&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 1</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 1,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;england&quot;,</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;EN&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 1361165,</span>
+<span class="sd">                                &quot;hasPerformanceGraphFeature&quot;: true,</span>
+<span class="sd">                                &quot;id&quot;: 17,</span>
+<span class="sd">                                &quot;displayInverseHomeAwayTeams&quot;: false,</span>
+<span class="sd">                                &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                    &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                        &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                        &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                        &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;priority&quot;: 617,</span>
+<span class="sd">                            &quot;isLive&quot;: false,</span>
+<span class="sd">                            &quot;id&quot;: 1,</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;الدوري الإنجليزي الممتاز&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;प्रिमियर लीग&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;প্রিমিয়ার লীগ&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {}</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;customId&quot;: &quot;HsR&quot;,</span>
+<span class="sd">                        &quot;status&quot;: {</span>
+<span class="sd">                            &quot;code&quot;: 0,</span>
+<span class="sd">                            &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;winnerCode&quot;: 0,</span>
+<span class="sd">                        &quot;homeTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;arsenal&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Arsenal&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 2341486,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;ARS&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: false,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 42,</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Арсенал&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ارسنال&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;आर्सेनल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;আর্সেনাল&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayTeam&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Liverpool&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;liverpool&quot;,</span>
+<span class="sd">                            &quot;shortName&quot;: &quot;Liverpool&quot;,</span>
+<span class="sd">                            &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;userCount&quot;: 2572976,</span>
+<span class="sd">                            &quot;nameCode&quot;: &quot;LIV&quot;,</span>
+<span class="sd">                            &quot;disabled&quot;: false,</span>
+<span class="sd">                            &quot;national&quot;: false,</span>
+<span class="sd">                            &quot;type&quot;: 0,</span>
+<span class="sd">                            &quot;id&quot;: 44,</span>
+<span class="sd">                            &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                            &quot;teamColors&quot;: {</span>
+<span class="sd">                                &quot;primary&quot;: &quot;#cc0000&quot;,</span>
+<span class="sd">                                &quot;secondary&quot;: &quot;#ffffff&quot;,</span>
+<span class="sd">                                &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ليفربول&quot;,</span>
+<span class="sd">                                    &quot;ru&quot;: &quot;Ливерпуль&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;लिवरपूल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;লিভারপুল&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                    &quot;ar&quot;: &quot;ليفربول&quot;,</span>
+<span class="sd">                                    &quot;hi&quot;: &quot;लिवरपूल&quot;,</span>
+<span class="sd">                                    &quot;bn&quot;: &quot;লিভারপুল&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;homeScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;period2&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;awayScore&quot;: {</span>
+<span class="sd">                            &quot;current&quot;: 0,</span>
+<span class="sd">                            &quot;display&quot;: 0,</span>
+<span class="sd">                            &quot;period1&quot;: 0,</span>
+<span class="sd">                            &quot;period2&quot;: 0,</span>
+<span class="sd">                            &quot;normaltime&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;time&quot;: {</span>
+<span class="sd">                            &quot;injuryTime1&quot;: 0,</span>
+<span class="sd">                            &quot;injuryTime2&quot;: 0,</span>
+<span class="sd">                            &quot;currentPeriodStartTimestamp&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;changes&quot;: {</span>
+<span class="sd">                            &quot;changes&quot;: [],</span>
+<span class="sd">                            &quot;changeTimestamp&quot;: 0</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                        &quot;hasXg&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerHeatMap&quot;: false,</span>
+<span class="sd">                        &quot;detailId&quot;: 1,</span>
+<span class="sd">                        &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                        &quot;id&quot;: 12436472,</span>
+<span class="sd">                        &quot;startTimestamp&quot;: 1735330500,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;arsenal-liverpool&quot;,</span>
+<span class="sd">                        &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                        &quot;feedLocked&quot;: false,</span>
+<span class="sd">                        &quot;isEditor&quot;: false</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s2">&quot;sports&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid sport: </span><span class="si">{</span><span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">. Must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s1">&#39;sports&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/sport/</span><span class="si">{</span><span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/scheduled-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Basketball.player_ratings">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.player_ratings">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">player_ratings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a player&#39;s ratings for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_id (int): The ID of the player.</span>
+<span class="sd">            league_id (int): The ID of the league (unique tournament).</span>
+<span class="sd">            season_id (int): The ID of the season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing the player&#39;s ratings.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;seasonRatings&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;eventId&quot;: 12696938,</span>
+<span class="sd">                            &quot;event&quot;: {</span>
+<span class="sd">                                &quot;homeTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Milwaukee Bucks&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 3410</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;awayTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Memphis Grizzlies&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 3415</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;homeScore&quot;: {</span>
+<span class="sd">                                    &quot;current&quot;: 119</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;awayScore&quot;: {</span>
+<span class="sd">                                    &quot;current&quot;: 132</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;status&quot;: {</span>
+<span class="sd">                                    &quot;description&quot;: &quot;Ended&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;rating&quot;: 7.9,</span>
+<span class="sd">                            &quot;opponent&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Memphis Grizzlies&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 3415</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;isHome&quot;: true</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                ratings = await api.player_ratings(player_id=123, league_id=132, season_id=2024)</span>
+<span class="sd">                print(ratings[&quot;seasonRatings&quot;][0][&quot;rating&quot;])  # Output: 7.9</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/player/</span><span class="si">{</span><span class="n">player_id</span><span class="si">}</span><span class="s2">/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/ratings&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Basketball.player_seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.player_seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">player_seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a player&#39;s seasons and the leagues they participated in.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_id (int): The ID of the player.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the player&#39;s seasons and league details.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;uniqueTournamentSeasons&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;NBA&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;nba&quot;,</span>
+<span class="sd">                                &quot;primaryColorHex&quot;: &quot;#045daf&quot;,</span>
+<span class="sd">                                &quot;secondaryColorHex&quot;: &quot;#cc2b31&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;USA&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;usa&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Basketball&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;basketball&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 2</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 15,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;usa&quot;,</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;US&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 241408,</span>
+<span class="sd">                                &quot;id&quot;: 132,</span>
+<span class="sd">                                &quot;displayInverseHomeAwayTeams&quot;: true</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;seasons&quot;: [</span>
+<span class="sd">                                {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;NBA 24/25&quot;,</span>
+<span class="sd">                                    &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                                    &quot;editor&quot;: false,</span>
+<span class="sd">                                    &quot;id&quot;: 65360</span>
+<span class="sd">                                }</span>
+<span class="sd">                            ]</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                seasons = await api.player_seasons(player_id=123)</span>
+<span class="sd">                print(seasons[&quot;uniqueTournamentSeasons&quot;][0][&quot;uniqueTournament&quot;][&quot;name&quot;])  # Output: &quot;NBA&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/player/</span><span class="si">{</span><span class="n">player_id</span><span class="si">}</span><span class="s2">/statistics/seasons&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Basketball.player_stats">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.player_stats">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">player_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a player&#39;s statistics for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_id (int): The ID of the player.</span>
+<span class="sd">            league_id (int): The ID of the league (unique tournament).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the player&#39;s season statistics, including points, rebounds, assists, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;seasons&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;statistics&quot;: {</span>
+<span class="sd">                                &quot;points&quot;: 1302,</span>
+<span class="sd">                                &quot;rebounds&quot;: 499,</span>
+<span class="sd">                                &quot;assists&quot;: 241,</span>
+<span class="sd">                                &quot;blocks&quot;: 54,</span>
+<span class="sd">                                &quot;steals&quot;: 31,</span>
+<span class="sd">                                &quot;rating&quot;: 8.3,</span>
+<span class="sd">                                &quot;appearances&quot;: 41</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;team&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Milwaukee Bucks&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;milwaukee-bucks&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;Bucks&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 3410</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;season&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;NBA 24/25&quot;,</span>
+<span class="sd">                                &quot;year&quot;: &quot;24/25&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 65360</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                stats = await api.player_stats(player_id=123, league_id=132)</span>
+<span class="sd">                print(stats[&quot;seasons&quot;][0][&quot;statistics&quot;][&quot;points&quot;])  # Output: 1302</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/player/</span><span class="si">{</span><span class="n">player_id</span><span class="si">}</span><span class="s2">/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/statistics/regularSeason&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Basketball.top_players_per_game">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.top_players_per_game">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">top_players_per_game</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top players&#39; statistics per game for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            league_id (int): The ID of the league (unique tournament).</span>
+<span class="sd">            season_id (int): The ID of the season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing top players&#39; statistics per game, </span>
+<span class="sd">            including points, rebounds, assists, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;topPlayers&quot;: {</span>
+<span class="sd">                        &quot;points&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;statistic&quot;: 60,</span>
+<span class="sd">                                &quot;player&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;De&#39;Aaron Fox&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;D. Fox&quot;,</span>
+<span class="sd">                                    &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 885244</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;event&quot;: {</span>
+<span class="sd">                                    &quot;tournament&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;NBA&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 177</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;homeTeam&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Sacramento Kings&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 3413</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;awayTeam&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Minnesota Timberwolves&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 3426</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;homeScore&quot;: {</span>
+<span class="sd">                                        &quot;current&quot;: 126</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;awayScore&quot;: {</span>
+<span class="sd">                                        &quot;current&quot;: 130</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 12687000</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                stats = await api.top_players_per_game(league_id=132, season_id=65360)</span>
+<span class="sd">                print(stats[&quot;topPlayers&quot;][&quot;points&quot;][0][&quot;player&quot;][&quot;name&quot;])  # Output: De&#39;Aaron Fox</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/top-players-per-game/all/regularSeason&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Basketball.top_players_per_season">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.top_players_per_season">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">top_players_per_season</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top players&#39; statistics per game for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            league_id (int): The ID of the league (unique tournament).</span>
+<span class="sd">            season_id (int): The ID of the season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing top players&#39; statistics per game, </span>
+<span class="sd">            including points, rebounds, assists, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;topPlayers&quot;: {</span>
+<span class="sd">                        &quot;points&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;statistic&quot;: 60,</span>
+<span class="sd">                                &quot;player&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;De&#39;Aaron Fox&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;D. Fox&quot;,</span>
+<span class="sd">                                    &quot;position&quot;: &quot;G&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 885244</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;event&quot;: {</span>
+<span class="sd">                                    &quot;tournament&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;NBA&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 177</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;homeTeam&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Sacramento Kings&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 3413</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;awayTeam&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Minnesota Timberwolves&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 3426</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;homeScore&quot;: {</span>
+<span class="sd">                                        &quot;current&quot;: 126</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;awayScore&quot;: {</span>
+<span class="sd">                                        &quot;current&quot;: 130</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 12687000</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                stats = await api.top_players_per_game(league_id=132, season_id=65360)</span>
+<span class="sd">                print(stats[&quot;topPlayers&quot;][&quot;points&quot;][0][&quot;player&quot;][&quot;name&quot;])  # Output: De&#39;Aaron Fox</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/top-players/regularSeason&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Basketball.top_teams_per_season">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.basketball.Basketball.top_teams_per_season">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">top_teams_per_season</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top teams&#39; statistics per game for a specific league and season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            league_id (int): The ID of the league (unique tournament).</span>
+<span class="sd">            season_id (int): The ID of the season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing top teams&#39; statistics per game,</span>
+<span class="sd">            including points, rebounds, assists, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;topTeams&quot;: {</span>
+<span class="sd">                        &quot;points&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;team&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Memphis Grizzlies&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;memphis-grizzlies&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;Memphis Grizzlies&quot;,</span>
+<span class="sd">                                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                    &quot;userCount&quot;: 51009,</span>
+<span class="sd">                                    &quot;national&quot;: false,</span>
+<span class="sd">                                    &quot;type&quot;: 0,</span>
+<span class="sd">                                    &quot;id&quot;: 3415,</span>
+<span class="sd">                                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                    &quot;teamColors&quot;: {</span>
+<span class="sd">                                        &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                        &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                        &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;ممفيس جريزليز&quot;,</span>
+<span class="sd">                                            &quot;ru&quot;: &quot;Мемфис Гриззлис&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;मेम्फिस ग्रिजलीज़&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;মেমফিস গ্রিজলিস&quot;</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;shortNameTranslation&quot;: {</span>
+<span class="sd">                                            &quot;ar&quot;: &quot;جريزليس&quot;,</span>
+<span class="sd">                                            &quot;hi&quot;: &quot;ग्रिज़लीज़&quot;,</span>
+<span class="sd">                                            &quot;bn&quot;: &quot;গ্রিজলিস&quot;</span>
+<span class="sd">                                        }</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;statistics&quot;: {</span>
+<span class="sd">                                    &quot;points&quot;: 6046,</span>
+<span class="sd">                                    &quot;id&quot;: 3834,</span>
+<span class="sd">                                    &quot;matches&quot;: 49,</span>
+<span class="sd">                                    &quot;awardedMatches&quot;: 0</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                stats = await api.top_teams_per_season(league_id=132, season_id=65360)</span>
+<span class="sd">                print(stats[&quot;topTeams&quot;][&quot;points&quot;][0][&quot;team&quot;][&quot;name&quot;])  # Output: Memphis Grizzlies</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/top-teams/regularSeason&quot;</span><span class="p">)</span></div>
+</div>
+
+
+    
+
+
+    
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

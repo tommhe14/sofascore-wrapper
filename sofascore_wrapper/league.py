@@ -1715,4 +1715,321 @@ class League:
 
         return fixtures if fixtures else None
     
+    async def cup_tree(self, season_id: int) -> Dict[str, Any]:
+        """
+        Retrieves the cup tree structure for a given season, displaying the knockout rounds and fixtures.
+
+        Args:
+            season_id (int): The ID of the season.
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the cup tree layout, including rounds, teams, and match results.
+
+        Example Response:
+            .. code-block:: json
+
+                {
+                    "cupTrees": [
+                        {
+                            "id": 10569462,
+                            "name": "FA Cup 24/25",
+                            "tournament": {
+                                "name": "FA Cup",
+                                "slug": "fa-cup",
+                                "category": {
+                                    "name": "England",
+                                    "slug": "england",
+                                    "sport": {
+                                        "name": "Football",
+                                        "slug": "football",
+                                        "id": 1
+                                    },
+                                    "id": 1,
+                                    "flag": "england",
+                                    "alpha2": "EN"
+                                }
+                            },
+                            "currentRound": 4,
+                            "rounds": [
+                                {
+                                    "order": 1,
+                                    "description": "Round 1",
+                                    "blocks": [
+                                        {
+                                            "blockId": 2253397,
+                                            "finished": true,
+                                            "matchesInRound": 1,
+                                            "result": "0:2",
+                                            "homeTeamScore": "0",
+                                            "awayTeamScore": "2",
+                                            "participants": [
+                                                {
+                                                    "team": {
+                                                        "name": "Gillingham",
+                                                        "slug": "gillingham",
+                                                        "shortName": "Gillingham",
+                                                        "id": 20
+                                                    },
+                                                    "winner": false
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+
+        Example Usage:
+            .. code-block:: python
+
+                cup_tree_data = await api.cup_tree(season_id=65360)
+                print(cup_tree_data["cupTrees"][0]["name"])  # Output: FA Cup 24/25
+
+        """
+        return await self.api._get(f"/unique-tournament/{self.league_id}/season/{season_id}/cuptrees")
+    
+    async def cup_fixtures_per_round(self, season_id: int, round_id: int) -> Dict[Dict, Any]:
+        """
+        Fetch the next fixtures for the given season and round.
+
+        This method retrieves the upcoming fixtures based on the specified round 
+        of the current season for a league. It filters events where the status is 
+        "Not Started" (status code 0).
+
+        Args:
+            season_id (int): The ID of the season.
+            round_id (int): The ID of the round.
+
+        Returns:
+            Dict[Dict, Any]: A dictionary representing the fixtures for the next round 
+            where the status is "Not Started". If no fixtures match the criteria, 
+            it returns None.
+
+        Example Response:
+            .. code-block:: json
+
+            [
+                {
+                    "tournament": {
+                        "name": "Premier League",
+                        "slug": "premier-league",
+                        "category": {
+                            "name": "England",
+                            "slug": "england",
+                            "sport": {
+                                "name": "Football",
+                                "slug": "football",
+                                "id": 1
+                            },
+                            "id": 1,
+                            "flag": "england",
+                            "alpha2": "EN"
+                        },
+                        "uniqueTournament": {
+                            "name": "Premier League",
+                            "slug": "premier-league",
+                            "primaryColorHex": "#3c1c5a",
+                            "secondaryColorHex": "#f80158",
+                            "category": {
+                                "name": "England",
+                                "slug": "england",
+                                "sport": {
+                                    "name": "Football",
+                                    "slug": "football",
+                                    "id": 1
+                                },
+                                "id": 1,
+                                "flag": "england",
+                                "alpha2": "EN"
+                            },
+                            "userCount": 1360406,
+                            "hasPerformanceGraphFeature": true,
+                            "id": 17,
+                            "hasEventPlayerStatistics": true,
+                            "displayInverseHomeAwayTeams": false
+                        },
+                        "priority": 617,
+                        "isGroup": false,
+                        "isLive": false,
+                        "id": 1
+                    },
+                    "season": {
+                        "name": "Premier League 24/25",
+                        "year": "24/25",
+                        "editor": false,
+                        "id": 61627
+                    },
+                    "roundInfo": {
+                        "round": 24
+                    },
+                    "customId": "osF",
+                    "status": {
+                        "code": 0,
+                        "description": "Not started",
+                        "type": "notstarted"
+                    },
+                    "homeTeam": {
+                        "name": "Nottingham Forest",
+                        "slug": "nottingham-forest",
+                        "shortName": "Forest",
+                        "gender": "M",
+                        "sport": {
+                            "name": "Football",
+                            "slug": "football",
+                            "id": 1
+                        },
+                        "userCount": 350038,
+                        "nameCode": "NFO",
+                        "disabled": false,
+                        "national": false,
+                        "type": 0,
+                        "id": 14
+                    },
+                    "awayTeam": {
+                        "name": "Manchester City",
+                        "slug": "manchester-city",
+                        "shortName": "City",
+                        "gender": "M",
+                        "sport": {
+                            "name": "Football",
+                            "slug": "football",
+                            "id": 1
+                        },
+                        "userCount": 498380,
+                        "nameCode": "MCI",
+                        "disabled": false,
+                        "national": false,
+                        "type": 0,
+                        "id": 13
+                    }
+                }
+            ]
+
+        """
+        return await self.api._get(f"/unique-tournament/{self.league_id}/season/{season_id}/events/round/{round_id}/slug/round-{round_id}")
+    
+    async def league_fixtures_per_round(self, season_id: int, round_id: int) -> Dict[Dict, Any]:
+        """
+        Fetch the next fixtures for the given season and round.
+
+        This method retrieves the upcoming fixtures based on the specified round 
+        of the current season for a league. It filters events where the status is 
+        "Not Started" (status code 0).
+
+        Args:
+            season_id (int): The ID of the season.
+            round_id (int): The ID of the round.
+
+        Returns:
+            Dict[Dict, Any]: A dictionary representing the fixtures for the next round 
+            where the status is "Not Started". If no fixtures match the criteria, 
+            it returns None.
+
+        Example Response:
+            .. code-block:: json
+
+            [
+                {
+                    "tournament": {
+                        "name": "Premier League",
+                        "slug": "premier-league",
+                        "category": {
+                            "name": "England",
+                            "slug": "england",
+                            "sport": {
+                                "name": "Football",
+                                "slug": "football",
+                                "id": 1
+                            },
+                            "id": 1,
+                            "flag": "england",
+                            "alpha2": "EN"
+                        },
+                        "uniqueTournament": {
+                            "name": "Premier League",
+                            "slug": "premier-league",
+                            "primaryColorHex": "#3c1c5a",
+                            "secondaryColorHex": "#f80158",
+                            "category": {
+                                "name": "England",
+                                "slug": "england",
+                                "sport": {
+                                    "name": "Football",
+                                    "slug": "football",
+                                    "id": 1
+                                },
+                                "id": 1,
+                                "flag": "england",
+                                "alpha2": "EN"
+                            },
+                            "userCount": 1360406,
+                            "hasPerformanceGraphFeature": true,
+                            "id": 17,
+                            "hasEventPlayerStatistics": true,
+                            "displayInverseHomeAwayTeams": false
+                        },
+                        "priority": 617,
+                        "isGroup": false,
+                        "isLive": false,
+                        "id": 1
+                    },
+                    "season": {
+                        "name": "Premier League 24/25",
+                        "year": "24/25",
+                        "editor": false,
+                        "id": 61627
+                    },
+                    "roundInfo": {
+                        "round": 24
+                    },
+                    "customId": "osF",
+                    "status": {
+                        "code": 0,
+                        "description": "Not started",
+                        "type": "notstarted"
+                    },
+                    "homeTeam": {
+                        "name": "Nottingham Forest",
+                        "slug": "nottingham-forest",
+                        "shortName": "Forest",
+                        "gender": "M",
+                        "sport": {
+                            "name": "Football",
+                            "slug": "football",
+                            "id": 1
+                        },
+                        "userCount": 350038,
+                        "nameCode": "NFO",
+                        "disabled": false,
+                        "national": false,
+                        "type": 0,
+                        "id": 14
+                    },
+                    "awayTeam": {
+                        "name": "Manchester City",
+                        "slug": "manchester-city",
+                        "shortName": "City",
+                        "gender": "M",
+                        "sport": {
+                            "name": "Football",
+                            "slug": "football",
+                            "id": 1
+                        },
+                        "userCount": 498380,
+                        "nameCode": "MCI",
+                        "disabled": false,
+                        "national": false,
+                        "type": 0,
+                        "id": 13
+                    }
+                }
+            ]
+
+        """
+        return await self.api._get(f"/unique-tournament/{self.league_id}/season/{season_id}/events/round/{round_id}")
+
+
+    
 

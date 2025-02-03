@@ -1496,9 +1496,12 @@
 
 <div class="viewcode-block" id="Match.shotmap">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.shotmap">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">shotmap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">shotmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieves the shot map for the given match.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            team_id (int): Show specific shotmap data for one of the teams for the selected match, Some sports like basketball require the team_id as the request will fail without it.</span>
 
 <span class="sd">        This function returns a list of shot events that occurred during the match, </span>
 <span class="sd">        including details about each shot, such as the player who took the shot, </span>
@@ -1587,8 +1590,10 @@
 <span class="sd">                    ]</span>
 <span class="sd">                }</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">team_id</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/shotmap/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/shotmap&quot;</span><span class="p">)</span></div>
-
 
 
     

@@ -7,8 +7,6 @@ Welcome to sofascore-wrapper's documentation!
 This is the Python API wrapper for the Sofascore undocumented API.
 It allows you to fetch and interact with data from Sofascore, including information about matches, players, teams, and more.
 
-Contents:
----------
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -55,11 +53,9 @@ Here's a simple example of how to use the wrapper to search for a player:
 
 In this example, we initialize the `SofascoreAPI`, create a `Search` instance with the search string `"saka"`, and call `search_all()` to fetch the player data. The result is printed to the console.
 
-From the Developer:
-=============
-
-While sofascore-wrapper lets you search for via sports, THERE IS ONLY SUPPORT FOR FOOTBALL (SOCCER). If you would like further sports added open up an issue and request for what specific things you're looking for with the front end example.
-
+From Me!
+========
+Will slowly be adding more sports along our journey! SofaScore API is written to re-use requests for multiple sports, So in theory making requests for a sport other than football (soccer) will allow you to make requests with any class (match, player, etc). Any requests for the dedicated sport that you cannot, they will be under the dedicated sport i.e Basketball.player_stats() rather than Player.stats()
 
 API Reference
 =============

@@ -96,6 +96,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="n">page</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
 
+<div class="viewcode-block" id="Search.get_sport_id">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.search.Search.get_sport_id">[docs]</a>
     <span class="k">def</span> <span class="nf">get_sport_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;team&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">][</span><span class="s2">&quot;sport&quot;</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
@@ -105,7 +107,8 @@
             <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">][</span><span class="s2">&quot;tournament&quot;</span><span class="p">][</span><span class="s2">&quot;category&quot;</span><span class="p">][</span><span class="s2">&quot;sport&quot;</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;uniqueTournament&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;entity&quot;</span><span class="p">][</span><span class="s2">&quot;category&quot;</span><span class="p">][</span><span class="s2">&quot;sport&quot;</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
 
 <div class="viewcode-block" id="Search.search_all">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.search.Search.search_all">[docs]</a>

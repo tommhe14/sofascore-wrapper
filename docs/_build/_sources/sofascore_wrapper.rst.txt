@@ -1,13 +1,19 @@
 sofascore\_wrapper package
 ==========================
 
-Submodules
-----------
 
 sofascore\_wrapper.api module
 -----------------------------
 
 .. automodule:: sofascore_wrapper.api
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sofascore\_wrapper.basketball module
+------------------------------------
+
+.. automodule:: sofascore_wrapper.basketball
    :members:
    :undoc-members:
    :show-inheritance:
@@ -67,4 +73,5 @@ sofascore\_wrapper.team module
    :members:
    :undoc-members:
    :show-inheritance:
+
 
