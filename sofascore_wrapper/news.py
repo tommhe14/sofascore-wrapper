@@ -4,11 +4,10 @@ from typing import List, Dict, Any, Literal
 class News:
     def __init__(self, api: SofascoreAPI):
         """
-        Initializes the Flag class with the SofascoreAPI instance and flag code.
+        Initializes the News class with the sofascore API.
 
         Args:
             api (SofascoreAPI): An instance of the SofascoreAPI class.
-            flag_code (str): The country code for the flag (e.g., "gb" for Great Britain).
         """
         self.api = api
 
