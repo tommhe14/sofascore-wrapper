@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.mma &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.mma</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.mma</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<div class="viewcode-block" id="MMA">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA">[docs]</a>
+<span class="k">class</span> <span class="nc">MMA</span><span class="p">:</span>
+    <span class="n">ENUMS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tools&quot;</span> <span class="o">/</span> <span class="s2">&quot;enums.json&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ENUMS_PATH</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">ENUMS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
+
+<div class="viewcode-block" id="MMA.total_fights">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.total_fights">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">total_fights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the total count of today&#39;s basketball games and how many are currently live.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+<span class="sd">                - &quot;live&quot;: The number of live basketball games.</span>
+<span class="sd">                - &quot;total&quot;: The total number of basketball games scheduled for today.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;live&quot;: 21,</span>
+<span class="sd">                &quot;total&quot;: 270</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/0/event-count&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mma&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
+
+
+
+<div class="viewcode-block" id="MMA.live_fights">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.live_fights">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">live_fights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve all currently live MMA events.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, List[Dict[str, Any]]]: A dictionary containing a list of live MMA events under the key &quot;events&quot;.</span>
+<span class="sd">            Each event is represented as a dictionary with details such as tournament, teams, scores, and match status.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            The response follows this structure:</span>
+
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;events&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;fightType&quot;: &quot;maincard&quot;,</span>
+<span class="sd">                            &quot;tournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;FS - MAT B - World OG Qualif.&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;fs-mat-b-world-og-qualif&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;World&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;world&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Mixed Martial Arts&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;mma&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 76</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 1708,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;international&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 134691,</span>
+<span class="sd">                                &quot;startTimestamp&quot;: 1715414400,</span>
+<span class="sd">                                &quot;location&quot;: &quot;Istanbul&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;season&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;FS - MAT B - World OG Qualif.&quot;,</span>
+<span class="sd">                                &quot;year&quot;: &quot;2024&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 63132</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;status&quot;: {</span>
+<span class="sd">                                &quot;code&quot;: 58,</span>
+<span class="sd">                                &quot;description&quot;: &quot;Awaiting announcement&quot;,</span>
+<span class="sd">                                &quot;type&quot;: &quot;inprogress&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;homeTeam&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Thomas John Mcglinchey BARNS&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;T. J. M. BARNS&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 528778,</span>
+<span class="sd">                                &quot;teamColors&quot;: {</span>
+<span class="sd">                                    &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;awayTeam&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Maxwell Lemar LACEY GARITA&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;M. L. L. GARITA&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 528779,</span>
+<span class="sd">                                &quot;teamColors&quot;: {</span>
+<span class="sd">                                    &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;homeScore&quot;: {},</span>
+<span class="sd">                            &quot;awayScore&quot;: {},</span>
+<span class="sd">                            &quot;time&quot;: {</span>
+<span class="sd">                                &quot;current&quot;: 7,</span>
+<span class="sd">                                &quot;period1&quot;: 7,</span>
+<span class="sd">                                &quot;totalPeriodCount&quot;: 3</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 12490984,</span>
+<span class="sd">                            &quot;startTimestamp&quot;: 1715415495,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;maxwell-lemar-lacey-garita-thomas-john-mcglinchey-barns&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/mma/events/live&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MMA.fights_by_date">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fights_by_date">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fights_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sport</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mma&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves scheduled fixtures for a given sport on a specific date.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sport (str): The sport for which to retrieve fixtures. Available options include:</span>
+<span class="sd">                - &quot;football&quot;, &quot;rugby&quot;, &quot;cricket&quot;, &quot;tennis&quot;, &quot;mma&quot;, &quot;motorsport&quot;, &quot;darts&quot;, &quot;snooker&quot;</span>
+<span class="sd">                - &quot;cycling&quot;, &quot;basketball&quot;, &quot;table-tennis&quot;, &quot;ice-hockey&quot;, &quot;e-sports&quot;, &quot;handball&quot;</span>
+<span class="sd">                - &quot;volleyball&quot;, &quot;baseball&quot;, &quot;american-football&quot;, &quot;futsal&quot;, &quot;minifootball&quot;, &quot;badminton&quot;</span>
+<span class="sd">                - &quot;aussie-rules&quot;, &quot;beach-volley&quot;, &quot;waterpolo&quot;, &quot;floorball&quot;, &quot;bandy&quot;</span>
+<span class="sd">            </span>
+<span class="sd">            date (str, optional): The date in &quot;YYYY-MM-DD&quot; format. If not provided, the current date is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing fixture details for the specified sport and date, </span>
+<span class="sd">            including match details, teams, venue, and start time.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the provided sport is not in the list of supported sports.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;events&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;venue&quot;: {</span>
+<span class="sd">                                &quot;city&quot;: {&quot;name&quot;: &quot;Sydney&quot;},</span>
+<span class="sd">                                &quot;name&quot;: &quot;Qudos Bank Arena&quot;,</span>
+<span class="sd">                                &quot;country&quot;: {&quot;alpha2&quot;: &quot;AU&quot;, &quot;name&quot;: &quot;Australia&quot;}</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;tournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;UFC 312: Du Plessis vs. Strickland 2&quot;,</span>
+<span class="sd">                                &quot;category&quot;: {&quot;name&quot;: &quot;World&quot;, &quot;sport&quot;: {&quot;name&quot;: &quot;Mixed Martial Arts&quot;}}</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;homeTeam&quot;: {&quot;name&quot;: &quot;Aleksandre Topuria&quot;, &quot;shortName&quot;: &quot;A. Topuria&quot;},</span>
+<span class="sd">                            &quot;awayTeam&quot;: {&quot;name&quot;: &quot;Colby Thicknesse&quot;, &quot;shortName&quot;: &quot;C. Thicknesse&quot;},</span>
+<span class="sd">                            &quot;status&quot;: {&quot;description&quot;: &quot;Not started&quot;},</span>
+<span class="sd">                            &quot;startTimestamp&quot;: 1739055600</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">sport_key</span> <span class="o">=</span> <span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">sport_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s2">&quot;sports&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid sport: </span><span class="si">{</span><span class="n">sport_key</span><span class="si">}</span><span class="s2">. Must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s1">&#39;sports&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/sport/</span><span class="si">{</span><span class="n">sport_key</span><span class="si">}</span><span class="s2">/scheduled-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MMA.fighter_career_stats">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fighter_career_stats">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fighter_career_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fighter_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves career statistics for a given fighter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fighter_id (int): The ID of the fighter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing the fighter&#39;s career statistics.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;issued&quot;: {</span>
+<span class="sd">                        &quot;strikes&quot;: {</span>
+<span class="sd">                            &quot;total&quot;: {</span>
+<span class="sd">                                &quot;landed&quot;: {</span>
+<span class="sd">                                    &quot;roundAvg&quot;: 46.64</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;distance&quot;: {</span>
+<span class="sd">                                &quot;landed&quot;: {</span>
+<span class="sd">                                    &quot;roundAvg&quot;: 38.45,</span>
+<span class="sd">                                    &quot;roundPct&quot;: 82.5</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;ground&quot;: {</span>
+<span class="sd">                                &quot;landed&quot;: {</span>
+<span class="sd">                                    &quot;roundAvg&quot;: 8.18,</span>
+<span class="sd">                                    &quot;roundPct&quot;: 17.5</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;significantStrikes&quot;: {</span>
+<span class="sd">                            &quot;total&quot;: {</span>
+<span class="sd">                                &quot;landed&quot;: {</span>
+<span class="sd">                                    &quot;roundAvg&quot;: 20.27,</span>
+<span class="sd">                                    &quot;roundPct&quot;: 43.5</span>
+<span class="sd">                                }</span>
+<span class="sd">                            }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                stats = await mma.fighter_career_stats(fighter_id=12345)</span>
+<span class="sd">                print(stats[&quot;issued&quot;][&quot;strikes&quot;][&quot;total&quot;][&quot;landed&quot;][&quot;roundAvg&quot;])  # Output: 46.64</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">fighter_id</span><span class="si">}</span><span class="s2">/career-statistics&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MMA.fighter_next_fights">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fighter_next_fights">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fighter_next_fights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fighter_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves upcoming fights for a given fighter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fighter_id (int): The ID of the fighter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Dict[str, Any]]: A list of dictionaries containing details about upcoming fights, </span>
+<span class="sd">            including tournament, season, venue, teams, scores, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;events&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;venue&quot;: {</span>
+<span class="sd">                                &quot;city&quot;: { &quot;name&quot;: &quot;Sydney&quot; },</span>
+<span class="sd">                                &quot;name&quot;: &quot;Qudos Bank Arena&quot;,</span>
+<span class="sd">                                &quot;country&quot;: { &quot;alpha2&quot;: &quot;AU&quot;, &quot;name&quot;: &quot;Australia&quot; }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fightType&quot;: &quot;maincard&quot;,</span>
+<span class="sd">                            &quot;weightClass&quot;: &quot;middle&quot;,</span>
+<span class="sd">                            &quot;tournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;UFC 312: Du Plessis vs. Strickland 2&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 144072,</span>
+<span class="sd">                                &quot;startTimestamp&quot;: 1739055600</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;season&quot;: { &quot;name&quot;: &quot;UFC 312&quot;, &quot;year&quot;: &quot;2025&quot; },</span>
+<span class="sd">                            &quot;status&quot;: { &quot;description&quot;: &quot;Not started&quot;, &quot;type&quot;: &quot;notstarted&quot; },</span>
+<span class="sd">                            &quot;homeTeam&quot;: { &quot;name&quot;: &quot;Dricus Du Plessis&quot;, &quot;id&quot;: 461874 },</span>
+<span class="sd">                            &quot;awayTeam&quot;: { &quot;name&quot;: &quot;Sean Strickland&quot;, &quot;id&quot;: 461861 }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &quot;hasNextPage&quot;: false</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                upcoming_fights = await mma.fighter_next_fights(fighter_id=12345)</span>
+<span class="sd">                print(upcoming_fights[0][&quot;tournament&quot;][&quot;name&quot;])  # Output: UFC 312: Du Plessis vs. Strickland 2</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">fighter_id</span><span class="si">}</span><span class="s2">/events/next/0&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="MMA.fighter_last_fights">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fighter_last_fights">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fighter_last_fights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fighter_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves previous fights for a given fighter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fighter_id (int): The ID of the fighter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[Dict[str, Any]]: A list of dictionaries containing details about previous fights, </span>
+<span class="sd">            including tournament, season, venue, teams, scores, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;events&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;venue&quot;: {</span>
+<span class="sd">                                &quot;city&quot;: { &quot;name&quot;: &quot;Sydney&quot; },</span>
+<span class="sd">                                &quot;name&quot;: &quot;Qudos Bank Arena&quot;,</span>
+<span class="sd">                                &quot;country&quot;: { &quot;alpha2&quot;: &quot;AU&quot;, &quot;name&quot;: &quot;Australia&quot; }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;fightType&quot;: &quot;maincard&quot;,</span>
+<span class="sd">                            &quot;weightClass&quot;: &quot;middle&quot;,</span>
+<span class="sd">                            &quot;tournament&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;UFC 312: Du Plessis vs. Strickland 2&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 144072,</span>
+<span class="sd">                                &quot;startTimestamp&quot;: 1739055600</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;season&quot;: { &quot;name&quot;: &quot;UFC 312&quot;, &quot;year&quot;: &quot;2025&quot; },</span>
+<span class="sd">                            &quot;status&quot;: { &quot;description&quot;: &quot;Not started&quot;, &quot;type&quot;: &quot;notstarted&quot; },</span>
+<span class="sd">                            &quot;homeTeam&quot;: { &quot;name&quot;: &quot;Dricus Du Plessis&quot;, &quot;id&quot;: 461874 },</span>
+<span class="sd">                            &quot;awayTeam&quot;: { &quot;name&quot;: &quot;Sean Strickland&quot;, &quot;id&quot;: 461861 }</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &quot;hasNextPage&quot;: false</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                upcoming_fights = await mma.fighter_last_fights(fighter_id=12345)</span>
+<span class="sd">                print(upcoming_fights[0][&quot;tournament&quot;][&quot;name&quot;])  # Output: UFC 312: Du Plessis vs. Strickland 2</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">fighter_id</span><span class="si">}</span><span class="s2">/events/last/0&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">]</span></div>
+
+    
+    <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<div class="viewcode-block" id="MMA.fighter_rankings">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fighter_rankings">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fighter_rankings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fighter_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves rankings and previous fights for a given fighter.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fighter_id (int): The ID of the fighter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries containing details about previous fights, </span>
+<span class="sd">            including tournament, season, venue, teams, scores, and more. Returns `None` if no data is found.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.fighter_rankings(fighter_id=12345)</span>
+<span class="sd">                if fighter_data:</span>
+<span class="sd">                    print(fighter_data[0][&quot;tournament&quot;][&quot;name&quot;])  # Example Output: UFC 312: Du Plessis vs. Strickland 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/rankings/team/</span><span class="si">{</span><span class="n">fighter_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MMA.fighter_info">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fighter_info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fighter_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fighter_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls info about the fighter</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fighter_id (int): The ID of the fighter.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries containing details about previous fights, </span>
+<span class="sd">            including tournament, season, venue, teams, scores, and more. Returns `None` if no data is found.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.fighter_info(fighter_id=12345)</span>
+<span class="sd">                if fighter_data:</span>
+<span class="sd">                    print(fighter_data[&quot;team&quot;][&quot;name&quot;])  # Example Output: Dricus Du Plessis</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">fighter_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MMA.main_events_date">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.main_events_date">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">main_events_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls MMA main events for the provided date, or today.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            date (Optional) str: YYYY-MM-DD provided date.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries containing details about previous fights, </span>
+<span class="sd">            including tournament, season, venue, teams, scores, and more. Returns `None` if no data is found.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.main_events_date(date=&quot;2025-02-06&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/sport/mma/main-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">/extended&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MMA.main_events_month">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.main_events_month">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">main_events_month</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">organisation_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls MMA main events for the provided month, or the current month.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            date (Optional) str: YYYY-MM provided date.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries containing details about previous fights, </span>
+<span class="sd">            including tournament, season, venue, teams, scores, and more. Returns `None` if no data is found.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.main_events_month(date=&quot;2025-02&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">organisation_id</span><span class="si">}</span><span class="s2">/scheduled-mma-main-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MMA.mma_tournaments">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.mma_tournaments">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">mma_tournaments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls active MMA tournaments such as UFC and BELLATOR.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries, </span>
+<span class="sd">            including tournament info</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.mma_tournaments()</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/category/1708/unique-tournaments&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MMA.mma_tournaments_months">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.mma_tournaments_months">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">mma_tournaments_months</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls which months has fights for the provided tournament</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries, </span>
+<span class="sd">            including tournament info</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;monthsWithEvents&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;month&quot;: 9,</span>
+<span class="sd">                            &quot;year&quot;: 2024</span>
+<span class="sd">                        },</span>
+<span class="sd">                ...</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.mma_tournaments_months(19906)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/calendar/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/0/months-with-events&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MMA.tournament_info">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.tournament_info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls info about the provided tournament</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries, </span>
+<span class="sd">            including tournament info</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.tournament_info(19906)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MMA.fighter_image">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.fighter_image">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fighter_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fighter_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the fighter image</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://img.sofascore.com/api/v1/team/</span><span class="si">{</span><span class="n">fighter_id</span><span class="si">}</span><span class="s2">/image&quot;</span></div>
+
+
+<div class="viewcode-block" id="MMA.tournament_image">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.tournament_image">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the tournament image</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://img.sofascore.com/api/v1/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/image/dark&quot;</span></div>
+
+    
+<div class="viewcode-block" id="MMA.ranking_summary">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.ranking_summary">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">ranking_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls the ranking summary for the chosen tournament</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries, </span>
+<span class="sd">            including tournament info</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.ranking_summary(19906)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/summary&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MMA.rankings">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.mma.MMA.rankings">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">rankings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranking_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pulls the full ranking data from the ranking provided by ranking_summary()</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[List[Dict[str, Any]]]: A list of dictionaries, </span>
+<span class="sd">            including tournament info</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                fighter_data = await mma.ranking_summary(19906)</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/rankings/</span><span class="si">{</span><span class="n">ranking_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+    
+
+
+
+
+    
+    
+    
+   
+    
+
+
+    
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

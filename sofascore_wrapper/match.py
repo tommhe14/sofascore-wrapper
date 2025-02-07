@@ -1500,52 +1500,6 @@ class Match:
             }
         """
         return await self.api._get(f"/event/{self.match_id}/heatmap/{team_id}")
-
-
-    async def stats(self):
-        """
-        Retrieves the statistics for the game.
-
-        This function returns detailed statistics for the match, including various 
-        performance metrics for both teams (e.g., ball possession, shots, etc.), 
-        grouped by categories such as "Match overview".
-
-        :returns: A dictionary containing the match statistics, with grouped statistics 
-                for home and away teams.
-        :rtype: dict
-
-        Example Response:
-            .. code-block:: json
-
-                {
-                    "statistics": [
-                        {
-                            "period": "ALL",
-                            "groups": [
-                                {
-                                    "groupName": "Match overview",
-                                    "statisticsItems": [
-                                        {
-                                            "name": "Ball possession",
-                                            "home": "39%",
-                                            "away": "61%",
-                                            "compareCode": 2,
-                                            "statisticsType": "positive",
-                                            "valueType": "event",
-                                            "homeValue": 39,
-                                            "awayValue": 61,
-                                            "renderType": 2,
-                                            "key": "ballPossession"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-        """
-        return await self.api._get(f"/event/{self.match_id}/statistics")
-
         
     async def stats(self) -> Dict:
         """
@@ -1590,6 +1544,192 @@ class Match:
                 "Match overview", and performance indicators for both home and away teams.
         """
         return await self.api._get(f"/event/{self.match_id}/statistics")
+    
+    async def get_match(self) -> Dict:
+        """
+        Returns the match info.
+
+        
+        Example Response:
+            .. code-block:: json
+            {
+                "tournament": {
+                    "name": "U20 CONMEBOL Championship, Group B",
+                    "slug": "u20-conmebol-championship-group-b",
+                    "category": {
+                        "name": "South America",
+                        "slug": "south-america",
+                        "sport": {
+                            "name": "Football",
+                            "slug": "football",
+                            "id": 1
+                        },
+                        "id": 1470,
+                        "flag": "south-america"
+                    },
+                    "uniqueTournament": {
+                        "name": "U20 CONMEBOL Championship",
+                        "slug": "u20-conmebol-championship",
+                        "primaryColorHex": "#348925",
+                        "secondaryColorHex": "#afc402",
+                        "category": {
+                            "name": "South America",
+                            "slug": "south-america",
+                            "sport": {
+                                "name": "Football",
+                                "slug": "football",
+                                "id": 1
+                            },
+                            "id": 1470,
+                            "flag": "south-america"
+                        },
+                        "userCount": 11952,
+                        "id": 632,
+                        "hasPerformanceGraphFeature": false,
+                        "hasEventPlayerStatistics": true,
+                        "displayInverseHomeAwayTeams": false
+                    },
+                    "priority": 0,
+                    "isGroup": true,
+                    "groupName": "Group B",
+                    "isLive": false,
+                    "id": 10066
+                },
+                "season": {
+                    "name": "U20 CONMEBOL Ch.ship 2025",
+                    "year": "2025",
+                    "editor": false,
+                    "id": 68914
+                },
+                "roundInfo": {
+                    "round": 4
+                },
+                "customId": "xdjsiAn",
+                "status": {
+                    "code": 6,
+                    "description": "1st half",
+                    "type": "inprogress"
+                },
+                "homeTeam": {
+                    "name": "Ecuador U20",
+                    "slug": "ecuador-u20",
+                    "shortName": "Ecuador U20",
+                    "gender": "M",
+                    "sport": {
+                        "name": "Football",
+                        "slug": "football",
+                        "id": 1
+                    },
+                    "userCount": 4401,
+                    "nameCode": "ECU",
+                    "disabled": false,
+                    "national": true,
+                    "type": 0,
+                    "id": 33758,
+                    "country": {
+                        "alpha2": "EC",
+                        "alpha3": "ECU",
+                        "name": "Ecuador",
+                        "slug": "ecuador"
+                    },
+                    "entityType": "team",
+                    "teamColors": {
+                        "primary": "#ffff00",
+                        "secondary": "#000063",
+                        "text": "#000063"
+                    },
+                    "fieldTranslations": {
+                        "nameTranslation": {
+                            "ar": "الإكوادور تحت 20",
+                            "ru": "Эквадор U20"
+                        }
+                    }
+                },
+                "awayTeam": {
+                    "name": "Brazil U20",
+                    "slug": "brazil-u20",
+                    "shortName": "Brazil U20",
+                    "gender": "M",
+                    "sport": {
+                        "name": "Football",
+                        "slug": "football",
+                        "id": 1
+                    },
+                    "userCount": 39092,
+                    "nameCode": "BRA",
+                    "disabled": false,
+                    "national": true,
+                    "type": 0,
+                    "id": 22672,
+                    "country": {
+                        "alpha2": "BR",
+                        "alpha3": "BRA",
+                        "name": "Brazil",
+                        "slug": "brazil"
+                    },
+                    "entityType": "team",
+                    "teamColors": {
+                        "primary": "#ffff00",
+                        "secondary": "#009933",
+                        "text": "#009933"
+                    },
+                    "fieldTranslations": {
+                        "nameTranslation": {
+                            "ar": "البرازيل تحت 20",
+                            "ru": "Бразилия U20"
+                        }
+                    }
+                },
+                "homeScore": {
+                    "current": 0,
+                    "display": 0,
+                    "period1": 0,
+                    "normaltime": 0
+                },
+                "awayScore": {
+                    "current": 0,
+                    "display": 0,
+                    "period1": 0,
+                    "normaltime": 0
+                },
+                "time": {
+                    "initial": 0,
+                    "max": 2700,
+                    "extra": 540,
+                    "currentPeriodStartTimestamp": 1738279810
+                },
+                "changes": {
+                    "changes": [
+                        "homeScore.period1",
+                        "homeScore.normaltime",
+                        "awayScore.period1",
+                        "awayScore.normaltime"
+                    ],
+                    "changeTimestamp": 1738279909
+                },
+                "hasGlobalHighlights": false,
+                "hasEventPlayerStatistics": true,
+                "hasEventPlayerHeatMap": true,
+                "detailId": 1,
+                "crowdsourcingDataDisplayEnabled": false,
+                "id": 13123315,
+                "statusTime": {
+                    "prefix": "",
+                    "initial": 0,
+                    "max": 2700,
+                    "timestamp": 1738279810,
+                    "extra": 540
+                },
+                "startTimestamp": 1738279800,
+                "slug": "ecuador-u20-brazil-u20",
+                "lastPeriod": "period1",
+                "finalResultOnly": false,
+                "feedLocked": true,
+                "isEditor": false
+            }
+
+        """
+        return await self.api._get(f"/event/{self.match_id}")
 
     
     async def highlight(self) -> Dict:

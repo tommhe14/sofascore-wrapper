@@ -1,0 +1,1149 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.motorsport &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.motorsport</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.motorsport</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<div class="viewcode-block" id="Motorsport">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport">[docs]</a>
+<span class="k">class</span> <span class="nc">Motorsport</span><span class="p">:</span>
+    <span class="n">ENUMS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tools&quot;</span> <span class="o">/</span> <span class="s2">&quot;enums.json&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ENUMS_PATH</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">ENUMS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
+
+<div class="viewcode-block" id="Motorsport.total_races">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.total_races">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">total_races</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the total count of today&#39;s motorsport races and how many are currently live.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+<span class="sd">                - &quot;live&quot;: The number of live motorsport races.</span>
+<span class="sd">                - &quot;total&quot;: The total number of motorsport races scheduled for today.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;live&quot;: 8,</span>
+<span class="sd">                &quot;total&quot;: 16</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/0/event-count&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;motorsport&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.categories">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.categories">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">categories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all the motorsport categories such as Rally, F1.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;categories&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;name&quot;: &quot;DTM&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;dtm&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 11</span>
+<span class="sd">                        },</span>
+<span class="sd">                    &quot;priority&quot;: 1,</span>
+<span class="sd">                    &quot;uniqueStages&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;name&quot;: &quot;DTM&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;dtm&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 10,</span>
+<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#0d2750&quot;,</span>
+<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#99cfff&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ],</span>
+<span class="sd">                        &quot;id&quot;: 198,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;dtm&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/motorsport/categories&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.live_races">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.live_races">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">live_races</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve all currently live motorsport events.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, List[Dict[str, Any]]]: A dictionary containing a list of live motorsport events under the key &quot;events&quot;.</span>
+<span class="sd">            Each event is represented as a dictionary with details such as stage, teams, results, and race status.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/motorsport/events/live&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.featured_races">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.featured_races">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">featured_races</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the featured motorsport races.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing details about upcoming motorsport races.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &quot;stages&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                    &quot;uniqueStage&quot;: {</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Formula E&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;formula-e&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 11</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;id&quot;: 1321,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;formula-e&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;name&quot;: &quot;Formula E&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;formula-e&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 68</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;description&quot;: &quot;GP Diriyah 1&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;gp-diriyah-1&quot;,</span>
+<span class="sd">                    &quot;type&quot;: {</span>
+<span class="sd">                        &quot;id&quot;: 2,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Event&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;status&quot;: {</span>
+<span class="sd">                        &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                        &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 210100,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;SA&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Saudi Arabia&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;name&quot;: &quot;GP Diriyah 1&quot;,</span>
+<span class="sd">                    &quot;info&quot;: {</span>
+<span class="sd">                        &quot;circuit&quot;: &quot;Jeddah Corniche Circuit&quot;,</span>
+<span class="sd">                        &quot;circuitCity&quot;: &quot;Jeddah&quot;,</span>
+<span class="sd">                        &quot;circuitCountry&quot;: &quot;Saudi Arabia&quot;,</span>
+<span class="sd">                        &quot;circuitLength&quot;: 6174,</span>
+<span class="sd">                        &quot;laps&quot;: 50,</span>
+<span class="sd">                        &quot;raceDistance&quot;: 308700</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;startDateTimestamp&quot;: 1739460600,</span>
+<span class="sd">                    &quot;endDateTimestamp&quot;: 1739556000,</span>
+<span class="sd">                    &quot;seasonStageName&quot;: &quot;Formula E 2025&quot;,</span>
+<span class="sd">                    &quot;flag&quot;: &quot;saudi-arabia&quot;,</span>
+<span class="sd">                    &quot;stageParent&quot;: {</span>
+<span class="sd">                        &quot;description&quot;: &quot;Formula E 2025&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 210097,</span>
+<span class="sd">                        &quot;startDateTimestamp&quot;: 1733513400</span>
+<span class="sd">                    }</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                featured_races = await api.motorsport_featured_races()</span>
+<span class="sd">                print(featured_races[&quot;stages&quot;][0][&quot;name&quot;])  # Output: &quot;GP Diriyah 1&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/stage/sport/motorsport/featured&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motorsport_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves season details for a specific motorsport category (e.g., Formula 1, Rally).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            motorsport_id (int): The ID of the motorsport category.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing season details for the specified motorsport.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &quot;seasons&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                    &quot;uniqueStage&quot;: {</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 11</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;id&quot;: 36,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 40</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;description&quot;: &quot;Formula 1 2025&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;formula-1-2025&quot;,</span>
+<span class="sd">                    &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 209766,</span>
+<span class="sd">                    &quot;name&quot;: &quot;Formula 1 2025&quot;,</span>
+<span class="sd">                    &quot;startDateTimestamp&quot;: 1741916100,</span>
+<span class="sd">                    &quot;endDateTimestamp&quot;: 1765119600</span>
+<span class="sd">                    }</span>
+<span class="sd">                ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                seasons_data = await api.seasons(motorsport_id=40)</span>
+<span class="sd">                print(seasons_data[&quot;seasons&quot;][0][&quot;name&quot;])  # Output: &quot;Formula 1 2025&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-stage/</span><span class="si">{</span><span class="n">motorsport_id</span><span class="si">}</span><span class="s2">/seasons&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.current_season">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.current_season">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">current_season</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motorsport_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the current season for the selected motorsport (e.g., Formula 1, Rally).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            motorsport_id (int): The ID of the motorsport category.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing season details for the specified motorsport.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                209766</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                current_season = await api.current_season(motorsport_id=40)</span>
+<span class="sd">                print(current_season)  # Output: &quot;209766&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-stage/</span><span class="si">{</span><span class="n">motorsport_id</span><span class="si">}</span><span class="s2">/seasons&quot;</span><span class="p">)</span>
+
+        <span class="n">season_obj</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">season</span> <span class="k">for</span> <span class="n">season</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;seasons&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">season</span><span class="p">[</span><span class="s2">&quot;startDateTimestamp&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">season</span><span class="p">[</span><span class="s2">&quot;endDateTimestamp&quot;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">season_obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;uniqueStage&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="p">{})</span> <span class="k">if</span> <span class="n">season_obj</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.races">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.races">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">races</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all the races for the selected season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">        &quot;stages&quot;: [</span>
+<span class="sd">            {</span>
+<span class="sd">            &quot;uniqueStage&quot;: {</span>
+<span class="sd">                &quot;category&quot;: {</span>
+<span class="sd">                &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 11</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;id&quot;: 36,</span>
+<span class="sd">                &quot;country&quot;: {</span>
+
+<span class="sd">                },</span>
+<span class="sd">                &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                &quot;id&quot;: 40</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;description&quot;: &quot;Australia GP&quot;,</span>
+<span class="sd">            &quot;slug&quot;: &quot;formula-1-gp&quot;,</span>
+<span class="sd">            &quot;type&quot;: {</span>
+<span class="sd">                &quot;id&quot;: 2,</span>
+<span class="sd">                &quot;name&quot;: &quot;Event&quot;</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;status&quot;: {</span>
+<span class="sd">                &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">            &quot;id&quot;: 209767,</span>
+<span class="sd">            &quot;country&quot;: {</span>
+<span class="sd">                &quot;alpha2&quot;: &quot;AU&quot;,</span>
+<span class="sd">                &quot;name&quot;: &quot;Australia&quot;</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;name&quot;: &quot;Australia GP&quot;,</span>
+<span class="sd">            &quot;info&quot;: {</span>
+<span class="sd">                &quot;circuit&quot;: &quot;Melbourne Grand Prix Circuit&quot;,</span>
+<span class="sd">                &quot;circuitCity&quot;: &quot;Melbourne&quot;,</span>
+<span class="sd">                &quot;circuitCountry&quot;: &quot;Australia&quot;,</span>
+<span class="sd">                &quot;circuitLength&quot;: 5278,</span>
+<span class="sd">                &quot;laps&quot;: 58,</span>
+<span class="sd">                &quot;raceDistance&quot;: 306124</span>
+<span class="sd">            },</span>
+<span class="sd">            &quot;startDateTimestamp&quot;: 1741916100,</span>
+<span class="sd">            &quot;endDateTimestamp&quot;: 1742104800,</span>
+<span class="sd">            &quot;seasonStageName&quot;: &quot;Formula 1 2025&quot;,</span>
+<span class="sd">            &quot;flag&quot;: &quot;australia&quot;,</span>
+<span class="sd">            &quot;stageParent&quot;: {</span>
+<span class="sd">                &quot;description&quot;: &quot;Formula 1 2025&quot;,</span>
+<span class="sd">                &quot;id&quot;: 209766,</span>
+<span class="sd">                &quot;startDateTimestamp&quot;: 1741916100</span>
+<span class="sd">            }</span>
+<span class="sd">            },</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/stage/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/substages&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.race_info">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.race_info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">race_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves detailed information about a specific race stage for a selected motorsport event </span>
+<span class="sd">        (e.g., Formula 1, Rally) based on the provided stage ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stage_id (int): The ID of the specific race stage (e.g., Formula 1 Grand Prix event).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing details about the selected race stage, </span>
+<span class="sd">            including the name, description, country, circuit info, start and end times, and more.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;stage&quot;: {</span>
+<span class="sd">                        &quot;uniqueStage&quot;: {</span>
+<span class="sd">                            &quot;category&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 11</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;id&quot;: 36,</span>
+<span class="sd">                                &quot;country&quot;: {},</span>
+<span class="sd">                                &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 40</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;description&quot;: &quot;Australia GP&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;formula-1-gp&quot;,</span>
+<span class="sd">                        &quot;type&quot;: {</span>
+<span class="sd">                            &quot;id&quot;: 2,</span>
+<span class="sd">                            &quot;name&quot;: &quot;Event&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;status&quot;: {</span>
+<span class="sd">                            &quot;description&quot;: &quot;Not started&quot;,</span>
+<span class="sd">                            &quot;type&quot;: &quot;notstarted&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 209767,</span>
+<span class="sd">                        &quot;country&quot;: {</span>
+<span class="sd">                            &quot;alpha2&quot;: &quot;AU&quot;,</span>
+<span class="sd">                            &quot;name&quot;: &quot;Australia&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;name&quot;: &quot;Australia GP&quot;,</span>
+<span class="sd">                        &quot;info&quot;: {</span>
+<span class="sd">                            &quot;circuit&quot;: &quot;Melbourne Grand Prix Circuit&quot;,</span>
+<span class="sd">                            &quot;circuitCity&quot;: &quot;Melbourne&quot;,</span>
+<span class="sd">                            &quot;circuitCountry&quot;: &quot;Australia&quot;,</span>
+<span class="sd">                            &quot;circuitLength&quot;: 5278,</span>
+<span class="sd">                            &quot;laps&quot;: 58,</span>
+<span class="sd">                            &quot;raceDistance&quot;: 306124</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;startDateTimestamp&quot;: 1741916100,</span>
+<span class="sd">                        &quot;endDateTimestamp&quot;: 1742104800,</span>
+<span class="sd">                        &quot;seasonStageName&quot;: &quot;Formula 1 2025&quot;,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;australia&quot;,</span>
+<span class="sd">                        &quot;stageParent&quot;: {</span>
+<span class="sd">                            &quot;description&quot;: &quot;Formula 1 2025&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 209766,</span>
+<span class="sd">                            &quot;startDateTimestamp&quot;: 1741916100</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                # Example usage of the race_info method</span>
+<span class="sd">                race_details = await api.race_info(stage_id=40)</span>
+<span class="sd">                print(race_details)  # Output: Details about the Australia GP stage</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/stage/</span><span class="si">{</span><span class="n">stage_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.driver_rankings">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.driver_rankings">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">driver_rankings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the current standings of drivers for a given motorsport season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            season_id (int): The ID of the season for which to retrieve driver rankings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The driver rankings for the given season, including details such as </span>
+<span class="sd">            position, points, victories, and other stats.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;standings&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;team&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;verstappen-max&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 11</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 11</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 36,</span>
+<span class="sd">                                    &quot;country&quot;: {},</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 31878,</span>
+<span class="sd">                                &quot;nameCode&quot;: &quot;VER&quot;,</span>
+<span class="sd">                                &quot;disabled&quot;: false,</span>
+<span class="sd">                                &quot;national&quot;: false,</span>
+<span class="sd">                                &quot;parentTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;red-bull-racing&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 11</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;category&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                        &quot;sport&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                            &quot;id&quot;: 11</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;id&quot;: 36,</span>
+<span class="sd">                                        &quot;country&quot;: {},</span>
+<span class="sd">                                        &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;userCount&quot;: 0,</span>
+<span class="sd">                                    &quot;nameCode&quot;: &quot;RBR&quot;,</span>
+<span class="sd">                                    &quot;disabled&quot;: false,</span>
+<span class="sd">                                    &quot;national&quot;: false,</span>
+<span class="sd">                                    &quot;type&quot;: 0,</span>
+<span class="sd">                                    &quot;id&quot;: 214902,</span>
+<span class="sd">                                    &quot;country&quot;: {</span>
+<span class="sd">                                        &quot;alpha2&quot;: &quot;GB&quot;,</span>
+<span class="sd">                                        &quot;alpha3&quot;: &quot;GBR&quot;,</span>
+<span class="sd">                                        &quot;name&quot;: &quot;United Kingdom&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;united-kingdom&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;great-britain&quot;,</span>
+<span class="sd">                                    &quot;teamColors&quot;: {</span>
+<span class="sd">                                        &quot;primary&quot;: &quot;#1e40ff&quot;,</span>
+<span class="sd">                                        &quot;secondary&quot;: &quot;#222226&quot;,</span>
+<span class="sd">                                        &quot;text&quot;: &quot;#222226&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;type&quot;: 1,</span>
+<span class="sd">                                &quot;id&quot;: 191417,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;NL&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;NLD&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Netherlands&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;netherlands&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;netherlands&quot;,</span>
+<span class="sd">                                &quot;teamColors&quot;: {</span>
+<span class="sd">                                    &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;points&quot;: 437,</span>
+<span class="sd">                            &quot;position&quot;: 1,</span>
+<span class="sd">                            &quot;victories&quot;: 9,</span>
+<span class="sd">                            &quot;racesStarted&quot;: 24,</span>
+<span class="sd">                            &quot;racesWithPoints&quot;: 23,</span>
+<span class="sd">                            &quot;polePositions&quot;: 8,</span>
+<span class="sd">                            &quot;podiums&quot;: 14,</span>
+<span class="sd">                            &quot;fastestLaps&quot;: 3,</span>
+<span class="sd">                            &quot;updatedAtTimestamp&quot;: 1733672824</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                # Example usage of the driver_rankings method</span>
+<span class="sd">                standings = await api.driver_rankings(season_id=206455)</span>
+<span class="sd">                print(standings)  # Output: Driver rankings for the given season</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/stage/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/standings/competitor&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.team_rankings">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.team_rankings">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_rankings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the current standings of teams for a given motorsport season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            season_id (int): The ID of the season for which to retrieve team rankings.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The driver rankings for the given season, including details such as </span>
+<span class="sd">            position, points, victories, and other stats.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;standings&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;team&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;verstappen-max&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 11</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 11</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 36,</span>
+<span class="sd">                                    &quot;country&quot;: {},</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 31878,</span>
+<span class="sd">                                &quot;nameCode&quot;: &quot;VER&quot;,</span>
+<span class="sd">                                &quot;disabled&quot;: false,</span>
+<span class="sd">                                &quot;national&quot;: false,</span>
+<span class="sd">                                &quot;parentTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;red-bull-racing&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 11</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;category&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                        &quot;sport&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                            &quot;id&quot;: 11</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;id&quot;: 36,</span>
+<span class="sd">                                        &quot;country&quot;: {},</span>
+<span class="sd">                                        &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;userCount&quot;: 0,</span>
+<span class="sd">                                    &quot;nameCode&quot;: &quot;RBR&quot;,</span>
+<span class="sd">                                    &quot;disabled&quot;: false,</span>
+<span class="sd">                                    &quot;national&quot;: false,</span>
+<span class="sd">                                    &quot;type&quot;: 0,</span>
+<span class="sd">                                    &quot;id&quot;: 214902,</span>
+<span class="sd">                                    &quot;country&quot;: {</span>
+<span class="sd">                                        &quot;alpha2&quot;: &quot;GB&quot;,</span>
+<span class="sd">                                        &quot;alpha3&quot;: &quot;GBR&quot;,</span>
+<span class="sd">                                        &quot;name&quot;: &quot;United Kingdom&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;united-kingdom&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;great-britain&quot;,</span>
+<span class="sd">                                    &quot;teamColors&quot;: {</span>
+<span class="sd">                                        &quot;primary&quot;: &quot;#1e40ff&quot;,</span>
+<span class="sd">                                        &quot;secondary&quot;: &quot;#222226&quot;,</span>
+<span class="sd">                                        &quot;text&quot;: &quot;#222226&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;type&quot;: 1,</span>
+<span class="sd">                                &quot;id&quot;: 191417,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;NL&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;NLD&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Netherlands&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;netherlands&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;netherlands&quot;,</span>
+<span class="sd">                                &quot;teamColors&quot;: {</span>
+<span class="sd">                                    &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;points&quot;: 437,</span>
+<span class="sd">                            &quot;position&quot;: 1,</span>
+<span class="sd">                            &quot;victories&quot;: 9,</span>
+<span class="sd">                            &quot;racesStarted&quot;: 24,</span>
+<span class="sd">                            &quot;racesWithPoints&quot;: 23,</span>
+<span class="sd">                            &quot;polePositions&quot;: 8,</span>
+<span class="sd">                            &quot;podiums&quot;: 14,</span>
+<span class="sd">                            &quot;fastestLaps&quot;: 3,</span>
+<span class="sd">                            &quot;updatedAtTimestamp&quot;: 1733672824</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                # Example usage of the team_rankings method</span>
+<span class="sd">                standings = await api.team_rankings(season_id=206455)</span>
+<span class="sd">                print(standings)  # Output: Driver rankings for the given season</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/stage/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/standings/team&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.race_results">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.race_results">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">race_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the driver rankings for a specific race</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stage_id (int): The ID of the race (stage)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The driver rankings for the given season, including details such as </span>
+<span class="sd">            position, points, victories, and other stats.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &quot;standings&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;team&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;verstappen-max&quot;,</span>
+<span class="sd">                                &quot;shortName&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                                &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                &quot;sport&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                    &quot;id&quot;: 11</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;category&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 11</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;id&quot;: 36,</span>
+<span class="sd">                                    &quot;country&quot;: {},</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;userCount&quot;: 31878,</span>
+<span class="sd">                                &quot;nameCode&quot;: &quot;VER&quot;,</span>
+<span class="sd">                                &quot;disabled&quot;: false,</span>
+<span class="sd">                                &quot;national&quot;: false,</span>
+<span class="sd">                                &quot;parentTeam&quot;: {</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;red-bull-racing&quot;,</span>
+<span class="sd">                                    &quot;shortName&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                                    &quot;sport&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                        &quot;id&quot;: 11</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;category&quot;: {</span>
+<span class="sd">                                        &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                                        &quot;sport&quot;: {</span>
+<span class="sd">                                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                                            &quot;id&quot;: 11</span>
+<span class="sd">                                        },</span>
+<span class="sd">                                        &quot;id&quot;: 36,</span>
+<span class="sd">                                        &quot;country&quot;: {},</span>
+<span class="sd">                                        &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;userCount&quot;: 0,</span>
+<span class="sd">                                    &quot;nameCode&quot;: &quot;RBR&quot;,</span>
+<span class="sd">                                    &quot;disabled&quot;: false,</span>
+<span class="sd">                                    &quot;national&quot;: false,</span>
+<span class="sd">                                    &quot;type&quot;: 0,</span>
+<span class="sd">                                    &quot;id&quot;: 214902,</span>
+<span class="sd">                                    &quot;country&quot;: {</span>
+<span class="sd">                                        &quot;alpha2&quot;: &quot;GB&quot;,</span>
+<span class="sd">                                        &quot;alpha3&quot;: &quot;GBR&quot;,</span>
+<span class="sd">                                        &quot;name&quot;: &quot;United Kingdom&quot;,</span>
+<span class="sd">                                        &quot;slug&quot;: &quot;united-kingdom&quot;</span>
+<span class="sd">                                    },</span>
+<span class="sd">                                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                    &quot;flag&quot;: &quot;great-britain&quot;,</span>
+<span class="sd">                                    &quot;teamColors&quot;: {</span>
+<span class="sd">                                        &quot;primary&quot;: &quot;#1e40ff&quot;,</span>
+<span class="sd">                                        &quot;secondary&quot;: &quot;#222226&quot;,</span>
+<span class="sd">                                        &quot;text&quot;: &quot;#222226&quot;</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;type&quot;: 1,</span>
+<span class="sd">                                &quot;id&quot;: 191417,</span>
+<span class="sd">                                &quot;country&quot;: {</span>
+<span class="sd">                                    &quot;alpha2&quot;: &quot;NL&quot;,</span>
+<span class="sd">                                    &quot;alpha3&quot;: &quot;NLD&quot;,</span>
+<span class="sd">                                    &quot;name&quot;: &quot;Netherlands&quot;,</span>
+<span class="sd">                                    &quot;slug&quot;: &quot;netherlands&quot;</span>
+<span class="sd">                                },</span>
+<span class="sd">                                &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                                &quot;flag&quot;: &quot;netherlands&quot;,</span>
+<span class="sd">                                &quot;teamColors&quot;: {</span>
+<span class="sd">                                    &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                                }</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;points&quot;: 437,</span>
+<span class="sd">                            &quot;position&quot;: 1,</span>
+<span class="sd">                            &quot;victories&quot;: 9,</span>
+<span class="sd">                            &quot;racesStarted&quot;: 24,</span>
+<span class="sd">                            &quot;racesWithPoints&quot;: 23,</span>
+<span class="sd">                            &quot;polePositions&quot;: 8,</span>
+<span class="sd">                            &quot;podiums&quot;: 14,</span>
+<span class="sd">                            &quot;fastestLaps&quot;: 3,</span>
+<span class="sd">                            &quot;updatedAtTimestamp&quot;: 1733672824</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                # Example usage of the team_rankings method</span>
+<span class="sd">                standings = await api.team_rankings(season_id=206455)</span>
+<span class="sd">                print(standings)  # Output: Driver rankings for the given season</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/stage/</span><span class="si">{</span><span class="n">stage_id</span><span class="si">}</span><span class="s2">/standings/competitor&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.race_image">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.race_image">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">race_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the race track image</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://img.sofascore.com/api/v1/stage/</span><span class="si">{</span><span class="n">stage_id</span><span class="si">}</span><span class="s2">/image&quot;</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.team_image">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.team_image">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the team image</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://img.sofascore.com/api/v1/team/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/image&quot;</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.driver_image">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.driver_image">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">driver_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the driver image</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;https://img.sofascore.com/api/v1/team/</span><span class="si">{</span><span class="n">driver_id</span><span class="si">}</span><span class="s2">/image&quot;</span></div>
+
+
+<div class="viewcode-block" id="Motorsport.driver_info">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.driver_info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">driver_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves detailed information about a driver.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            driver_id (int): The ID of the driver.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing driver details.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &quot;team&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;Verstappen M.&quot;,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Netherlands&quot;,</span>
+<span class="sd">                    &quot;alpha2&quot;: &quot;NL&quot;,</span>
+<span class="sd">                    &quot;alpha3&quot;: &quot;NLD&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;playerTeamInfo&quot;: {</span>
+<span class="sd">                    &quot;residence&quot;: &quot;Monte Carlo, Monaco&quot;,</span>
+<span class="sd">                    &quot;birthplace&quot;: &quot;Hasselt, Belgium&quot;,</span>
+<span class="sd">                    &quot;height&quot;: 1.8,</span>
+<span class="sd">                    &quot;weight&quot;: 67,</span>
+<span class="sd">                    &quot;number&quot;: 1,</span>
+<span class="sd">                    &quot;birthDateTimestamp&quot;: 875577600</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;parentTeam&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;United Kingdom&quot;,</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;GB&quot;,</span>
+<span class="sd">                        &quot;alpha3&quot;: &quot;GBR&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;teamColors&quot;: {</span>
+<span class="sd">                    &quot;primary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                    &quot;secondary&quot;: &quot;#374df5&quot;,</span>
+<span class="sd">                    &quot;text&quot;: &quot;#ffffff&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                }</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                driver_details = await api.driver_info(driver_id=191417)</span>
+<span class="sd">                print(driver_details)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">driver_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.team_info">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.team_info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves detailed information about a team.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            team_id (int): The ID of the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing team details.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+
+<span class="sd">                {</span>
+<span class="sd">                &quot;team&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;red-bull-racing&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                    &quot;id&quot;: 11</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;category&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Formula 1&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;formula-1&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 11</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;id&quot;: 36,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;flag&quot;: &quot;formula-1&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 0,</span>
+<span class="sd">                    &quot;nameCode&quot;: &quot;RBR&quot;,</span>
+<span class="sd">                    &quot;disabled&quot;: false,</span>
+<span class="sd">                    &quot;national&quot;: false,</span>
+<span class="sd">                    &quot;type&quot;: 0,</span>
+<span class="sd">                    &quot;id&quot;: 214902,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                    &quot;alpha2&quot;: &quot;GB&quot;,</span>
+<span class="sd">                    &quot;alpha3&quot;: &quot;GBR&quot;,</span>
+<span class="sd">                    &quot;name&quot;: &quot;United Kingdom&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;united-kingdom&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                    &quot;fullName&quot;: &quot;Red Bull Racing&quot;,</span>
+<span class="sd">                    &quot;teamColors&quot;: {</span>
+<span class="sd">                    &quot;primary&quot;: &quot;#1e40ff&quot;,</span>
+<span class="sd">                    &quot;secondary&quot;: &quot;#222226&quot;,</span>
+<span class="sd">                    &quot;text&quot;: &quot;#222226&quot;</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;pregameForm&quot;: null</span>
+<span class="sd">                }</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                team_details = await api.team_info(team_id=191417)</span>
+<span class="sd">                print(team_details)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.driver_seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.driver_seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">driver_seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of seasons in which a driver has participated.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            driver_id (int): The ID of the driver.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing season details for the given driver.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                driver_seasons = await api.driver_seasons(driver_id=191417)</span>
+<span class="sd">                print(driver_seasons)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">driver_id</span><span class="si">}</span><span class="s2">/stage-seasons&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.team_seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.team_seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of seasons in which a team has participated.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            team_id (int): The ID of the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing season details for the given team.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                team_seasons = await api.team_seasons(team_id=191417)</span>
+<span class="sd">                print(team_seasons)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/stage-seasons&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.driver_races">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.driver_races">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">driver_races</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">driver_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of races in which the driver participated for the given season</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            driver_id (int): The ID of the driver.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing season details for the given driver.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                driver_races = await api.driver_races(driver_id=191417, season_id=206455)</span>
+<span class="sd">                print(driver_races)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">driver_id</span><span class="si">}</span><span class="s2">/stage-season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/races&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Motorsport.team_races">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.motorsport.Motorsport.team_races">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_races</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of races in which the team participated for the given season</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            team_id (int): The ID of the team.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: A dictionary containing season details for the given team.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">                team_races = await api.team_races(team_id=214902, season_id=206455)</span>
+<span class="sd">                print(team_races)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/team/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/stage-season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/races&quot;</span><span class="p">)</span></div>
+</div>
+
+    
+
+
+
+    
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

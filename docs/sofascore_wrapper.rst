@@ -1,6 +1,8 @@
 sofascore\_wrapper package
 ==========================
 
+Submodules
+----------
 
 sofascore\_wrapper.api module
 -----------------------------
@@ -14,6 +16,14 @@ sofascore\_wrapper.basketball module
 ------------------------------------
 
 .. automodule:: sofascore_wrapper.basketball
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sofascore\_wrapper.esports module
+---------------------------------
+
+.. automodule:: sofascore_wrapper.esports
    :members:
    :undoc-members:
    :show-inheritance:
@@ -50,6 +60,30 @@ sofascore\_wrapper.match module
    :undoc-members:
    :show-inheritance:
 
+sofascore\_wrapper.mma module
+-----------------------------
+
+.. automodule:: sofascore_wrapper.mma
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sofascore\_wrapper.motorsport module
+------------------------------------
+
+.. automodule:: sofascore_wrapper.motorsport
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sofascore\_wrapper.news module
+------------------------------
+
+.. automodule:: sofascore_wrapper.news
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 sofascore\_wrapper.player module
 --------------------------------
 
@@ -74,4 +108,10 @@ sofascore\_wrapper.team module
    :undoc-members:
    :show-inheritance:
 
+Module contents
+---------------
 
+.. automodule:: sofascore_wrapper
+   :members:
+   :undoc-members:
+   :show-inheritance:

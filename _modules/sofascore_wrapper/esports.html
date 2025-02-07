@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.esports &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.esports</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.esports</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<div class="viewcode-block" id="Esports">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports">[docs]</a>
+<span class="k">class</span> <span class="nc">Esports</span><span class="p">:</span>
+    <span class="n">ENUMS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tools&quot;</span> <span class="o">/</span> <span class="s2">&quot;enums.json&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ENUMS_PATH</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">ENUMS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
+
+<div class="viewcode-block" id="Esports.total_matches">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.total_matches">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">total_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the total count of today&#39;s e-sport matches and how many are currently live.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+<span class="sd">                - &quot;live&quot;: The number of live e-sport matches.</span>
+<span class="sd">                - &quot;total&quot;: The total number of e-sport matches scheduled for today.</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;live&quot;: 8,</span>
+<span class="sd">                &quot;total&quot;: 16</span>
+<span class="sd">            }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/0/event-count&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;esports&quot;</span><span class="p">,</span> <span class="p">{})</span></div>
+
+    
+<div class="viewcode-block" id="Esports.all_tournaments">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.all_tournaments">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">all_tournaments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all the e-sport tournaments</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;categories&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;name&quot;: &quot;DTM&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;dtm&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 11</span>
+<span class="sd">                        },</span>
+<span class="sd">                    &quot;priority&quot;: 1,</span>
+<span class="sd">                    &quot;uniqueStages&quot;: [</span>
+<span class="sd">                        {</span>
+<span class="sd">                            &quot;name&quot;: &quot;DTM&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;dtm&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 10,</span>
+<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#0d2750&quot;,</span>
+<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#99cfff&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    ],</span>
+<span class="sd">                        &quot;id&quot;: 198,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;dtm&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/config/default-unique-tournaments/GB/esports&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.categories">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.categories">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">categories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all the esports categories such as LoL, Counter-Strike.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;categories&quot;: [</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Counter Strike&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;csgo&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;E-sports&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;esports&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 72</span>
+<span class="sd">                        },</span>
+<span class="sd">                    &quot;priority&quot;: 0,</span>
+<span class="sd">                        &quot;id&quot;: 1572,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;counter-strike&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/esports/categories&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.matches_by_date">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.matches_by_date">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">matches_by_date</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sport</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;esports&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves scheduled fixtures for a given sport on a specific date.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sport (str): The sport for which to retrieve fixtures. Available options include:</span>
+<span class="sd">                - &quot;football&quot;, &quot;rugby&quot;, &quot;cricket&quot;, &quot;tennis&quot;, &quot;mma&quot;, &quot;motorsport&quot;, &quot;darts&quot;, &quot;snooker&quot;</span>
+<span class="sd">                - &quot;cycling&quot;, &quot;basketball&quot;, &quot;table-tennis&quot;, &quot;ice-hockey&quot;, &quot;esports&quot;, &quot;handball&quot;</span>
+<span class="sd">                - &quot;volleyball&quot;, &quot;baseball&quot;, &quot;american-football&quot;, &quot;futsal&quot;, &quot;minifootball&quot;, &quot;badminton&quot;</span>
+<span class="sd">                - &quot;aussie-rules&quot;, &quot;beach-volley&quot;, &quot;waterpolo&quot;, &quot;floorball&quot;, &quot;bandy&quot;</span>
+<span class="sd">            </span>
+<span class="sd">            date (str, optional): The date in &quot;YYYY-MM-DD&quot; format. If not provided, the current date is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing fixture details for the specified sport and date, </span>
+<span class="sd">            including match details, teams, venue, and start time.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the provided sport is not in the list of supported sports.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">sport_key</span> <span class="o">=</span> <span class="n">sport</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">sport_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s2">&quot;sports&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid sport: </span><span class="si">{</span><span class="n">sport_key</span><span class="si">}</span><span class="s2">. Must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enums</span><span class="p">[</span><span class="s1">&#39;sports&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/sport/</span><span class="si">{</span><span class="n">sport_key</span><span class="si">}</span><span class="s2">/scheduled-events/</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.tournaments">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.tournaments">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournaments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all tournaments for a selected esports category i.e counter strike.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/category/</span><span class="si">{</span><span class="n">category_id</span><span class="si">}</span><span class="s2">/unique-tournaments&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.tournament_seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.tournament_seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the tournament seasons.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/seasons&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.tournament_info">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.tournament_info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the tournament info.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/info&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.get_tournament">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.get_tournament">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_tournament</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the tournament.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.tournament_media">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.tournament_media">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_media</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the tournament media such as highlights and streams.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/media&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.featured_matches">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.featured_matches">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">featured_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the tournament current featured matches.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/featured-events&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.tournament_cuptree">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.tournament_cuptree">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_cuptree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the tournament current cup tree for the selected season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/cuptrees&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.next_tournament_matches">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.next_tournament_matches">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">next_tournament_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the next matches for the selected tournament and season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events/next/0&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.last_tournament_matches">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.last_tournament_matches">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">last_tournament_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the last matches for the selected tournament and season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events/last/0&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.tournament_matches">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.tournament_matches">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">tournament_matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tournament_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">season_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves all matches for the selected tournament and season.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.get_match">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.get_match">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves match info.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/esports-games&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.match_rounds">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.match_rounds">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">match_rounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves further match info which cannot be pulled from match.get_match()</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/esports-game/</span><span class="si">{</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/rounds&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Esports.lineups">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.lineups">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">lineups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves match lineups</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/esports-game/</span><span class="si">{</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/lineups&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.team_streaks">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.team_streaks">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_streaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves team streaks for the selected match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/esports-game/</span><span class="si">{</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/team-streaks&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Esports.highlights">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.highlights">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">highlights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the match highlights.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/esports-game/</span><span class="si">{</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/highlights&quot;</span><span class="p">)</span></div>
+</div>
+
+    
+
+    
+    
+
+    
+
+
+    
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

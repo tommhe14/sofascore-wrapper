@@ -1630,52 +1630,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/heatmap/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
-
-
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retrieves the statistics for the game.</span>
-
-<span class="sd">        This function returns detailed statistics for the match, including various </span>
-<span class="sd">        performance metrics for both teams (e.g., ball possession, shots, etc.), </span>
-<span class="sd">        grouped by categories such as &quot;Match overview&quot;.</span>
-
-<span class="sd">        :returns: A dictionary containing the match statistics, with grouped statistics </span>
-<span class="sd">                for home and away teams.</span>
-<span class="sd">        :rtype: dict</span>
-
-<span class="sd">        Example Response:</span>
-<span class="sd">            .. code-block:: json</span>
-
-<span class="sd">                {</span>
-<span class="sd">                    &quot;statistics&quot;: [</span>
-<span class="sd">                        {</span>
-<span class="sd">                            &quot;period&quot;: &quot;ALL&quot;,</span>
-<span class="sd">                            &quot;groups&quot;: [</span>
-<span class="sd">                                {</span>
-<span class="sd">                                    &quot;groupName&quot;: &quot;Match overview&quot;,</span>
-<span class="sd">                                    &quot;statisticsItems&quot;: [</span>
-<span class="sd">                                        {</span>
-<span class="sd">                                            &quot;name&quot;: &quot;Ball possession&quot;,</span>
-<span class="sd">                                            &quot;home&quot;: &quot;39%&quot;,</span>
-<span class="sd">                                            &quot;away&quot;: &quot;61%&quot;,</span>
-<span class="sd">                                            &quot;compareCode&quot;: 2,</span>
-<span class="sd">                                            &quot;statisticsType&quot;: &quot;positive&quot;,</span>
-<span class="sd">                                            &quot;valueType&quot;: &quot;event&quot;,</span>
-<span class="sd">                                            &quot;homeValue&quot;: 39,</span>
-<span class="sd">                                            &quot;awayValue&quot;: 61,</span>
-<span class="sd">                                            &quot;renderType&quot;: 2,</span>
-<span class="sd">                                            &quot;key&quot;: &quot;ballPossession&quot;</span>
-<span class="sd">                                        }</span>
-<span class="sd">                                    ]</span>
-<span class="sd">                                }</span>
-<span class="sd">                            ]</span>
-<span class="sd">                        }</span>
-<span class="sd">                    ]</span>
-<span class="sd">                }</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/statistics&quot;</span><span class="p">)</span>
-
         
 <div class="viewcode-block" id="Match.stats">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.stats">[docs]</a>
@@ -1722,6 +1676,195 @@
 <span class="sd">                &quot;Match overview&quot;, and performance indicators for both home and away teams.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/statistics&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.get_match">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.get_match">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_match</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the match info.</span>
+
+<span class="sd">        </span>
+<span class="sd">        Example Response:</span>
+<span class="sd">            .. code-block:: json</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;tournament&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;U20 CONMEBOL Championship, Group B&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;u20-conmebol-championship-group-b&quot;,</span>
+<span class="sd">                    &quot;category&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;South America&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;south-america&quot;,</span>
+<span class="sd">                        &quot;sport&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                            &quot;id&quot;: 1</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;id&quot;: 1470,</span>
+<span class="sd">                        &quot;flag&quot;: &quot;south-america&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;uniqueTournament&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;U20 CONMEBOL Championship&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;u20-conmebol-championship&quot;,</span>
+<span class="sd">                        &quot;primaryColorHex&quot;: &quot;#348925&quot;,</span>
+<span class="sd">                        &quot;secondaryColorHex&quot;: &quot;#afc402&quot;,</span>
+<span class="sd">                        &quot;category&quot;: {</span>
+<span class="sd">                            &quot;name&quot;: &quot;South America&quot;,</span>
+<span class="sd">                            &quot;slug&quot;: &quot;south-america&quot;,</span>
+<span class="sd">                            &quot;sport&quot;: {</span>
+<span class="sd">                                &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                                &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                                &quot;id&quot;: 1</span>
+<span class="sd">                            },</span>
+<span class="sd">                            &quot;id&quot;: 1470,</span>
+<span class="sd">                            &quot;flag&quot;: &quot;south-america&quot;</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;userCount&quot;: 11952,</span>
+<span class="sd">                        &quot;id&quot;: 632,</span>
+<span class="sd">                        &quot;hasPerformanceGraphFeature&quot;: false,</span>
+<span class="sd">                        &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                        &quot;displayInverseHomeAwayTeams&quot;: false</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;priority&quot;: 0,</span>
+<span class="sd">                    &quot;isGroup&quot;: true,</span>
+<span class="sd">                    &quot;groupName&quot;: &quot;Group B&quot;,</span>
+<span class="sd">                    &quot;isLive&quot;: false,</span>
+<span class="sd">                    &quot;id&quot;: 10066</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;season&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;U20 CONMEBOL Ch.ship 2025&quot;,</span>
+<span class="sd">                    &quot;year&quot;: &quot;2025&quot;,</span>
+<span class="sd">                    &quot;editor&quot;: false,</span>
+<span class="sd">                    &quot;id&quot;: 68914</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;roundInfo&quot;: {</span>
+<span class="sd">                    &quot;round&quot;: 4</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;customId&quot;: &quot;xdjsiAn&quot;,</span>
+<span class="sd">                &quot;status&quot;: {</span>
+<span class="sd">                    &quot;code&quot;: 6,</span>
+<span class="sd">                    &quot;description&quot;: &quot;1st half&quot;,</span>
+<span class="sd">                    &quot;type&quot;: &quot;inprogress&quot;</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;homeTeam&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Ecuador U20&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;ecuador-u20&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;Ecuador U20&quot;,</span>
+<span class="sd">                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 4401,</span>
+<span class="sd">                    &quot;nameCode&quot;: &quot;ECU&quot;,</span>
+<span class="sd">                    &quot;disabled&quot;: false,</span>
+<span class="sd">                    &quot;national&quot;: true,</span>
+<span class="sd">                    &quot;type&quot;: 0,</span>
+<span class="sd">                    &quot;id&quot;: 33758,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;EC&quot;,</span>
+<span class="sd">                        &quot;alpha3&quot;: &quot;ECU&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Ecuador&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;ecuador&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                    &quot;teamColors&quot;: {</span>
+<span class="sd">                        &quot;primary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                        &quot;secondary&quot;: &quot;#000063&quot;,</span>
+<span class="sd">                        &quot;text&quot;: &quot;#000063&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                            &quot;ar&quot;: &quot;الإكوادور تحت 20&quot;,</span>
+<span class="sd">                            &quot;ru&quot;: &quot;Эквадор U20&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;awayTeam&quot;: {</span>
+<span class="sd">                    &quot;name&quot;: &quot;Brazil U20&quot;,</span>
+<span class="sd">                    &quot;slug&quot;: &quot;brazil-u20&quot;,</span>
+<span class="sd">                    &quot;shortName&quot;: &quot;Brazil U20&quot;,</span>
+<span class="sd">                    &quot;gender&quot;: &quot;M&quot;,</span>
+<span class="sd">                    &quot;sport&quot;: {</span>
+<span class="sd">                        &quot;name&quot;: &quot;Football&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;football&quot;,</span>
+<span class="sd">                        &quot;id&quot;: 1</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;userCount&quot;: 39092,</span>
+<span class="sd">                    &quot;nameCode&quot;: &quot;BRA&quot;,</span>
+<span class="sd">                    &quot;disabled&quot;: false,</span>
+<span class="sd">                    &quot;national&quot;: true,</span>
+<span class="sd">                    &quot;type&quot;: 0,</span>
+<span class="sd">                    &quot;id&quot;: 22672,</span>
+<span class="sd">                    &quot;country&quot;: {</span>
+<span class="sd">                        &quot;alpha2&quot;: &quot;BR&quot;,</span>
+<span class="sd">                        &quot;alpha3&quot;: &quot;BRA&quot;,</span>
+<span class="sd">                        &quot;name&quot;: &quot;Brazil&quot;,</span>
+<span class="sd">                        &quot;slug&quot;: &quot;brazil&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;entityType&quot;: &quot;team&quot;,</span>
+<span class="sd">                    &quot;teamColors&quot;: {</span>
+<span class="sd">                        &quot;primary&quot;: &quot;#ffff00&quot;,</span>
+<span class="sd">                        &quot;secondary&quot;: &quot;#009933&quot;,</span>
+<span class="sd">                        &quot;text&quot;: &quot;#009933&quot;</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;fieldTranslations&quot;: {</span>
+<span class="sd">                        &quot;nameTranslation&quot;: {</span>
+<span class="sd">                            &quot;ar&quot;: &quot;البرازيل تحت 20&quot;,</span>
+<span class="sd">                            &quot;ru&quot;: &quot;Бразилия U20&quot;</span>
+<span class="sd">                        }</span>
+<span class="sd">                    }</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;homeScore&quot;: {</span>
+<span class="sd">                    &quot;current&quot;: 0,</span>
+<span class="sd">                    &quot;display&quot;: 0,</span>
+<span class="sd">                    &quot;period1&quot;: 0,</span>
+<span class="sd">                    &quot;normaltime&quot;: 0</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;awayScore&quot;: {</span>
+<span class="sd">                    &quot;current&quot;: 0,</span>
+<span class="sd">                    &quot;display&quot;: 0,</span>
+<span class="sd">                    &quot;period1&quot;: 0,</span>
+<span class="sd">                    &quot;normaltime&quot;: 0</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;time&quot;: {</span>
+<span class="sd">                    &quot;initial&quot;: 0,</span>
+<span class="sd">                    &quot;max&quot;: 2700,</span>
+<span class="sd">                    &quot;extra&quot;: 540,</span>
+<span class="sd">                    &quot;currentPeriodStartTimestamp&quot;: 1738279810</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;changes&quot;: {</span>
+<span class="sd">                    &quot;changes&quot;: [</span>
+<span class="sd">                        &quot;homeScore.period1&quot;,</span>
+<span class="sd">                        &quot;homeScore.normaltime&quot;,</span>
+<span class="sd">                        &quot;awayScore.period1&quot;,</span>
+<span class="sd">                        &quot;awayScore.normaltime&quot;</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &quot;changeTimestamp&quot;: 1738279909</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;hasGlobalHighlights&quot;: false,</span>
+<span class="sd">                &quot;hasEventPlayerStatistics&quot;: true,</span>
+<span class="sd">                &quot;hasEventPlayerHeatMap&quot;: true,</span>
+<span class="sd">                &quot;detailId&quot;: 1,</span>
+<span class="sd">                &quot;crowdsourcingDataDisplayEnabled&quot;: false,</span>
+<span class="sd">                &quot;id&quot;: 13123315,</span>
+<span class="sd">                &quot;statusTime&quot;: {</span>
+<span class="sd">                    &quot;prefix&quot;: &quot;&quot;,</span>
+<span class="sd">                    &quot;initial&quot;: 0,</span>
+<span class="sd">                    &quot;max&quot;: 2700,</span>
+<span class="sd">                    &quot;timestamp&quot;: 1738279810,</span>
+<span class="sd">                    &quot;extra&quot;: 540</span>
+<span class="sd">                },</span>
+<span class="sd">                &quot;startTimestamp&quot;: 1738279800,</span>
+<span class="sd">                &quot;slug&quot;: &quot;ecuador-u20-brazil-u20&quot;,</span>
+<span class="sd">                &quot;lastPeriod&quot;: &quot;period1&quot;,</span>
+<span class="sd">                &quot;finalResultOnly&quot;: false,</span>
+<span class="sd">                &quot;feedLocked&quot;: true,</span>
+<span class="sd">                &quot;isEditor&quot;: false</span>
+<span class="sd">            }</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
     
