@@ -1849,7 +1849,25 @@ class Match:
                 - ``fieldTranslations``: Translations for the player's name and short name in different languages.
             """
         return await self.api._get(f"/event/{self.match_id}/comments")
+    
+    async def team_streaks(self) -> Dict[str, int]:
+        """
+        Retrieves team streaks for the selected match.
 
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
 
+        """
+        return await self.api._get(f"/event/{self.match_id}/team-streaks")
+    
+    async def h2h_results(self, match_code: str) -> Dict[str, int]:
+        """
+        Retrieves more h2h data for a given match. Please provide the match code such as xNbsDNb rather than the match id.
 
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
+
+        """
+        return await self.api._get(f"/event/{match_code}/h2h/events")
+    
     

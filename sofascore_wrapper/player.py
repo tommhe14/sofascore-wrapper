@@ -995,3 +995,30 @@ class Player:
             }
         """
         return await self.api._get(f"/player/{self.player_id}/national-team-statistics")
+    
+    async def player_seasons(self, player_id: int) -> Dict[str, Any]:
+        """
+        Retrieves a player's full seasons info
+
+        Args:
+            player_id (int): The ID of the player.
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the player's season statistics.
+
+        """
+        return await self.api._get(f"/player/{player_id}/statistics/seasons")
+    
+    async def player_leagues(self, player_id: int) -> Dict[str, Any]:
+        """
+        Retrieves a list of players unique leagues of which they have participated.
+
+        Args:
+            player_id (int): The ID of the player.
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the player's total leagues participated
+
+        """
+        return await self.api._get(f"/player/{player_id}/unique-tournaments")
+

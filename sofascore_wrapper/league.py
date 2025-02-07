@@ -902,12 +902,10 @@ class League:
         """
         return await self.api._get(f"/unique-tournament/{self.league_id}/season/{season}/player-of-the-season")
 
-    async def featured_game(self, season: int) -> Dict:
+    async def featured_games(self) -> Dict:
         """
         Get the featured game for a specific season.
 
-        Args:
-            season (int): The season ID to fetch the featured game for.
 
         Returns:
             Dict: A dictionary containing the featured game details.
@@ -1070,7 +1068,8 @@ class League:
                 ]
             }
         """
-        return await self.api._get(f"/unique-tournament/{self.league_id}/season/{season}/player-of-the-season")
+        return await self.api._get(f"/unique-tournaments/{self.league_id}/featured-events")
+    
 
     async def totw_rounds(self, season: int) -> Dict:
         """
@@ -2029,6 +2028,36 @@ class League:
 
         """
         return await self.api._get(f"/unique-tournament/{self.league_id}/season/{season_id}/events/round/{round_id}")
+    
+    async def leagues(self, category_id: int) -> Dict[str, int]:
+        """
+        Retrieves all tournaments for a selected sport category.
+
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
+
+        """
+        return await self.api._get(f"/category/{category_id}/unique-tournaments")
+    
+    async def league_info(self, league_id: int, season_id: int) -> Dict[str, int]:
+        """
+        Retrieves the tournament info.
+
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
+
+        """
+        return await self.api._get(f"/unique-tournaments/{league_id}/season/{season_id}/info")
+    
+    async def get_league(self, league_id: int) -> Dict[str, int]:
+        """
+        Retrieves the tournament.
+
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
+
+        """
+        return await self.api._get(f"/unique-tournaments/{league_id}")
 
 
     

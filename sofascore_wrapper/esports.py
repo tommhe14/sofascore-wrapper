@@ -277,6 +277,17 @@ class Esports:
         """
         return await self.api._get(f"/esports-game/{match_id}/highlights")
     
+    async def live_matches(self) -> Dict[str, List[Dict[str, Any]]]:
+        """
+        Retrieve all currently live e-sport events.
+
+        Returns:
+            Dict[str, List[Dict[str, Any]]]: A dictionary containing a list of live esport events under the key "events".
+            Each event is represented as a dictionary with details such as tournament, teams, scores, and match status.
+
+        """
+        return await self.api._get("/sport/esports/events/live")
+    
 
     
     
