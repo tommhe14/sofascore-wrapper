@@ -7,7 +7,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="sofascore_wrapper",  
-    version="1.0.16",
+    version="1.0.17",
     description="A Python API wrapper for https://www.sofascore.com",
     long_description=README,
     long_description_content_type="text/markdown",
