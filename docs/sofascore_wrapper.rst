@@ -4,6 +4,14 @@ sofascore\_wrapper package
 Submodules
 ----------
 
+sofascore\_wrapper.american\_football module
+--------------------------------------------
+
+.. automodule:: sofascore_wrapper.american_football
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 sofascore\_wrapper.api module
 -----------------------------
 
@@ -108,10 +116,3 @@ sofascore\_wrapper.team module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: sofascore_wrapper
-   :members:
-   :undoc-members:
-   :show-inheritance:

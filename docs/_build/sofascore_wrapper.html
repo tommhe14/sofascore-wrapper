@@ -46,6 +46,10 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">sofascore_wrapper</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">sofascore_wrapper package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.american_football">sofascore_wrapper.american_football module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.american_football.AmericanFootball"><code class="docutils literal notranslate"><span class="pre">AmericanFootball</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.api">sofascore_wrapper.api module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI"><code class="docutils literal notranslate"><span class="pre">SofascoreAPI</span></code></a></li>
 </ul>
@@ -99,7 +103,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.team.Team"><code class="docutils literal notranslate"><span class="pre">Team</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -136,6 +139,293 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
+<section id="module-sofascore_wrapper.american_football">
+<span id="sofascore-wrapper-american-football-module"></span><h2>sofascore_wrapper.american_football module<a class="headerlink" href="#module-sofascore_wrapper.american_football" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.american_football.</span></span><span class="sig-name descname"><span class="pre">AmericanFootball</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api</strong> (<a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.best_player_of_playoffs">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">best_player_of_playoffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tournament_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.best_player_of_playoffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.best_player_of_playoffs" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the best players for the selected team, tournament and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tournament_id</strong> (<em>int</em>) – The ID of the tournament id.</p></li>
+<li><p><strong>team_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.categories">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.categories" title="Link to this definition"></a></dt>
+<dd><p>Retrieves all the american football categories such as NFL europa and USA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.matches_by_date">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matches_by_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sport</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'american-football'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.matches_by_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.matches_by_date" title="Link to this definition"></a></dt>
+<dd><p>Retrieves scheduled fixtures for a given sport on a specific date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sport</strong> (<em>str</em>) – The sport for which to retrieve fixtures. Available options include:
+- “football”, “rugby”, “cricket”, “tennis”, “mma”, “motorsport”, “darts”, “snooker”
+- “cycling”, “basketball”, “table-tennis”, “ice-hockey”, “esports”, “handball”
+- “volleyball”, “baseball”, “american-football”, “futsal”, “minifootball”, “badminton”
+- “aussie-rules”, “beach-volley”, “waterpolo”, “floorball”, “bandy”</p></li>
+<li><p><strong>date</strong> (<em>str</em><em>, </em><em>optional</em>) – The date in “YYYY-MM-DD” format. If not provided, the current date is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing fixture details for the specified sport and date,
+including match details, teams, venue, and start time.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided sport is not in the list of supported sports.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.player_stats">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.player_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.player_stats" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a player’s statistics for a specific league and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>player_id</strong> (<em>int</em>) – The ID of the player.</p></li>
+<li><p><strong>league_id</strong> (<em>int</em>) – The ID of the league (unique tournament).</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>) – (int): the ID of the season.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the player’s season statistics, including points, rebounds, assists, and more.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.round_highlights">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">round_highlights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tournament_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.round_highlights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.round_highlights" title="Link to this definition"></a></dt>
+<dd><p>Retrieves highlights for the given round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>country_code</strong> (<em>str</em>)</p></li>
+<li><p><strong>tournament_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>round</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.season_games">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">season_games</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tournament_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.season_games"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.season_games" title="Link to this definition"></a></dt>
+<dd><p>Retrieves all matches for the selected tournament and season.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tournament_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.standings">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">standings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tournament_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.standings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.standings" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the current standings for the tournament and season.
+:returns: A dictionary containing two keys:
+:rtype: Dict[str, int]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tournament_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Dict</em>[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.team_near_games">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">team_near_games</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.team_near_games"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.team_near_games" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the nearest games for the selected team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.team_player_stats">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">team_player_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.team_player_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.team_player_stats" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a team’s best players for a given season.
+:param team_id: The ID of the tea,.
+:type team_id: int
+:param league_id: The ID of the league (unique tournament).
+:type league_id: int
+:param season_id: The ID of the season.
+:type season_id: int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the team’s best players stats.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>team_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>league_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.team_seasons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">team_seasons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.team_seasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.team_seasons" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the seasons for a given american football team.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>team_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.total_matches">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">total_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.total_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.total_matches" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the total count of today’s e-sport matches and how many are currently live.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A dictionary containing two keys:</dt><dd><ul class="simple">
+<li><p>”live”: The number of live e-sport matches.</p></li>
+<li><p>”total”: The total number of e-sport matches scheduled for today.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+</dl>
+<dl>
+<dt>Example Response:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>{</dt><dd><p>“live”: 8,
+“total”: 16</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.tournament_info">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tournament_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tournament_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.tournament_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.tournament_info" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the tournament info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tournament_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.american_football.AmericanFootball.tournaments">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tournaments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/american_football.html#AmericanFootball.tournaments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.american_football.AmericanFootball.tournaments" title="Link to this definition"></a></dt>
+<dd><p>Retrieves all tournaments for a selected esports category i.e NFL PRE SEASON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category_id</strong> (<em>int</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-sofascore_wrapper.api">
 <span id="sofascore-wrapper-api-module"></span><h2>sofascore_wrapper.api module<a class="headerlink" href="#module-sofascore_wrapper.api" title="Link to this heading"></a></h2>
 <dl class="py class">
@@ -150,6 +440,11 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="sofascore_wrapper.api.SofascoreAPI.close">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/api.html#SofascoreAPI.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.api.SofascoreAPI.close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sofascore_wrapper.api.SofascoreAPI.default_headers">
+<span class="sig-name descname"><span class="pre">default_headers</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'User-Agent':</span> <span class="pre">'Mozilla/5.0'}</span></em><a class="headerlink" href="#sofascore_wrapper.api.SofascoreAPI.default_headers" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1347,6 +1642,21 @@ including points, rebounds, assists, and more.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.esports.Esports.live_matches">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">live_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/esports.html#Esports.live_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.esports.Esports.live_matches" title="Link to this definition"></a></dt>
+<dd><p>Retrieve all currently live e-sport events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing a list of live esport events under the key “events”.
+Each event is represented as a dictionary with details such as tournament, teams, scores, and match status.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, List[Dict[str, Any]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sofascore_wrapper.esports.Esports.match_rounds">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match_rounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">match_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/esports.html#Esports.match_rounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.esports.Esports.match_rounds" title="Link to this definition"></a></dt>
 <dd><p>Retrieves further match info which cannot be pulled from match.get_match()</p>
@@ -1913,21 +2223,18 @@ it returns None.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sofascore_wrapper.league.League.featured_game">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">featured_game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">season</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.featured_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.featured_game" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.featured_games">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">featured_games</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.featured_games"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.featured_games" title="Link to this definition"></a></dt>
 <dd><p>Get the featured game for a specific season.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>season</strong> (<em>int</em>) – The season ID to fetch the featured game for.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing the featured game details.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary containing the featured game details.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Exception</strong> – If the API request fails.</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
 </dd>
 </dl>
 <dl>
@@ -2455,51 +2762,17 @@ Returns an empty list if no fixtures match the criteria.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_league">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_league</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_league"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_league" title="Link to this definition"></a></dt>
-<dd><p>Fetch general information about the league.</p>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_league</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_league"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_league" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the tournament.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A dictionary containing league details.</p>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dd class="field-even"><p>Dict[str, int]</p>
 </dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>Exception</strong> – If the API request fails.</p>
-</dd>
-</dl>
-<dl>
-<dt>Example Response:</dt><dd><div class="highlight-json notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<dl>
-<dt>{</dt><dd><p>“id”: 17,
-“name”: “Premier League”,
-“slug”: “premier-league”,
-“primaryColorHex”: “#3c1c5a”,
-“secondaryColorHex”: “#f80158”,
-“category”: {</p>
-<blockquote>
-<div><p>“name”: “England”,
-“slug”: “england”,
-“sport”: {</p>
-<blockquote>
-<div><p>“name”: “Football”,
-“slug”: “football”,
-“id”: 1</p>
-</div></blockquote>
-<p>},
-“id”: 1,
-“flag”: “england”,
-“alpha2”: “EN”</p>
-</div></blockquote>
-<p>},
-“userCount”: 1361165,
-“hasPerformanceGraphFeature”: true,
-“displayInverseHomeAwayTeams”: false</p>
-</dd>
-</dl>
-<p>}</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>league_id</strong> (<em>int</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2838,6 +3111,43 @@ it returns None.</p>
 </dd>
 </dl>
 <p>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.league_info">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">league_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">league_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.league_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.league_info" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the tournament info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>league_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>season_id</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.league.League.leagues">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leagues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.leagues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.leagues" title="Link to this definition"></a></dt>
+<dd><p>Retrieves all tournaments for a selected sport category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category_id</strong> (<em>int</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5861,6 +6171,23 @@ if the channel name is not found.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.match.Match.h2h_results">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">h2h_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">match_code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match.h2h_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match.h2h_results" title="Link to this definition"></a></dt>
+<dd><p>Retrieves more h2h data for a given match. Please provide the match code such as xNbsDNb rather than the match id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>match_code</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sofascore_wrapper.match.Match.heatmap">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">team_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match.heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match.heatmap" title="Link to this definition"></a></dt>
 <dd><p>Retrieves the heatmap data for the given team in the specified match.</p>
@@ -6940,6 +7267,20 @@ shots, and other performance indicators for both teams.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.match.Match.team_streaks">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">team_streaks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/match.html#Match.team_streaks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.match.Match.team_streaks" title="Link to this definition"></a></dt>
+<dd><p>Retrieves team streaks for the selected match.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary containing two keys:</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -9737,6 +10078,40 @@ is the first item in the list.</p>
 </dd>
 </dl>
 <p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.player_leagues">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player_leagues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.player_leagues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.player_leagues" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a list of players unique leagues of which they have participated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>player_id</strong> (<em>int</em>) – The ID of the player.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the player’s total leagues participated</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.player.Player.player_seasons">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player_seasons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/player.html#Player.player_seasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.player.Player.player_seasons" title="Link to this definition"></a></dt>
+<dd><p>Retrieves a player’s full seasons info</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>player_id</strong> (<em>int</em>) – The ID of the player.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the player’s season statistics.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -13349,9 +13724,6 @@ is the first item in the list.</p>
 
 </dd></dl>
 
-</section>
-<section id="module-sofascore_wrapper">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sofascore_wrapper" title="Link to this heading"></a></h2>
 </section>
 </section>
 

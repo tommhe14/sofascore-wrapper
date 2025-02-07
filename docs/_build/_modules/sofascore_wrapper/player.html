@@ -1094,7 +1094,40 @@
 <span class="sd">            }</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/player/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">player_id</span><span class="si">}</span><span class="s2">/national-team-statistics&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Player.player_seasons">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.player.Player.player_seasons">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">player_seasons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a player&#39;s full seasons info</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_id (int): The ID of the player.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the player&#39;s season statistics.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/player/</span><span class="si">{</span><span class="n">player_id</span><span class="si">}</span><span class="s2">/statistics/seasons&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Player.player_leagues">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.player.Player.player_leagues">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">player_leagues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of players unique leagues of which they have participated.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_id (int): The ID of the player.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the player&#39;s total leagues participated</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/player/</span><span class="si">{</span><span class="n">player_id</span><span class="si">}</span><span class="s2">/unique-tournaments&quot;</span><span class="p">)</span></div>
 </div>
+
 
 </pre></div>
 

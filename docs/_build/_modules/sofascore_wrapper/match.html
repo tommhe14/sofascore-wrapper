@@ -1990,11 +1990,35 @@
 <span class="sd">                - ``fieldTranslations``: Translations for the player&#39;s name and short name in different languages.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/comments&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.team_streaks">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.team_streaks">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">team_streaks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves team streaks for the selected match.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/team-streaks&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.h2h_results">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.h2h_results">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">h2h_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves more h2h data for a given match. Please provide the match code such as xNbsDNb rather than the match id.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="n">match_code</span><span class="si">}</span><span class="s2">/h2h/events&quot;</span><span class="p">)</span></div>
 </div>
 
-
-
-
+    
     
 </pre></div>
 
