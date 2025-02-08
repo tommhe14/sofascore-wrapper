@@ -2208,75 +2208,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">league_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
-
-    
-
-<div class="viewcode-block" id="League.get_transfer_feed">
-<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.league.League.get_transfer_feed">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">get_transfer_feed</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">sort_by</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;transferdate&quot;</span><span class="p">,</span> 
-        <span class="n">min_age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
-        <span class="n">max_age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="n">nationality</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">unique_tournament_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">followers_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Fetches the transfer feed from Sofascore API with optional filters.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            page (int): Page number for pagination (default=1).</span>
-<span class="sd">            sort_by (str): Sorting method (&quot;followers&quot;, &quot;transferfee&quot;, &quot;transferdate&quot;).</span>
-<span class="sd">            min_age (int): Minimum player age (default=15, max=50).</span>
-<span class="sd">            max_age (int): Maximum player age (default=50, min=15).</span>
-<span class="sd">            nationality (Optional[str]): Filter by nationality code (e.g., &#39;DZA&#39; for Algeria).</span>
-<span class="sd">            unique_tournament_id (Optional[int]): Filter by league/tournament ID.</span>
-<span class="sd">            position (Optional[str]): Filter by player position (&#39;FW&#39;, &#39;MF&#39;, &#39;DF&#39;, &#39;GK&#39;).</span>
-<span class="sd">            followers_count (Optional[int]): Minimum followers count (max=1000).</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            Dict: The API response containing transfer feed data.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">sort_mapping</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;followers&quot;</span><span class="p">:</span> <span class="s2">&quot;-userCount&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;transferfee&quot;</span><span class="p">:</span> <span class="s2">&quot;-transferFee&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;transferdate&quot;</span><span class="p">:</span> <span class="s2">&quot;-transferDate&quot;</span>
-        <span class="p">}</span>
-        <span class="n">sort_by</span> <span class="o">=</span> <span class="n">sort_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sort_by</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">sort_by</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid sort_by value: Must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">sort_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="n">min_age</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">min_age</span><span class="p">))</span>
-        <span class="n">max_age</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_age</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">followers_count</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">followers_count</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">followers_count</span><span class="p">))</span>
-
-        <span class="n">valid_positions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;FW&quot;</span><span class="p">,</span> <span class="s2">&quot;MF&quot;</span><span class="p">,</span> <span class="s2">&quot;DF&quot;</span><span class="p">,</span> <span class="s2">&quot;GK&quot;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">position</span><span class="p">:</span>
-            <span class="n">position</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_positions</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid position: </span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s2">. Must be one of </span><span class="si">{</span><span class="n">valid_positions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="n">query_params</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;sort=</span><span class="si">{</span><span class="n">sort_by</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;minAge=</span><span class="si">{</span><span class="n">min_age</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;maxAge=</span><span class="si">{</span><span class="n">max_age</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">nationality</span><span class="p">:</span>
-            <span class="n">query_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nationality=</span><span class="si">{</span><span class="n">nationality</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">unique_tournament_id</span><span class="p">:</span>
-            <span class="n">query_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;uniqueTournamentId=</span><span class="si">{</span><span class="n">unique_tournament_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">position</span><span class="p">:</span>
-            <span class="n">query_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;position=</span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">followers_count</span><span class="p">:</span>
-            <span class="n">query_params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;followersCount=</span><span class="si">{</span><span class="n">followers_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="n">request_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/transfer?</span><span class="si">{</span><span class="s1">&#39;&amp;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">query_params</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">request_url</span><span class="p">)</span> </div>
 </div>
 
+    
 
 
 

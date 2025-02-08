@@ -123,6 +123,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.tennis.Tennis"><code class="docutils literal notranslate"><span class="pre">Tennis</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.transfers">sofascore_wrapper.transfers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.transfers.Transfers"><code class="docutils literal notranslate"><span class="pre">Transfers</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-sofascore_wrapper.user_data">sofascore_wrapper.user_data module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sofascore_wrapper.user_data.UserData"><code class="docutils literal notranslate"><span class="pre">UserData</span></code></a></li>
 </ul>
@@ -3282,32 +3286,6 @@ Returns an empty list if no fixtures match the criteria.</p>
 </dd>
 </dl>
 <p>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sofascore_wrapper.league.League.get_transfer_feed">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_transfer_feed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'transferdate'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_age</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_age</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nationality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_tournament_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">followers_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/league.html#League.get_transfer_feed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.league.League.get_transfer_feed" title="Link to this definition"></a></dt>
-<dd><p>Fetches the transfer feed from Sofascore API with optional filters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>page</strong> (<em>int</em>) – Page number for pagination (default=1).</p></li>
-<li><p><strong>sort_by</strong> (<em>str</em>) – Sorting method (“followers”, “transferfee”, “transferdate”).</p></li>
-<li><p><strong>min_age</strong> (<em>int</em>) – Minimum player age (default=15, max=50).</p></li>
-<li><p><strong>max_age</strong> (<em>int</em>) – Maximum player age (default=50, min=15).</p></li>
-<li><p><strong>nationality</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Filter by nationality code (e.g., ‘DZA’ for Algeria).</p></li>
-<li><p><strong>unique_tournament_id</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Filter by league/tournament ID.</p></li>
-<li><p><strong>position</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Filter by player position (‘FW’, ‘MF’, ‘DF’, ‘GK’).</p></li>
-<li><p><strong>followers_count</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Minimum followers count (max=1000).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The API response containing transfer feed data.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -14650,6 +14628,46 @@ including match details, teams, venue, and start time.</p>
 </dd>
 </dl>
 <p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sofascore_wrapper.transfers">
+<span id="sofascore-wrapper-transfers-module"></span><h2>sofascore_wrapper.transfers module<a class="headerlink" href="#module-sofascore_wrapper.transfers" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sofascore_wrapper.transfers.Transfers">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sofascore_wrapper.transfers.</span></span><span class="sig-name descname"><span class="pre">Transfers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/transfers.html#Transfers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.transfers.Transfers" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>api</strong> (<a class="reference internal" href="#sofascore_wrapper.api.SofascoreAPI" title="sofascore_wrapper.api.SofascoreAPI"><em>SofascoreAPI</em></a>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sofascore_wrapper.transfers.Transfers.get_transfer_feed">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_transfer_feed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'transferdate'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_age</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_age</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nationality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_tournament_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">followers_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sofascore_wrapper/transfers.html#Transfers.get_transfer_feed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sofascore_wrapper.transfers.Transfers.get_transfer_feed" title="Link to this definition"></a></dt>
+<dd><p>Fetches the transfer feed from Sofascore API with optional filters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>page</strong> (<em>int</em>) – Page number for pagination (default=1).</p></li>
+<li><p><strong>sort_by</strong> (<em>str</em>) – Sorting method (“followers”, “transferfee”, “transferdate”).</p></li>
+<li><p><strong>min_age</strong> (<em>int</em>) – Minimum player age (default=15, max=50).</p></li>
+<li><p><strong>max_age</strong> (<em>int</em>) – Maximum player age (default=50, min=15).</p></li>
+<li><p><strong>nationality</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Filter by nationality code (e.g., ‘DZA’ for Algeria).</p></li>
+<li><p><strong>unique_tournament_id</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Filter by league/tournament ID.</p></li>
+<li><p><strong>position</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Filter by player position (‘FW’, ‘MF’, ‘DF’, ‘GK’).</p></li>
+<li><p><strong>followers_count</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Minimum followers count (max=1000).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The API response containing transfer feed data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict</p>
 </dd>
 </dl>
 </dd></dl>

@@ -109,7 +109,7 @@ class AmericanFootball:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/team-events/total")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/team-events/total")
     
     async def tournament_info(self, tournament_id: int, season_id: int) -> Dict[str, int]:
         """
@@ -119,7 +119,7 @@ class AmericanFootball:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/info")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/info")
     
     async def round_highlights(self, country_code: str, tournament_id: int, season_id: int, round: int) -> Dict[str, int]:
         """

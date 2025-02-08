@@ -156,6 +156,14 @@ sofascore\_wrapper.tennis module
    :undoc-members:
    :show-inheritance:
 
+sofascore\_wrapper.transfers module
+-----------------------------------
+
+.. automodule:: sofascore_wrapper.transfers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 sofascore\_wrapper.user\_data module
 ------------------------------------
 

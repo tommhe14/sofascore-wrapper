@@ -7,8 +7,7 @@ Welcome to sofascore-wrapper's documentation!
 This is the Python API wrapper for the Sofascore undocumented API.
 It allows you to fetch and interact with data from Sofascore, including information about matches, players, teams, and more.
 
-Contents:
----------
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
