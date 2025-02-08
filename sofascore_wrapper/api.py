@@ -18,6 +18,15 @@ class SofascoreAPI:
                 return await response.json()
             else:
                 raise Exception(f"Failed to fetch {endpoint}: {response.status}")
+            
+    async def _raw_get(self, endpoint):
+        if self.session is None:
+            self.session = aiohttp.ClientSession(headers = self.headers)
+        async with self.session.get(endpoint) as response:
+            if response.status == 200:
+                return await response.json()
+            else:
+                raise Exception(f"Failed to fetch {endpoint}: {response.status}")
 
     async def close(self):
         if self.session:
