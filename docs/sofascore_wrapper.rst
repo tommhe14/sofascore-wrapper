@@ -20,10 +20,26 @@ sofascore\_wrapper.api module
    :undoc-members:
    :show-inheritance:
 
+sofascore\_wrapper.baseball module
+----------------------------------
+
+.. automodule:: sofascore_wrapper.baseball
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 sofascore\_wrapper.basketball module
 ------------------------------------
 
 .. automodule:: sofascore_wrapper.basketball
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sofascore\_wrapper.cricket module
+---------------------------------
+
+.. automodule:: sofascore_wrapper.cricket
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,6 +56,14 @@ sofascore\_wrapper.flag module
 ------------------------------
 
 .. automodule:: sofascore_wrapper.flag
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sofascore\_wrapper.ice\_hockey module
+-------------------------------------
+
+.. automodule:: sofascore_wrapper.ice_hockey
    :members:
    :undoc-members:
    :show-inheritance:
@@ -100,6 +124,14 @@ sofascore\_wrapper.player module
    :undoc-members:
    :show-inheritance:
 
+sofascore\_wrapper.rugby module
+-------------------------------
+
+.. automodule:: sofascore_wrapper.rugby
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 sofascore\_wrapper.search module
 --------------------------------
 
@@ -115,4 +147,13 @@ sofascore\_wrapper.team module
    :members:
    :undoc-members:
    :show-inheritance:
+
+sofascore\_wrapper.tennis module
+--------------------------------
+
+.. automodule:: sofascore_wrapper.tennis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 

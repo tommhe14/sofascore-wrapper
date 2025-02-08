@@ -2016,6 +2016,19 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="n">match_code</span><span class="si">}</span><span class="s2">/h2h/events&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="Match.win_probability">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.win_probability">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">win_probability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the match win probability, Does not provide data for all sports.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/graph/win-probability&quot;</span><span class="p">)</span></div>
 </div>
 
     

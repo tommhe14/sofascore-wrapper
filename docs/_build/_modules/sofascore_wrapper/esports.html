@@ -111,40 +111,15 @@
     
 <div class="viewcode-block" id="Esports.all_tournaments">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.esports.Esports.all_tournaments">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">all_tournaments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">all_tournaments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;GB&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieves all the e-sport tournaments</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
-<span class="sd">        Example Response:</span>
-<span class="sd">            .. code-block:: json</span>
-<span class="sd">            {</span>
-<span class="sd">                &quot;categories&quot;: [</span>
-<span class="sd">                    {</span>
-<span class="sd">                        &quot;name&quot;: &quot;DTM&quot;,</span>
-<span class="sd">                        &quot;slug&quot;: &quot;dtm&quot;,</span>
-<span class="sd">                        &quot;sport&quot;: {</span>
-<span class="sd">                            &quot;name&quot;: &quot;Motorsport&quot;,</span>
-<span class="sd">                            &quot;slug&quot;: &quot;motorsport&quot;,</span>
-<span class="sd">                            &quot;id&quot;: 11</span>
-<span class="sd">                        },</span>
-<span class="sd">                    &quot;priority&quot;: 1,</span>
-<span class="sd">                    &quot;uniqueStages&quot;: [</span>
-<span class="sd">                        {</span>
-<span class="sd">                            &quot;name&quot;: &quot;DTM&quot;,</span>
-<span class="sd">                            &quot;slug&quot;: &quot;dtm&quot;,</span>
-<span class="sd">                            &quot;id&quot;: 10,</span>
-<span class="sd">                            &quot;primaryColorHex&quot;: &quot;#0d2750&quot;,</span>
-<span class="sd">                            &quot;secondaryColorHex&quot;: &quot;#99cfff&quot;</span>
-<span class="sd">                        }</span>
-<span class="sd">                    ],</span>
-<span class="sd">                        &quot;id&quot;: 198,</span>
-<span class="sd">                        &quot;flag&quot;: &quot;dtm&quot;</span>
-<span class="sd">                    },</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/config/default-unique-tournaments/GB/esports&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/config/default-unique-tournaments/</span><span class="si">{</span><span class="n">country_code</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">/esports&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Esports.categories">
@@ -156,22 +131,6 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
-<span class="sd">        Example Response:</span>
-<span class="sd">            .. code-block:: json</span>
-<span class="sd">            {</span>
-<span class="sd">                &quot;categories&quot;: [</span>
-<span class="sd">                    {</span>
-<span class="sd">                        &quot;name&quot;: &quot;Counter Strike&quot;,</span>
-<span class="sd">                        &quot;slug&quot;: &quot;csgo&quot;,</span>
-<span class="sd">                        &quot;sport&quot;: {</span>
-<span class="sd">                            &quot;name&quot;: &quot;E-sports&quot;,</span>
-<span class="sd">                            &quot;slug&quot;: &quot;esports&quot;,</span>
-<span class="sd">                            &quot;id&quot;: 72</span>
-<span class="sd">                        },</span>
-<span class="sd">                    &quot;priority&quot;: 0,</span>
-<span class="sd">                        &quot;id&quot;: 1572,</span>
-<span class="sd">                        &quot;flag&quot;: &quot;counter-strike&quot;</span>
-<span class="sd">                    },</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/sport/esports/categories&quot;</span><span class="p">)</span></div>
 
@@ -248,7 +207,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/info&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/info&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Esports.get_tournament">
@@ -261,7 +220,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Esports.tournament_media">
@@ -274,7 +233,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/media&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/media&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Esports.featured_matches">
@@ -287,7 +246,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/featured-events&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/featured-events&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Esports.tournament_cuptree">
@@ -300,7 +259,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/cuptrees&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/cuptrees&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Esports.next_tournament_matches">
@@ -313,7 +272,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events/next/0&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events/next/0&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Esports.last_tournament_matches">
@@ -326,7 +285,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events/last/0&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events/last/0&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Esports.tournament_matches">
@@ -339,7 +298,7 @@
 <span class="sd">            Dict[str, int]: A dictionary containing two keys:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournaments/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events&quot;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/unique-tournament/</span><span class="si">{</span><span class="n">tournament_id</span><span class="si">}</span><span class="s2">/season/</span><span class="si">{</span><span class="n">season_id</span><span class="si">}</span><span class="s2">/events&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Esports.get_match">
