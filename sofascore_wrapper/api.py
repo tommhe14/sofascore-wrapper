@@ -3,7 +3,7 @@ import aiohttp
 BASE_URL = "https://www.sofascore.com/api/v1"
 
 class SofascoreAPI:
-    default_headers = {"User-Agent": "Mozilla/5.0"}
+    default_headers = {"User-Agent": "Mozilla/5.0",}
     
     def __init__(self, headers: dict = None):
         self.session = None
