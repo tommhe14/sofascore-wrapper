@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sofascore_wrapper.user_data &mdash; SofaScore Wrapper 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=71272d9f"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SofaScore Wrapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">sofascore_wrapper</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SofaScore Wrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">sofascore_wrapper.user_data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sofascore_wrapper.user_data</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">SofascoreAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<div class="viewcode-block" id="UserData">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData">[docs]</a>
+<span class="k">class</span> <span class="nc">UserData</span><span class="p">:</span>
+    <span class="n">ENUMS_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tools&quot;</span> <span class="o">/</span> <span class="s2">&quot;enums.json&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ENUMS_PATH</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">ENUMS</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">:</span> <span class="n">SofascoreAPI</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enums</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ENUMS</span>
+
+<div class="viewcode-block" id="UserData.sofascore_news_rss_feed">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.sofascore_news_rss_feed">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">sofascore_news_rss_feed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the current sofascore news RSS feed.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_raw_get</span><span class="p">(</span><span class="s2">&quot;https://www.sofascore.com/news/category/app/iphone/feed/&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.user_account">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.user_account">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">user_account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the given user data.</span>
+
+<span class="sd">        To get your User ID, go to profile -&gt; share account which will provide a link such as https://www.sofascore.com/user/profile/[userid]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/user-account/</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.user_flares">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.user_flares">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">user_flares</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the given user flares data.</span>
+
+<span class="sd">        To get your User ID, go to profile -&gt; share account which will provide a link such as https://www.sofascore.com/user/profile/[userid]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/flare/user/</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.last_user_predictions">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.last_user_predictions">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">last_user_predictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the given user last predictions</span>
+
+<span class="sd">        To get your User ID, go to profile -&gt; share account which will provide a link such as https://www.sofascore.com/user/profile/[userid]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/user-account/</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">/predictions/last/0&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.next_user_predictions">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.next_user_predictions">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">next_user_predictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the given user last predictions</span>
+
+<span class="sd">        To get your User ID, go to profile -&gt; share account which will provide a link such as https://www.sofascore.com/user/profile/[userid]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/user-account/</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">/predictions/next/0&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.contribution_leaderboard">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.contribution_leaderboard">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">contribution_leaderboard</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top 100 contribution leaderboard.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/user-account/contribution-ranking-score&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.predictions_leaderboard">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.predictions_leaderboard">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">predictions_leaderboard</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top 100 predictions leaderboard.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/user-account/vote-ranking&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="UserData.editor_leaderboard">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.user_data.UserData.editor_leaderboard">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">editor_leaderboard</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the top 100 editors leaderboard.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;/user-account/editor-ranking&quot;</span><span class="p">)</span></div>
+</div>
+
+    
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, tommhe14 (mane).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

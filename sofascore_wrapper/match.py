@@ -510,6 +510,18 @@ class Match:
         """
         return await self.api._get(f"/event/{self.match_id}/odds/1/all")
     
+    async def top_team_streaks(self) -> Dict[str, Any]:
+        """
+        Fetches the top current team streaks.
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the match odds data. 
+
+        Raises:
+            Exception: If the API request fails or returns an error.
+        """
+        return await self.api._get(f"/odds/top-team-streaks/wins/all")
+    
     async def featured_odds(self) -> Dict[str, Any]:
         """
         Fetches the featured odds for the specified match.
@@ -1172,7 +1184,17 @@ class Match:
         """
         data = await self.api._get(f"/tv/channel/{channel_id}/event/{self.match_id}/votes")
         return data.get("tvChannelVotes", {}).get("tvChannel", {}).get("name", None)
+    
+    async def channel_schedule(self, channel_id: int) -> str:
+        """
+        Get the channel schedule for the given channel ID.
 
+        This function retrieves the upcoming games for the provided channel.
+
+        Args:
+            channel_id (int): The ID of the TV channel for which the name is required.
+        """
+        return await self.api._get(f"/tv/channel/{channel_id}/schedule")
     
     async def managers(self) -> Dict:
         """

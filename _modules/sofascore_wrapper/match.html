@@ -595,6 +595,21 @@
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/odds/1/all&quot;</span><span class="p">)</span></div>
 
     
+<div class="viewcode-block" id="Match.top_team_streaks">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.top_team_streaks">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">top_team_streaks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetches the top current team streaks.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Any]: A dictionary containing the match odds data. </span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the API request fails or returns an error.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/odds/top-team-streaks/wins/all&quot;</span><span class="p">)</span></div>
+
+    
 <div class="viewcode-block" id="Match.featured_odds">
 <a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.featured_odds">[docs]</a>
     <span class="k">async</span> <span class="k">def</span> <span class="nf">featured_odds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
@@ -1287,6 +1302,19 @@
         <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tv/channel/</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">/event/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">match_id</span><span class="si">}</span><span class="s2">/votes&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tvChannelVotes&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tvChannel&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
 
+    
+<div class="viewcode-block" id="Match.channel_schedule">
+<a class="viewcode-back" href="../../sofascore_wrapper.html#sofascore_wrapper.match.Match.channel_schedule">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">channel_schedule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the channel schedule for the given channel ID.</span>
+
+<span class="sd">        This function retrieves the upcoming games for the provided channel.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            channel_id (int): The ID of the TV channel for which the name is required.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/tv/channel/</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">/schedule&quot;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="Match.managers">
