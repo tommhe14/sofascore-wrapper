@@ -1870,4 +1870,14 @@ class Match:
         """
         return await self.api._get(f"/event/{match_code}/h2h/events")
     
+    async def win_probability(self) -> Dict[str, int]:
+        """
+        Retrieves the match win probability, Does not provide data for all sports.
+
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
+
+        """
+        return await self.api._get(f"/event/{self.match_id}/graph/win-probability")
+    
     

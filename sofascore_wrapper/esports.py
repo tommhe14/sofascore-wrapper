@@ -33,40 +33,15 @@ class Esports:
         data = await self.api._get("/sport/0/event-count")
         return data.get("esports", {})
     
-    async def all_tournaments(self) -> Dict[str, int]:
+    async def all_tournaments(self, country_code: str = "GB") -> Dict[str, int]:
         """
         Retrieves all the e-sport tournaments
 
         Returns:
             Dict[str, int]: A dictionary containing two keys:
 
-        Example Response:
-            .. code-block:: json
-            {
-                "categories": [
-                    {
-                        "name": "DTM",
-                        "slug": "dtm",
-                        "sport": {
-                            "name": "Motorsport",
-                            "slug": "motorsport",
-                            "id": 11
-                        },
-                    "priority": 1,
-                    "uniqueStages": [
-                        {
-                            "name": "DTM",
-                            "slug": "dtm",
-                            "id": 10,
-                            "primaryColorHex": "#0d2750",
-                            "secondaryColorHex": "#99cfff"
-                        }
-                    ],
-                        "id": 198,
-                        "flag": "dtm"
-                    },
         """
-        return await self.api._get("/config/default-unique-tournaments/GB/esports")
+        return await self.api._get(f"/config/default-unique-tournaments/{country_code.upper()}/esports")
     
     async def categories(self) -> Dict[str, int]:
         """
@@ -75,22 +50,6 @@ class Esports:
         Returns:
             Dict[str, int]: A dictionary containing two keys:
 
-        Example Response:
-            .. code-block:: json
-            {
-                "categories": [
-                    {
-                        "name": "Counter Strike",
-                        "slug": "csgo",
-                        "sport": {
-                            "name": "E-sports",
-                            "slug": "esports",
-                            "id": 72
-                        },
-                    "priority": 0,
-                        "id": 1572,
-                        "flag": "counter-strike"
-                    },
         """
         return await self.api._get("/sport/esports/categories")
     
@@ -155,7 +114,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/info")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/info")
     
     async def get_tournament(self, tournament_id: int) -> Dict[str, int]:
         """
@@ -165,7 +124,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}")
+        return await self.api._get(f"/unique-tournament/{tournament_id}")
 
     async def tournament_media(self, tournament_id: int) -> Dict[str, int]:
         """
@@ -175,7 +134,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/media")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/media")
 
     async def featured_matches(self, tournament_id: int) -> Dict[str, int]:
         """
@@ -185,7 +144,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/featured-events")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/featured-events")
 
     async def tournament_cuptree(self, tournament_id: int, season_id: int) -> Dict[str, int]:
         """
@@ -195,7 +154,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/cuptrees")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/cuptrees")
 
     async def next_tournament_matches(self, tournament_id: int, season_id: int) -> Dict[str, int]:
         """
@@ -205,7 +164,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/events/next/0")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/events/next/0")
     
     async def last_tournament_matches(self, tournament_id: int, season_id: int) -> Dict[str, int]:
         """
@@ -215,7 +174,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/events/last/0")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/events/last/0")
     
     async def tournament_matches(self, tournament_id: int, season_id: int) -> Dict[str, int]:
         """
@@ -225,7 +184,7 @@ class Esports:
             Dict[str, int]: A dictionary containing two keys:
 
         """
-        return await self.api._get(f"/unique-tournaments/{tournament_id}/season/{season_id}/events")
+        return await self.api._get(f"/unique-tournament/{tournament_id}/season/{season_id}/events")
 
     async def get_match(self, match_id) -> Dict[str, int]:
         """

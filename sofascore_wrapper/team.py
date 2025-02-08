@@ -1805,3 +1805,13 @@ class Team:
             }
         """
         return await self.api._get(f"/unique-tournament/{league_id}/season/{season}/team/{self.team_id}/team-performance-graph-data")
+
+    async def near_events(self) -> Dict[str, int]:
+        """
+        Retrieves the team's nearest matches, Does not provide data for all sports.
+
+        Returns:
+            Dict[str, int]: A dictionary containing two keys:
+
+        """
+        return await self.api._get(f"/team/{self.team_id}/near-events")
