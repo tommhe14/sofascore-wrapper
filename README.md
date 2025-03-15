@@ -46,6 +46,8 @@ Will slowly be adding more sports along our journey! SofaScore API is written to
 - If you have any enhancement requests, feel free to open an issue with the front end proof of what you're looking to get.
 - Always open to pull requests!
 
+*This is an unofficial API wrapper and not affiliated with Sofascore. You may be at risk via Sofascore's TOS.*
+
 ## Examples
 Check out some more use cases from the examples folder!
 
