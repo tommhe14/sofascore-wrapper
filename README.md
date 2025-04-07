@@ -48,6 +48,8 @@ Will slowly be adding more sports along our journey! SofaScore API is written to
 
 *This is an unofficial API wrapper and not affiliated with Sofascore. You may be at risk via Sofascore's TOS.*
 
+**THIS MAY NOW RETURN 403 FOR ALL REQUESTS, THIS IS A NEW CHANGE SOFASCORE HAVE IMPLETEMENTED INSTEAD OF CLOSING THE API**
+
 ## Examples
 Check out some more use cases from the examples folder!
 
