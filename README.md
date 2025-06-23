@@ -18,6 +18,7 @@ pip install sofascore-wrapper
 Here's a quick example to get you started:
 ```python
 import asyncio
+import json
 from sofascore_wrapper.api import SofascoreAPI
 from sofascore_wrapper.search import Search
 
@@ -25,7 +26,7 @@ async def main():
     api = SofascoreAPI()  # Initialize the API client
     search = Search(api, search_string="saka")
     player = await search.search_all()
-    print(player)
+    print(json.dumps(player, indent = 4))
     await api.close()
 
 if __name__ == "__main__":
@@ -48,7 +49,7 @@ Will slowly be adding more sports along our journey! SofaScore API is written to
 
 *This is an unofficial API wrapper and not affiliated with Sofascore. You may be at risk via Sofascore's TOS.*
 
-**THIS MAY NOW RETURN 403 FOR ALL REQUESTS, THIS IS A NEW CHANGE SOFASCORE HAVE IMPLETEMENTED INSTEAD OF CLOSING THE API**
+**RECENTLY CHANGED TO CHROMIUM BASED REQUESTS TO ADVERT 403 ON ALL REST REQUESTS**
 
 ## Examples
 Check out some more use cases from the examples folder!
