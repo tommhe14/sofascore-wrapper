@@ -33,6 +33,69 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+## Example Response!
+```json
+{
+    "results": [
+        {
+            "entity": {
+                "id": 934235,
+                "name": "Bukayo Saka",
+                "slug": "bukayo-saka",
+                "retired": false,
+                "userCount": 205496,
+                "team": {
+                    "id": 42,
+                    "name": "Arsenal",
+                    "nameCode": "ARS",
+                    "slug": "arsenal",
+                    "national": false,
+                    "sport": {
+                        "id": 1,
+                        "slug": "football",
+                        "name": "Football"
+                    },
+                    "userCount": 2540585,
+                    "teamColors": {
+                        "primary": "#cc0000",
+                        "secondary": "#ffffff",
+                        "text": "#ffffff"
+                    },
+                    "gender": "M",
+                    "fieldTranslations": {
+                        "nameTranslation": {
+                            "ar": "\u0627\u0631\u0633\u0646\u0627\u0644",
+                            "ru": "\u0410\u0440\u0441\u0435\u043d\u0430\u043b",
+                            "hi": "\u0906\u0930\u094d\u0938\u0947\u0928\u0932",
+                            "bn": "\u0986\u09b0\u09cd\u09b8\u09c7\u09a8\u09be\u09b2"
+                        },
+                        "shortNameTranslation": {}
+                    }
+                },
+                "deceased": false,
+                "country": {
+                    "alpha2": "EN",
+                    "name": "England",
+                    "slug": "england"
+                },
+                "shortName": "B. Saka",
+                "position": "F",
+                "jerseyNumber": "7",
+                "fieldTranslations": {
+                    "nameTranslation": {
+                        "ar": "\u0628. \u0633\u0627\u0643\u0627",
+                        "hi": "\u092c\u0940. \u0938\u093e\u0915\u093e",
+                        "bn": "\u09ac\u09bf. \u09b8\u09be\u0995\u09be"
+                    },
+                    "shortNameTranslation": {}
+                }
+            },
+            "score": 651868.6,
+            "type": "player"
+        },
+        ...
+```
+
 ## 💬 Need Help?
 Join our Discord community for support and discussions:
 👉 [Discord Support Server](https://discord.gg/pGYmZxUKB7)

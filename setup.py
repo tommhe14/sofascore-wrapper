@@ -1,14 +1,22 @@
 import pathlib
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+import subprocess
 
 HERE = pathlib.Path(__file__).parent
-
 README = (HERE / "README.md").read_text()
+
+class PostInstallCommand(install):
+    """Post-installation for installation mode."""
+    def run(self):
+        install.run(self)
+        subprocess.call(['playwright', 'install', 'chromium'])
+        subprocess.call(['playwright', 'install-deps'])
 
 setup(
     name="sofascore_wrapper",  
-    version="1.0.24",
-    description="A Python API wrapper for https://www.sofascore.com",
+    version="1.1.0",  # Increment version
+    description="A Python API wrapper for https://www.sofascore.com using Playwright",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/tommhe14/sofascore-wrapper",
@@ -18,15 +26,18 @@ setup(
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.8",  
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
     ],
-    packages=find_packages(),  
+    packages=find_packages(),
     include_package_data=True,
-    install_requires=["requests>=2.31.0", "pytest>=7.0.0"],
-    python_requires=">=3.6",
+    install_requires=[
+        "playwright>=1.42.0",  
+    ],
+    python_requires=">=3.8",  
+    cmdclass={
+        'install': PostInstallCommand,
+    },
 )
