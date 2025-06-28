@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="sofascore_wrapper",
-    version="1.1.0",
+    version="1.1.1",
     description="Python API wrapper for SofaScore",
     long_description=README,
     long_description_content_type="text/markdown",
