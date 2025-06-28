@@ -9,9 +9,12 @@ For detailed usage and API reference, visit the official documentation:
 👉 [Sofascore Wrapper Docs](https://tommhe14.github.io/sofascore-wrapper)
 
 ## 📥 Installation
-You can install the package using pip:
+
+### 1. Install the Package and Playwright
 ```bash
 pip install sofascore-wrapper
+# REQUIRED FOR USE
+python -m playwright install chromium
 ```
 
 ## 🚀 Usage Example
