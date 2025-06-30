@@ -11,7 +11,8 @@ leagues = {
         "Liga F":1127,
         "Première Ligue, Féminine":1139,
         "Frauen-Bundesliga":232,
-        "Serie A Women":10640
+        "Serie A Women":10640,
+        "NWSL":1690
     }
 
 # feed for just womens football
